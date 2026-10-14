@@ -39,3 +39,10 @@
 .header-avatar .avatar{width:35px;height:35px}
 .header-avatar img{border:2px solid #e8e8e0}
 @media(max-width:760px){.topbar{border-radius:17px 17px 0 0}.header-actions{gap:5px}.header-settings{height:32px;padding:0 10px;font-size:10px}.header-notification{width:32px;height:32px}.header-avatar .avatar{width:32px;height:32px}}
+
+/* Align the workspace header flush with the top of the screen. */
+.workspace{margin-top:0;border-top:0;border-top-left-radius:0;border-top-right-radius:0}
+.topbar{border-top-left-radius:0;border-top-right-radius:0}
+@media(min-width:1500px){.workspace{margin-top:0}}
+@media(max-width:1100px){.workspace{margin-top:0}}
+@media(max-width:760px){.workspace{margin-top:0}.topbar{border-top-left-radius:0;border-top-right-radius:0}}
