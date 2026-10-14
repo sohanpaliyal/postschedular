@@ -70,3 +70,8 @@
 
 .collapse-button{background:#eaece6;color:#858b7d}
 .collapse-button:hover{background:#dfe3d8;color:#424b38}
+
+/* Center the toggle glyph without native button padding. */
+.collapse-button{padding:0;width:25px;height:25px;line-height:0;box-shadow:0 2px 5px #30382814,0 1px 2px #3038280a}
+.collapse-button .motion-chevron{display:block;margin:0}
+.collapse-button:hover{box-shadow:0 3px 8px #3038281c,0 1px 3px #3038280d}
