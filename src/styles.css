@@ -7,9 +7,9 @@
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 
 /* Keep both strokes mounted so interrupted toggles reverse smoothly. */
-.motion-chevron{width:17px;height:17px;overflow:visible;flex-shrink:0}
-.motion-chevron.horizontal{width:15px;height:15px;transform:rotate(90deg)}
-.motion-chevron .chevron-arm{transform-origin:8px 8px;transition:transform .65s var(--motion)}
+.motion-chevron{width:18px;height:18px;overflow:visible;flex-shrink:0}
+.motion-chevron.horizontal{width:18px;height:18px;transform:rotate(90deg)}
+.motion-chevron .chevron-arm{transform-origin:12px 12px;transition:transform .65s var(--motion)}
 .motion-chevron .first{transform:rotate(45deg)}
 .motion-chevron .second{transform:rotate(-45deg)}
 .motion-chevron.flipped .first{transform:rotate(-45deg)}
