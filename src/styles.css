@@ -27,3 +27,15 @@
 @media(min-width:1500px){.app-shell{padding-left:0;padding-top:0;padding-bottom:0}.sidebar{top:0;height:100dvh}.workspace{margin-top:30px;margin-bottom:30px}}
 @media(max-width:1100px){.app-shell{padding-left:0;padding-top:0;padding-bottom:0}.sidebar{top:0;height:100dvh}.workspace{margin-top:16px;margin-bottom:16px}}
 @media(max-width:760px){.app-shell{padding-left:10px;padding-top:0;padding-bottom:0}.sidebar{top:0;left:0;height:100dvh;border-radius:0 23px 23px 0}.workspace{margin-top:10px;margin-bottom:10px}}
+
+/* Sticky workspace header with reference-style account controls. */
+.topbar{position:sticky;top:0;z-index:15;background:#fbfbfaf2;backdrop-filter:blur(14px);border-radius:23px 23px 0 0}
+.header-actions{display:flex;align-items:center;gap:7px}
+.header-settings,.header-notification{display:flex;align-items:center;justify-content:center;gap:5px;height:36px;background:#fff;border:1px solid #eeeeea;color:#80817b;border-radius:22px;transition:background .2s,color .2s,box-shadow .2s}
+.header-settings{padding:0 13px;font-size:12px}
+.header-notification{width:36px;padding:0}
+.header-settings:hover,.header-notification:hover{background:#f0f1ec;color:#3f4738;box-shadow:0 2px 7px #00000005}
+.header-avatar{padding:0;margin-left:2px;border-radius:50%;display:grid;place-items:center}
+.header-avatar .avatar{width:35px;height:35px}
+.header-avatar img{border:2px solid #e8e8e0}
+@media(max-width:760px){.topbar{border-radius:17px 17px 0 0}.header-actions{gap:5px}.header-settings{height:32px;padding:0 10px;font-size:10px}.header-notification{width:32px;height:32px}.header-avatar .avatar{width:32px;height:32px}}
