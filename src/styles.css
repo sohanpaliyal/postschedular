@@ -97,3 +97,9 @@
 .workspace>.overview{max-width:1280px;margin:24px auto 0}
 .workspace>.page-content{padding-top:26px}
 @media(max-width:760px){.welcome-row{flex-wrap:wrap}.welcome-actions{gap:8px}.workspace>.overview{margin-top:20px}.workspace>.page-content{padding-top:20px}}
+
+/* Compact icon navigation with distinct breathing room between items. */
+.sidebar.collapsed nav{display:flex;flex-direction:column;gap:9px}
+.sidebar.collapsed .nav-item{width:38px;height:38px;padding:0;margin-inline:auto;justify-content:center;border-radius:10px}
+.sidebar.collapsed .dashboard-group{width:100%}
+.sidebar.collapsed .submenu-wrap{top:34px}
