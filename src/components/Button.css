@@ -1,6 +1,6 @@
 /* Low specificity lets layout-specific classes preserve their geometry. */
 :where(.button){font:inherit;cursor:pointer;transition:background .2s,color .2s,border-color .2s,box-shadow .2s,transform .2s}
-:where(.button:not(.button--unstyled)){display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:10px;padding:11px 16px;font-size:12px;line-height:1.4}
+:where(.button:not(.button--unstyled)){display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:10px;height:42px;padding:0 16px;font-size:12px;font-weight:500;line-height:1.4;white-space:nowrap}
 :where(.button--primary){background:#2d3329;color:#fff}
 :where(.button--primary:hover:not(:disabled)){background:#434c3c}
 :where(.button--secondary){background:#fff;color:#666;border-color:#e3e3dd}
@@ -11,8 +11,8 @@
 :where(.button--icon){width:36px;height:36px;padding:0;background:transparent;color:#858b7d}
 :where(.button--text){background:transparent;color:#657354;padding:5px 7px}
 :where(.button--secondary:hover:not(:disabled),.button--outline:hover:not(:disabled),.button--soft:hover:not(:disabled),.button--icon:hover:not(:disabled),.button--text:hover:not(:disabled)){background:#eeefe9}
-:where(.button--sm:not(.button--unstyled)){font-size:11px;padding:8px 12px}
-:where(.button--lg:not(.button--unstyled)){font-size:14px;padding:14px 20px}
+:where(.button--sm:not(.button--unstyled)){height:32px;font-size:11px;padding:0 12px}
+:where(.button--lg:not(.button--unstyled)){height:48px;font-size:14px;padding:0 20px}
 :where(.button--icon.button--sm){width:30px;height:30px;padding:0}
 :where(.button--icon.button--lg){width:44px;height:44px;padding:0}
 :where(.button--pill:not(.button--unstyled)){border-radius:999px}

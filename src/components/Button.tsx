@@ -24,7 +24,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   loadingText, startIcon, endIcon, badge, fullWidth = false,
   disabled, type = 'button', className = '', children, ...props
 }, ref) {
-  const legacyClass = variant === 'primary' ? 'primary-button' : variant === 'secondary' ? 'secondary-button' : '';
   return (
     <button
       {...props}
@@ -32,7 +31,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       type={type}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
-      className={['button', `button--${variant}`, `button--${size}`, `button--${shape}`, fullWidth && 'button--full', legacyClass, className].filter(Boolean).join(' ')}
+      className={['button', `button--${variant}`, `button--${size}`, `button--${shape}`, fullWidth && 'button--full', className].filter(Boolean).join(' ')}
     >
       {loading ? <LoaderCircle className="button-spinner" size={16} aria-hidden="true" /> : startIcon && <span className="button-icon" aria-hidden="true">{startIcon}</span>}
       {loading && loadingText ? loadingText : children}
