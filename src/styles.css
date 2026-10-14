@@ -59,3 +59,11 @@
 .topbar::before{content:'';position:absolute;top:0;bottom:0;right:0;width:100vw;background:#fbfbfa;border-bottom:1px solid #ededea;z-index:-1;pointer-events:none}
 .page-content{margin-top:24px;background:#fbfbfa;border-radius:23px;min-height:calc(100dvh - 120px)}
 @media(max-width:760px){.page-content{margin-top:16px;border-radius:17px}}
+
+/* A subtle warm-gray navigation surface. */
+.sidebar{background:#f5f5f2;border-color:#eeeeea}
+.sidebar .nav-item.selected,.sidebar .sub-item.active span{background:#eaece6}
+.sidebar .nav-item:hover,.sidebar .contact:hover,.sidebar .sub-item:hover span{background:#eeefe9}
+.sidebar .sidebar-search,.sidebar .profile-button{background:#fafaf8}
+.sidebar .messages{border-top-color:#e9eae4}
+.sidebar .avatar i{border-color:#f5f5f2}
