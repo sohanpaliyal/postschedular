@@ -1,0 +1,22 @@
+.date-picker-trigger{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;padding:10px 13px;border:1px solid #e3e3dc;border-radius:11px;background:#fdfdfb;text-align:left;color:#7e8775;transition:border-color .2s,box-shadow .2s}
+.date-picker-trigger:hover,.date-picker-trigger.is-open{border-color:#aab59e;box-shadow:0 0 0 3px #aab59e12}
+.date-picker-trigger-icon{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:#eff1ea;flex-shrink:0}
+.date-picker-value{flex:1;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12px;color:#414b37}
+.date-picker-value strong{font-weight:500}.date-picker-value>span{color:#8c9384;font-size:11px}.date-picker-value.placeholder{color:#a0a396}
+.date-picker-trigger>svg{transition:transform .25s}.date-picker-trigger>svg.turned{transform:rotate(180deg)}
+.date-picker-panel{margin-top:10px;background:#fff;border:1px solid #e5e8df;border-radius:14px;padding:16px;box-shadow:0 6px 22px #29332108;animation:float-in .25s var(--motion)}
+.date-picker-quick{display:flex;gap:7px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid #f0f1eb}.date-picker-quick .button{font-size:10px}
+.date-picker-calendar-header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 0 9px}.date-picker-month,.date-picker-navigation{display:flex;align-items:center;gap:4px}
+.date-picker-month select{border:0;background:#fff;font-weight:500;color:#3d4536;font-size:12px;padding:5px;max-width:130px}
+.date-picker-calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.date-picker-weekday{font-size:9px;text-align:center;color:#a1a695;padding:8px 0}
+.date-picker-day{position:relative;display:grid;place-items:center;height:34px;border-radius:8px;padding:0;font-size:11px;color:#68705f;background:transparent}
+.date-picker-day:hover:not(:disabled){background:#eef1e8}.date-picker-day.outside{color:#bec3b5}.date-picker-day:disabled{color:#b8bcb2;opacity:.4}
+.date-picker-day.chosen,.date-picker-day.chosen:hover{background:#3e4934;color:white;font-weight:600}
+.date-picker-day.today::after{content:'';position:absolute;bottom:4px;width:3px;height:3px;background:currentColor;border-radius:50%}
+.date-picker-time{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;margin-top:12px;border-top:1px solid #f0f1eb}
+.date-picker-time>span{display:flex;align-items:center;gap:7px;font-size:11px;color:#7a826f}.date-picker-time-controls{display:flex;align-items:center;gap:5px}.date-picker-time-controls select{border-color:#e5e8dd;border-radius:8px;background:#fafbf7;padding:7px;color:#59644c;font-size:12px}.date-picker-time-controls b{color:#9ba38e;font-weight:400}
+.date-picker-footer{display:flex;justify-content:space-between;align-items:center;padding-top:11px;border-top:1px solid #f0f1eb}.date-picker-error{color:#b27360;font-size:10px;margin:0 0 12px}
+.date-picker-zone{display:flex;align-items:center;gap:5px;font-size:10px;color:#9aa18e;margin:10px 0 0;flex-wrap:wrap}.date-picker-zone span{color:#afb3a5}
+@media(max-width:450px){.date-picker-panel{padding:12px}.date-picker-quick{gap:5px}.date-picker-quick .button{padding-inline:8px;font-size:9px}.date-picker-month select{font-size:11px;max-width:110px}.date-picker-time-controls select{padding:7px 5px}}
+@media(prefers-reduced-motion:reduce){.date-picker-trigger,.date-picker-trigger>svg{transition:none}.date-picker-panel{animation:none}}

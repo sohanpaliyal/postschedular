@@ -171,7 +171,7 @@ These are states within the two core screens, not extra screens:
 - **React Router** for the dashboard and composer routes and URL query handling.
 - A small mocked API layer over local seed data, with simulated latency and failures.
 - **localStorage** for created posts and successful status changes so work survives refresh. URL query parameters remain the source of truth for filters and search.
-- Native date/time inputs and `Intl.DateTimeFormat` for local time display, with careful local-to-UTC conversion.
+- A shared styled date/time picker with a calendar, month/year navigation, 12-hour time controls, quick presets, past-date restrictions, and `Intl.DateTimeFormat` for local time display. Local values convert to UTC on submission.
 - Accessible form labels, keyboard interaction, focus handling, and status feedback that does not rely on color alone.
 - Test the meaningful behavior: validation, URL filter restoration, UTC conversion/local grouping, and optimistic retry success and rollback.
 
@@ -220,3 +220,9 @@ These are proposed choices, not extra assignment requirements.
 - [ ] Share the repository and live link with **bhanu@flintzy.com** when ready.
 
 Repository creation, deployment, and submission are future delivery tasks; this planning step does not perform them.
+
+## Scheduling picker
+
+`src/components/DateTimePicker.tsx` replaces the native datetime input. It uses the shared Button component and includes calendar navigation, keyboard arrow navigation, today/selected indicators, hour/minute/AM-PM controls, quick presets, clearing, and future-time validation. Escape closes the picker before closing the composer. The expandable panel stays inside the dialog and scrolls with it on small screens.
+
+Run the date/calendar checks with `npm test` (Node.js 22.6+).
