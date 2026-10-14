@@ -75,3 +75,10 @@
 .collapse-button{padding:0;width:25px;height:25px;line-height:0;box-shadow:0 2px 5px #30382814,0 1px 2px #3038280a}
 .collapse-button .motion-chevron{display:block;margin:0}
 .collapse-button:hover{box-shadow:0 3px 8px #3038281c,0 1px 3px #3038280d}
+
+/* Align header controls with the content surface, including its max width. */
+.topbar{padding-left:0;padding-right:0}
+.header-inner{width:calc(100% - 50px);max-width:1280px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+@media(min-width:1500px){.topbar{padding-left:0;padding-right:0}.header-inner{width:calc(100% - 62px)}}
+@media(max-width:1100px){.topbar{padding-left:0;padding-right:0}.header-inner{width:calc(100% - 34px)}}
+@media(max-width:760px){.topbar{padding-left:0;padding-right:0}.header-inner{width:calc(100% - 22px)}}
