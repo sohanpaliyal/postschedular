@@ -82,3 +82,12 @@
 @media(min-width:1500px){.topbar{padding-left:0;padding-right:0}.header-inner{width:calc(100% - 62px)}}
 @media(max-width:1100px){.topbar{padding-left:0;padding-right:0}.header-inner{width:calc(100% - 34px)}}
 @media(max-width:760px){.topbar{padding-left:0;padding-right:0}.header-inner{width:calc(100% - 22px)}}
+
+/* Welcome sits outside the content card, beneath the sticky header. */
+.welcome-row{max-width:1280px;margin:27px auto 0;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 1px}
+.welcome-row h2{font-size:27px;font-weight:500;letter-spacing:-1px;margin:0 0 5px}
+.welcome-row h2 span{color:#9a9c96;font-weight:400}
+.welcome-row p{font-size:12px;color:#9a9c96;margin:0;line-height:1.6}
+.export-button{display:flex;align-items:center;justify-content:center;gap:8px;background:#fff;border:1px solid #eeeee9;border-radius:20px;padding:9px 14px;font-size:11px;color:#777b70;white-space:nowrap;transition:background .2s,box-shadow .2s}
+.export-button:hover{background:#f7f8f3;box-shadow:0 2px 7px #3038280a}
+@media(max-width:760px){.welcome-row{margin-top:21px;gap:12px;align-items:flex-start}.welcome-row h2{font-size:21px;letter-spacing:-.6px}.welcome-row p{font-size:10px;max-width:220px}.export-button{font-size:9px;padding:8px 10px;gap:5px}.export-button svg:last-child{display:none}}
