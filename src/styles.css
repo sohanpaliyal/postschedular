@@ -15,3 +15,7 @@
 .motion-chevron.flipped .first{transform:rotate(-45deg)}
 .motion-chevron.flipped .second{transform:rotate(45deg)}
 .collapse-button{transition:color .25s,background .25s,right .65s var(--motion),transform .35s var(--motion)}
+
+/* Offset the joint by half the arm height to keep the visible bounds centered. */
+.motion-chevron .chevron-joint{transform:translateY(3px);transition:transform .65s var(--motion)}
+.motion-chevron.flipped .chevron-joint{transform:translateY(-3px)}
