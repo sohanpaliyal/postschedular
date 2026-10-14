@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Search, LayoutGrid, Files, Wallet, Bell, ChevronLeft, ChevronRight, ChevronDown, Plus, X, CalendarDays, Clock3, ArrowUpRight, Image as ImageIcon, Check, RotateCcw, PanelLeft, Command, MoreHorizontal } from 'lucide-react';
+import { Search, LayoutGrid, Files, Wallet, Bell, ChevronRight, ChevronDown, Plus, X, CalendarDays, Clock3, ArrowUpRight, Image as ImageIcon, Check, RotateCcw, PanelLeft, Command, MoreHorizontal } from 'lucide-react';
 import './styles.css';
 
 type Platform = 'X' | 'Instagram' | 'TikTok' | 'Facebook';
@@ -11,6 +11,12 @@ const examples = ['A little behind the scenes. A lot of good things on the way. 
 function seed(): Post[] { return Array.from({ length: 32 }, (_, i) => { const date = new Date(); date.setDate(date.getDate() + Math.floor(i / 4) - 2); date.setHours(9 + i % 4 * 3, 30, 0, 0); const status = i % 7 === 0 ? 'failed' : i < 8 ? 'published' : 'scheduled'; return { id: `post-${i}`, content: examples[i % examples.length], platforms: [platforms[i % 4], ...(i % 3 === 0 ? [platforms[(i + 1) % 4]] : [])], scheduledAt: date.toISOString(), status, errorMessage: status === 'failed' ? 'The platform could not process this post. Please try again.' : undefined }; }); }
 const contacts = [{ name: 'Ester Howard', image: '47', color: 'green' }, { name: 'Jacob Jones', image: '12', color: 'red' }, { name: 'Cody Fisher', image: '44', color: 'green' }];
 function Avatar({ id, name, status }: { id: string; name: string; status?: string }) { return <span className="avatar"><img src={`https://i.pravatar.cc/80?img=${id}`} alt={name} />{status && <i className={status} />}</span>; }
+function MotionChevron({ flipped, horizontal = false }: { flipped: boolean; horizontal?: boolean }) {
+ return <svg aria-hidden="true" viewBox="0 0 16 16" className={`motion-chevron ${horizontal ? 'horizontal' : 'nav-chevron label'} ${flipped ? 'flipped' : ''}`} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
+  <line className="chevron-arm first" x1="8" y1="8" x2="3.5" y2="8" />
+  <line className="chevron-arm second" x1="8" y1="8" x2="12.5" y2="8" />
+ </svg>;
+}
 function App() {
  const [collapsed, setCollapsed] = useState(() => localStorage.getItem('flintzy-sidebar') === 'collapsed');
  const [submenu, setSubmenu] = useState(true);
@@ -42,12 +48,12 @@ function App() {
  return <div className="app-shell">
  {mobile && <button className="mobile-backdrop" aria-label="Close navigation" onClick={() => setMobile(false)} />}
  <aside className={`sidebar ${collapsed ? 'collapsed' : ''} ${mobile ? 'mobile-open' : ''}`} aria-label="Main navigation">
-  <div className="brand-row"><button className="brand-mark" aria-label="Flintzy home" onClick={() => { setActive('Project'); setPanel(null); }}><svg viewBox="0 0 32 32" fill="currentColor"><path d="M12 2h9v9h9v9h-9v10h-9v-9H2v-9h10z" /></svg></button><button className="collapse-button" onClick={() => setCollapsed(c => !c)} aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'} aria-expanded={!collapsed}>{collapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}</button></div>
+  <div className="brand-row"><button className="brand-mark" aria-label="Flintzy home" onClick={() => { setActive('Project'); setPanel(null); }}><svg viewBox="0 0 32 32" fill="currentColor"><path d="M12 2h9v9h9v9h-9v10h-9v-9H2v-9h10z" /></svg></button><button className="collapse-button" onClick={() => setCollapsed(c => !c)} aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'} aria-expanded={!collapsed}><MotionChevron horizontal flipped={collapsed}/></button></div>
   <button className="sidebar-search" aria-label="Search posts" onClick={() => { searchRef.current?.focus(); setMobile(false); }}><Search size={18}/><span className="label">Search</span><span className="shortcut label"><kbd><Command size={14}/></kbd><kbd>S</kbd></span></button>
   <div className="section-heading">MAIN</div>
   <nav>
    <div className={`dashboard-group ${submenu ? 'is-open' : ''}`}>
-    <button className="nav-item selected" aria-expanded={submenu} onClick={() => setSubmenu(s => !s)} title={collapsed ? 'Dashboard' : undefined}><LayoutGrid size={20}/><span className="label">Dashboard</span><ChevronDown className="nav-chevron label" size={17}/></button>
+    <button className="nav-item selected" aria-expanded={submenu} onClick={() => setSubmenu(s => !s)} title={collapsed ? 'Dashboard' : undefined}><LayoutGrid size={20}/><span className="label">Dashboard</span><MotionChevron flipped={submenu}/></button>
     <div className="submenu-wrap"><div className="submenu"><div className="branch-line"/>{['Project', 'Revenue', 'Insights'].map(item => <button key={item} className={`sub-item ${active === item ? 'active' : ''}`} onClick={() => { setActive(item); if (item !== 'Project') setPanel(item); else setPanel(null); setMobile(false); }}><span>{item}</span></button>)}</div></div>
    </div>
    {[{ name: 'Contracts', icon: Files }, { name: 'Payments', icon: Wallet }, { name: 'Notification', icon: Bell }].map(({ name, icon: Icon }) => <button key={name} className={`nav-item ${panel === name ? 'selected' : ''}`} title={collapsed ? name : undefined} onClick={() => setPanel(name)}><Icon size={20}/><span className="label">{name}</span></button>)}
