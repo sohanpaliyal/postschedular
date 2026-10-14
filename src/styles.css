@@ -67,3 +67,6 @@
 .sidebar .sidebar-search,.sidebar .profile-button{background:#fafaf8}
 .sidebar .messages{border-top-color:#e9eae4}
 .sidebar .avatar i{border-color:#f5f5f2}
+
+.collapse-button{background:#eaece6;color:#858b7d}
+.collapse-button:hover{background:#dfe3d8;color:#424b38}
