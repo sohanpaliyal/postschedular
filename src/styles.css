@@ -107,3 +107,9 @@
 /* Keep main navigation geometry consistent in both sidebar states. */
 .sidebar nav{display:flex;flex-direction:column;gap:9px}
 .sidebar .nav-item{height:38px}
+
+/* Independent summary cards with matching corners and equal spacing. */
+.workspace>.overview{gap:16px;background:transparent;border:0;border-radius:0}
+.workspace>.overview>div{min-width:0;background:#fff;border:1px solid #e7e7e1;border-radius:14px}
+.workspace>.overview>div:last-child{border-right:1px solid #e7e7e1}
+@media(max-width:760px){.workspace>.overview{gap:10px}}

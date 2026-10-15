@@ -71,3 +71,7 @@ body,.topbar,.topbar::before,.page-content,.overview,.post-card,dialog,.date-pic
 :root[data-theme='dark'] .date-picker-time>span,:root[data-theme='dark'] .date-picker-zone{color:#9fb489}
 :root[data-theme='dark'] .skeletons>div{background:linear-gradient(100deg,#303a30 20%,#414e3a 50%,#303a30 80%);background-size:200% 100%}
 @media(prefers-reduced-motion:reduce){body,.topbar,.topbar::before,.page-content,.overview,.post-card,dialog,.date-picker-panel,.profile-menu{transition:none}}
+
+:root[data-theme='dark'] .workspace>.overview{background:transparent;border:0}
+:root[data-theme='dark'] .workspace>.overview>div{background:#303735;border-color:#414a41}
+.overview>div{transition:background-color .65s ease,color .65s ease,border-color .65s ease}
