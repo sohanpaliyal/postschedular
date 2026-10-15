@@ -7,6 +7,7 @@ import { isFuture } from './components/dateTime';
 import { ThemeSwitch } from './components/ThemeSwitch';
 import './styles.css';
 import './theme.css';
+import './sidebar-motion.css';
 
 type Platform = 'X' | 'Instagram' | 'TikTok' | 'Facebook';
 type Post = { id: string; content: string; platforms: Platform[]; mediaUrl?: string; scheduledAt: string; status: 'scheduled' | 'published' | 'failed'; errorMessage?: string };
@@ -57,6 +58,9 @@ function App() {
   const url = URL.createObjectURL(new Blob(['\uFEFF' + rows.map(row => row.map(cell).join(',')).join('\r\n')], { type: 'text/csv;charset=utf-8;' }));
   const link = document.createElement('a'); link.href = url; link.download = 'postflow-posts.csv'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
  }
+ function renderSubmenu() {
+  return <div className="submenu"><div className="branch-line"/>{['Project', 'Revenue', 'Insights'].map(item => <Button variant="unstyled" key={item} className={`sub-item ${active === item ? 'active' : ''}`} onClick={() => { setActive(item); setPanel(item === 'Project' ? null : item); setMobile(false); }}><span>{item}</span></Button>)}</div>;
+ }
  async function retry(post: Post) { setPending(p => [...p, post.id]); setPosts(ps => ps.map(p => p.id === post.id ? { ...p, status: 'scheduled', errorMessage: undefined } : p)); await new Promise(r => setTimeout(r, 1000)); if (Math.random() < .2) { setPosts(ps => ps.map(p => p.id === post.id ? { ...post, errorMessage: 'Retry failed. Please try again.' } : p)); setNotice('Retry failed. Your post has been restored.'); } else setNotice('Post added back to the queue.'); setPending(p => p.filter(id => id !== post.id)); }
  return <div className="app-shell">
  {mobile && <Button variant="unstyled" className="mobile-backdrop" aria-label="Close navigation" onClick={() => setMobile(false)} />}
@@ -67,7 +71,8 @@ function App() {
   <nav>
    <div className={`dashboard-group ${submenu ? 'is-open' : ''}`}>
     <Button variant="unstyled" className="nav-item selected" aria-expanded={submenu} onClick={() => setSubmenu(s => !s)} title={collapsed ? 'Dashboard' : undefined}><LayoutGrid size={20}/><span className="label">Dashboard</span><MotionChevron flipped={submenu}/></Button>
-    <div className="submenu-wrap"><div className="submenu"><div className="branch-line"/>{['Project', 'Revenue', 'Insights'].map(item => <Button variant="unstyled" key={item} className={`sub-item ${active === item ? 'active' : ''}`} onClick={() => { setActive(item); if (item !== 'Project') setPanel(item); else setPanel(null); setMobile(false); }}><span>{item}</span></Button>)}</div></div>
+    <div className="submenu-wrap" inert={collapsed || !submenu} aria-hidden={collapsed || !submenu}>{renderSubmenu()}</div>
+    <div className="submenu-flyout" inert={!collapsed || !submenu} aria-hidden={!collapsed || !submenu}>{renderSubmenu()}</div>
    </div>
    {[{ name: 'Contracts', icon: Files }, { name: 'Payments', icon: Wallet }, { name: 'Notification', icon: Bell }].map(({ name, icon: Icon }) => <Button variant="unstyled" key={name} className={`nav-item ${panel === name ? 'selected' : ''}`} title={collapsed ? name : undefined} onClick={() => setPanel(name)}><Icon size={20}/><span className="label">{name}</span></Button>)}
   </nav>
