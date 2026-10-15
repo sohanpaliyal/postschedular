@@ -226,3 +226,7 @@ Repository creation, deployment, and submission are future delivery tasks; this 
 `src/components/DateTimePicker.tsx` replaces the native datetime input. It uses the shared Button component and includes calendar navigation, keyboard arrow navigation, today/selected indicators, hour/minute/AM-PM controls, quick presets, clearing, and future-time validation. Escape closes the picker before closing the composer. The expandable panel stays inside the dialog and scrolls with it on small screens.
 
 Run the date/calendar checks with `npm test` (Node.js 22.6+).
+
+## Theme switch
+
+The header contains a sun/moon switch inspired by the supplied animation reference. Its blue indicator stretches across the track and settles on the selected icon over 650 ms, with synchronized surface color fades. Light/dark preference is saved locally and restored before React loads. The switch reuses Button, supports keyboard interaction and `role="switch"`, and respects reduced-motion preferences. Rapid reversals continue from the indicator's current position. Dark styling covers navigation, cards, dialogs, shared buttons, and the scheduling picker. Motion values are recreated from the video; original animation source was not supplied.
