@@ -1,0 +1,1 @@
+export function Avatar({ id, name, status }: { id: string; name: string; status?: string }) { return <span className="avatar"><img src={`https://i.pravatar.cc/80?img=${id}`} alt={name} />{status && <i className={status} />}</span>; }

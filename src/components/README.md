@@ -19,3 +19,37 @@ Variants: `primary` (default), `secondary`, `outline`, `soft`, `danger`, `icon`,
 `loading` disables the button and sets `aria-busy`. Optional loading text replaces the label; otherwise the label remains visible. Native button attributes, event handlers, ARIA attributes, and refs are forwarded. The default type is `button`; use `type="submit"` explicitly for form submission. Always provide an accessible label for an icon-only control. Motion respects reduced-motion preferences.
 
 The existing warm gray/olive palette is retained; the supplied reference informs supported variants and composition rather than replacing the application's colors.
+
+# Shared Select
+
+`Select.tsx` replaces every native select in the application. It is a controlled single-select component accepting string or number values. Options can include icons, descriptions, and disabled states. Search is optional; the month and minute lists enable it. Menus use the browser top layer so they remain visible inside dialogs and scroll containers, and reposition above/below the trigger as space allows.
+
+```tsx
+<Select
+  label="Filter status"
+  value={status}
+  onChange={setStatus}
+  options={[
+    { value: 'all', label: 'All statuses' },
+    { value: 'scheduled', label: 'Scheduled', description: 'Ready in your queue' },
+  ]}
+/>
+<Select label="Month" value={month} onChange={setMonth}
+  options={monthOptions} size="sm" variant="ghost" searchable />
+```
+
+Keyboard support: Arrow Up/Down, Home/End, Enter/Space, Escape, Tab, and type-ahead. Disabled options are skipped. Choosing an option restores focus to the trigger. The component uses combobox/listbox semantics, selected-state check marks, light/dark styling, and an empty search state. All trigger and option buttons reuse Button. An optional `name` emits a hidden field for native form submission. Modern browsers with the HTML Popover API are required.
+
+# Shared component inventory
+
+| Component | Where used |
+| --- | --- |
+| `Button` | All buttons, including navigation, header, dropdown options, calendar, and dialogs. |
+| `Select` | Platform and status filters; calendar month/year; schedule hour/minute/AM-PM. |
+| `Avatar` | Sidebar contacts, sidebar profile, and header profile. |
+| `Modal` | Composer, Post Details, and reference menu demo panels. |
+| `MotionChevron` | Dashboard submenu and sidebar expand/collapse arrows. |
+| `DateTimePicker` | Composer scheduling field; composed from Button and Select. |
+| `ThemeSwitch` | Header theme control; composed from Button. |
+
+DateTimePicker and ThemeSwitch currently have one application instance each but are isolated reusable components. Composer and the main application remain feature-specific components in `main.tsx`.
