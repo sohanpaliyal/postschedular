@@ -77,3 +77,11 @@ The page owns calendar view/date state; reusable components receive typed data a
 - `SegmentedControl`: reused for Analytics sections and chart metrics with the same stretching animation as the planner.
 
 All analytics values are mock fixtures and are generated only for published posts. The fixture calculations are separately tested in `tests/analytics.test.mjs`.
+
+# PlatformIcon
+
+`PlatformIcon.tsx` centralizes all social brand marks. Facebook, Instagram, TikTok, and X use local SVG paths from `simple-icons` 16.35.0. Only those four paths are bundled. The component accepts optional `sm`/`md`/`lg` sizes and a `decorative` flag when visible text already labels the platform. It is re-exported by PostIndicators for existing consumers.
+
+Brand treatments: Facebook blue, Instagram gradient, TikTok black with cyan/red accents, and X black/white. Context sizes remain compact in calendar/analytics cells. Shared use includes queue cards, calendar cards, analytics, dropdown triggers/options, composer platform choices/counters, and Post Details.
+
+Icon source: [Simple Icons](https://simpleicons.org/), distributed under CC0. Upstream Facebook and Instagram entries reference [Meta brand resources](https://about.meta.com/brand/resources/); TikTok and X entries reference their platform sites.
