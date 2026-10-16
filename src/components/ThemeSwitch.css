@@ -1,6 +1,6 @@
 .theme-switch{position:relative;display:block;flex-shrink:0;width:74px;height:40px;padding:0;border:0;border-radius:999px;background:#fff;box-shadow:0 4px 12px #26374409;isolation:isolate;transition:background-color .65s,box-shadow .3s}
 .theme-switch.is-dark{background:#151a1b;box-shadow:0 4px 12px #00000020}
-.theme-switch-indicator{position:absolute;top:5px;left:5px;width:30px;height:30px;background:#104bfa;border-radius:999px;z-index:-1}
+.theme-switch-indicator{position:absolute;top:5px;left:5px;width:30px;height:30px;background:#2d3329;border-radius:999px;z-index:-1}
 .theme-switch.is-dark .theme-switch-indicator{left:39px}
 .theme-switch-icon{position:absolute;top:5px;width:30px;height:30px;display:grid;place-items:center;pointer-events:none;transition:color .5s,transform .65s cubic-bezier(.22,1,.36,1)}
 .theme-switch-sun{left:5px;color:#fff;transform:rotate(0deg)}
