@@ -230,3 +230,21 @@ Run the date/calendar checks with `npm test` (Node.js 22.6+).
 ## Theme switch
 
 The header contains a sun/moon switch inspired by the supplied animation reference. Its blue indicator stretches across the track and settles on the selected icon over 650 ms, with synchronized surface color fades. Light/dark preference is saved locally and restored before React loads. The switch reuses Button, supports keyboard interaction and `role="switch"`, and respects reduced-motion preferences. Rapid reversals continue from the indicator's current position. Dark styling covers navigation, cards, dialogs, shared buttons, and the scheduling picker. Motion values are recreated from the video; original animation source was not supplied.
+
+## All Posts planner
+
+Open `/posts` or use **All posts** in the sidebar. This dedicated page provides Month, Week, Year, and List views in the existing light/dark theme. Search and platform/status filters are shared with the dashboard. The selected `view` and local `date` are persisted in URL query parameters and browser back/forward navigation is supported.
+
+- Calendar weeks start on Sunday, matching the supplied reference.
+- Month cells show up to three compact entries (two with details enabled). **See all** opens that day's full list; clicking a post opens Post Details.
+- **Show details** displays local times, statuses, and platform badges. Campaign filtering is not introduced because the assignment's post model has no campaign field.
+- Creating from a future day prefills 9 AM local time. Creating for Today prefills one hour ahead if 9 AM has passed. Past-day creation is unavailable.
+- Year view shows twelve mini calendars with post indicators; selecting a day opens its month.
+- Calendar grids scroll horizontally on small screens. All controls retain keyboard access and accessible labels.
+- All views share the same posts, composer, retry actions, and local persistence. The existing dashboard stays at `/`.
+
+New shared components: `PostFilters`, `PostCard`, `PostList`, `PlatformIcon`, `StatusBadge`, `SegmentedControl`, `CalendarToolbar`, `PostCalendar`, and `YearCalendar`. Post types live in `src/types/post.ts`; date grouping and calendar navigation live in `src/lib/calendar.ts`.
+
+Validation: `npm run build`; nine date/calendar checks via `npm test`, also run with `TZ=Asia/Kolkata` and `TZ=America/New_York`. Desktop month layout inspected in Chrome. Mobile styles are implemented, but a device-sized browser pass remains part of final assignment QA.
+
+Static hosts must serve `index.html` for application routes such as `/posts` (SPA fallback). Vite development and preview servers handle this automatically.

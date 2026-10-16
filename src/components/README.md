@@ -53,3 +53,17 @@ Keyboard support: Arrow Up/Down, Home/End, Enter/Space, Escape, Tab, and type-ah
 | `ThemeSwitch` | Header theme control; composed from Button. |
 
 DateTimePicker and ThemeSwitch currently have one application instance each but are isolated reusable components. Composer and the main application remain feature-specific components in `main.tsx`.
+
+# Planner components
+
+| Component | Reuse |
+| --- | --- |
+| `PostFilters` | Dashboard and All Posts filters. |
+| `PostList` / `PostCard` | Dashboard, All Posts list view, and selected-day modal. |
+| `PlatformIcon` / `StatusBadge` | Queue cards, filter options, and calendar previews. |
+| `SegmentedControl` | List/calendar and week/month/year view selectors. |
+| `CalendarToolbar` | Shared calendar navigation and view controls. |
+| `PostCalendar` | Week and month calendar rendering. |
+| `YearCalendar` | Year overview, delegating selected dates to the month view. |
+
+The page owns calendar view/date state; reusable components receive typed data and callbacks. `src/lib/calendar.ts` contains separately tested local-day grouping, month/week ranges, URL date parsing, and period navigation. No post data is duplicated between views.
