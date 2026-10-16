@@ -113,3 +113,5 @@
 .workspace>.overview>div{min-width:0;background:#fff;border:1px solid #e7e7e1;border-radius:14px}
 .workspace>.overview>div:last-child{border-right:1px solid #e7e7e1}
 @media(max-width:760px){.workspace>.overview{gap:10px}}
+
+.platform-options .button{min-height:var(--button-height);padding-block:0}

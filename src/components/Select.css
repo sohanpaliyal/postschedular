@@ -3,7 +3,7 @@
 .rich-select-trigger:hover{border-color:#bcc5b0;background:#fafbf7}.rich-select-trigger.is-open{border-color:#9fae8d;box-shadow:0 0 0 3px #93a27d15}
 .rich-select-value{flex:1;overflow:hidden;text-overflow:ellipsis}.rich-select-icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:17px;height:17px}
 .rich-select-chevron{flex-shrink:0;color:#939b89;transition:transform .3s var(--motion)}.rich-select-trigger.is-open .rich-select-chevron{transform:rotate(180deg)}
-.rich-select--sm .rich-select-trigger{height:32px;padding:0 8px;gap:5px;font-size:12px}
+.rich-select--sm .rich-select-trigger{height:var(--button-height);padding:0 8px;gap:5px;font-size:12px}
 .rich-select--ghost .rich-select-trigger{border-color:transparent;background:transparent;color:#3d4536;font-weight:500}
 .rich-select--ghost .rich-select-trigger:hover{background:#f1f4eb}
 .rich-select-menu{position:fixed;inset:auto;margin:0;padding:5px;border:1px solid #e2e7d9;border-radius:12px;background:#fff;color:#59664a;box-shadow:0 10px 32px #28351c1a,0 2px 6px #28351c08;overflow:hidden;display:flex;flex-direction:column;animation:select-appear .18s var(--motion);z-index:1000}

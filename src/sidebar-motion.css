@@ -20,7 +20,7 @@
 .sidebar .messages .section-heading{position:relative;width:100%;justify-content:flex-start;padding-left:0;font-size:8px}
 .sidebar .messages .section-heading>.button{position:absolute;right:3px;top:7px}
 .sidebar nav,.sidebar.collapsed nav{gap:9px}
-.sidebar .nav-item,.sidebar.collapsed .nav-item{position:relative;width:calc(100% - 4px);height:38px;margin-inline:2px;padding:0 9px;gap:13px;justify-content:flex-start;border-radius:10px;overflow:hidden;flex-shrink:0;transition:background-color .2s,color .2s}
+.sidebar .nav-item,.sidebar.collapsed .nav-item{position:relative;width:calc(100% - 4px);height:var(--button-height);margin-inline:2px;padding:0 9px;gap:13px;justify-content:flex-start;border-radius:10px;overflow:hidden;flex-shrink:0;transition:background-color .2s,color .2s}
 .sidebar .nav-item>svg:first-child{flex-shrink:0}
 .sidebar .nav-item .nav-chevron,.sidebar.collapsed .nav-item .nav-chevron{margin-left:auto;flex-shrink:0}
 .sidebar .dashboard-group{position:relative;width:100%}
