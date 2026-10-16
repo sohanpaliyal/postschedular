@@ -248,3 +248,17 @@ New shared components: `PostFilters`, `PostCard`, `PostList`, `PlatformIcon`, `S
 Validation: `npm run build`; nine date/calendar checks via `npm test`, also run with `TZ=Asia/Kolkata` and `TZ=America/New_York`. Desktop month layout inspected in Chrome. Mobile styles are implemented, but a device-sized browser pass remains part of final assignment QA.
 
 Static hosts must serve `index.html` for application routes such as `/posts` (SPA fallback). Vite development and preview servers handle this automatically.
+
+## Analytics
+
+Open `/analytics` or select **Analytics** in the sidebar. The page follows the supplied post-performance reference in the app's olive theme and reuses the All Posts `SegmentedControl` for every tab/metric switch.
+
+- **Post performance**: all matching posts, followers, engagement, likes, comments, shares, impressions, reach, per-column normalized heatmap cells, sorting, and Details actions. Published posts appear first by mock impressions by default.
+- **Overview**: aggregate cards and a selectable impressions/reach/likes chart.
+- **Platforms**: counts by platform/status. Multi-platform posts contribute to each selected platform's counts.
+- Shared content/platform/status filters, All Time / 7-day / 30-day range, CSV report export, and URL-persisted section/range.
+- Details opens a performance modal and can lead to the existing Post Details modal.
+
+Analytics is entirely illustrative. Stable fixture values are derived from published post IDs/content. Scheduled and failed posts have no metrics. Engagement is total interactions divided by impressions; summed reach is not a unique-audience count. Charts distribute the selected fixture total into seven labeled sample intervals, not real observation dates. The interface and CSV headings identify mock data. The reference's Audience and Bio Link sections were replaced with a Platforms breakdown because the assignment has no audience or bio-link data.
+
+Reusable analytics components: `DataTable`, `MetricCard`, `MetricChart`, and `HeatmapValue`. Mock calculations live separately in `src/lib/analytics.ts`. Fourteen tests pass, including mock stability, weighted engagement aggregation, heat normalization, interval totals, calendar boundaries, and local date ranges.

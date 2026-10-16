@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Search, LayoutGrid, Files, Wallet, Bell, Settings, Upload, ChevronRight, ChevronDown, Plus, X, CalendarDays, Clock3, ArrowUpRight, Image as ImageIcon, Check, RotateCcw, PanelLeft, Command } from 'lucide-react';
+import { Search, BarChart3, LayoutGrid, Files, Wallet, Bell, Settings, Upload, ChevronRight, ChevronDown, Plus, X, CalendarDays, Clock3, ArrowUpRight, Image as ImageIcon, Check, RotateCcw, PanelLeft, Command } from 'lucide-react';
 import { Button } from './components/Button';
 import { PostFilters } from './components/PostFilters';
 import { PostList } from './components/PostList';
 import { AllPostsPage } from './pages/AllPostsPage';
+import { AnalyticsPage } from './pages/AnalyticsPage';
 import { platforms, limits, type Platform, type Post } from './types/post';
 import { toLocalDateTime } from './components/dateTime';
 import { Avatar } from './components/Avatar';
@@ -29,6 +30,7 @@ function App() {
  const [mobile, setMobile] = useState(false);
  const [pathname, setPathname] = useState(location.pathname);
  const allPostsPage = pathname === '/posts' || pathname === '/posts/';
+ const analyticsPage = pathname === '/analytics' || pathname === '/analytics/';
  const [composerDate, setComposerDate] = useState('');
  const [composer, setComposer] = useState(false);
  const [detail, setDetail] = useState<Post | null>(null);
@@ -50,7 +52,8 @@ function App() {
  const filtered = posts.filter(p => p.content.toLowerCase().includes(query.toLowerCase()) && (platform === 'all' || p.platforms.includes(platform as Platform)) && (status === 'all' || p.status === status)).sort((a, b) => a.scheduledAt.localeCompare(b.scheduledAt));
  function navigate(path: string) {
   const params = new URLSearchParams(location.search);
-  if (path === '/') { params.delete('view'); params.delete('date'); }
+  if (path !== '/posts') { params.delete('view'); params.delete('date'); }
+  if (path !== '/analytics') { params.delete('tab'); params.delete('period'); }
   history.pushState(null, '', path + (params.size ? '?' + params : ''));
   setPathname(path); setPanel(null); setMobile(false); window.scrollTo({ top: 0 });
  }
@@ -72,7 +75,7 @@ function App() {
   const link = document.createElement('a'); link.href = url; link.download = 'postflow-posts.csv'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
  }
  function renderSubmenu() {
-  return <div className="submenu"><div className="branch-line"/>{['Project', 'Revenue', 'Insights'].map(item => <Button variant="unstyled" key={item} className={`sub-item ${active === item && !allPostsPage ? 'active' : ''}`} onClick={() => { setActive(item); if (item === 'Project') navigate('/'); else setPanel(item); setMobile(false); }}><span>{item}</span></Button>)}</div>;
+  return <div className="submenu"><div className="branch-line"/>{['Project', 'Revenue', 'Insights'].map(item => <Button variant="unstyled" key={item} className={`sub-item ${active === item && !allPostsPage && !analyticsPage ? 'active' : ''}`} onClick={() => { setActive(item); if (item === 'Project') navigate('/'); else setPanel(item); setMobile(false); }}><span>{item}</span></Button>)}</div>;
  }
  async function retry(post: Post) { setPending(p => [...p, post.id]); setPosts(ps => ps.map(p => p.id === post.id ? { ...p, status: 'scheduled', errorMessage: undefined } : p)); await new Promise(r => setTimeout(r, 1000)); if (Math.random() < .2) { setPosts(ps => ps.map(p => p.id === post.id ? { ...post, errorMessage: 'Retry failed. Please try again.' } : p)); setNotice('Retry failed. Your post has been restored.'); } else setNotice('Post added back to the queue.'); setPending(p => p.filter(id => id !== post.id)); }
  return <div className="app-shell">
@@ -83,18 +86,19 @@ function App() {
   <div className="section-heading">MAIN</div>
   <nav>
    <div className={`dashboard-group ${submenu ? 'is-open' : ''}`}>
-    <Button variant="unstyled" className={`nav-item ${!allPostsPage ? 'selected' : ''}`} aria-expanded={submenu} onClick={() => setSubmenu(s => !s)} title={collapsed ? 'Dashboard' : undefined}><LayoutGrid size={20}/><span className="label">Dashboard</span><MotionChevron flipped={submenu}/></Button>
+    <Button variant="unstyled" className={`nav-item ${!allPostsPage && !analyticsPage ? 'selected' : ''}`} aria-expanded={submenu} onClick={() => setSubmenu(s => !s)} title={collapsed ? 'Dashboard' : undefined}><LayoutGrid size={20}/><span className="label">Dashboard</span><MotionChevron flipped={submenu}/></Button>
     <div className="submenu-wrap" inert={collapsed || !submenu} aria-hidden={collapsed || !submenu}>{renderSubmenu()}</div>
     <div className="submenu-flyout" inert={!collapsed || !submenu} aria-hidden={!collapsed || !submenu}>{renderSubmenu()}</div>
    </div>
    <a href="/posts" aria-current={allPostsPage ? 'page' : undefined} className={`nav-item all-posts-link ${allPostsPage ? 'selected' : ''}`} title={collapsed ? 'All posts' : undefined} onClick={e => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey) { e.preventDefault(); navigate('/posts'); } }}><CalendarDays size={20}/><span className="label">All posts</span></a>
+   <a href="/analytics" aria-current={analyticsPage ? 'page' : undefined} className={`nav-item all-posts-link ${analyticsPage ? 'selected' : ''}`} title={collapsed ? 'Analytics' : undefined} onClick={e => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey) { e.preventDefault(); navigate('/analytics'); } }}><BarChart3 size={20}/><span className="label">Analytics</span></a>
    {[{ name: 'Contracts', icon: Files }, { name: 'Payments', icon: Wallet }, { name: 'Notification', icon: Bell }].map(({ name, icon: Icon }) => <Button variant="unstyled" key={name} className={`nav-item ${panel === name ? 'selected' : ''}`} title={collapsed ? name : undefined} onClick={() => setPanel(name)}><Icon size={20}/><span className="label">{name}</span></Button>)}
   </nav>
   <div className="messages"><div className="section-heading">MESSAGES<Button variant="icon" aria-label="New message" className="label icon-button" onClick={() => setPanel('New message')}><Plus size={18}/></Button></div>{contacts.map(c => <Button variant="unstyled" className="contact" key={c.name} title={c.name} onClick={() => setPanel(c.name)}><Avatar id={c.image} name={c.name} status={c.color}/><span className="label">{c.name}</span></Button>)}</div>
   <div className="sidebar-footer">{profile && <div className="profile-menu"><strong>John Doe</strong><span>Demo workspace</span><Button variant="unstyled" onClick={() => { setCollapsed(c => !c); setProfile(false); }}><PanelLeft size={16}/> Toggle sidebar</Button></div>}<Button variant="unstyled" className="profile-button" aria-expanded={profile} onClick={() => setProfile(p => !p)}><Avatar id="60" name="John Doe"/><span className="profile-name label"><strong>John Doe</strong><small>Designer</small></span><ChevronDown className="label" size={18}/></Button></div>
  </aside>
- <main className="workspace"><header className="topbar"><div className="header-inner"><div className="breadcrumb"><Button variant="icon" className="icon-button mobile-menu" aria-label="Open navigation" onClick={() => setMobile(true)}><PanelLeft size={20}/></Button><span>Workspace</span><ChevronRight size={14}/><strong>{allPostsPage ? 'All posts' : 'Post queue'}</strong></div><div className="header-actions"><ThemeSwitch/><Button variant="unstyled" className="header-settings" onClick={() => setPanel('Settings')}><Settings size={15}/><span>Setting</span></Button><Button variant="unstyled" className="header-notification" aria-label="Notifications" onClick={() => setPanel('Notification')}><Bell size={17}/></Button><Button variant="unstyled" className="header-avatar" aria-label="Open profile" onClick={() => setPanel('Profile')}><Avatar id="12" name="John Doe"/></Button></div></div></header>
- {allPostsPage ? <AllPostsPage posts={filtered} pending={pending} onSelect={setDetail} onRetry={retry} onClear={clearFilters} filters={filters} loading={loading} onCreate={openComposer}/> : <> <section className="welcome-row" aria-label="Workspace welcome"><div><h2><span>Good {new Date().getHours() < 12 ? 'Morning' : new Date().getHours() < 18 ? 'Afternoon' : 'Evening'},</span> John!</h2><p>Plan your content and keep your social channels moving.</p></div><div className="welcome-actions"><Button variant="primary" startIcon={<Plus size={18}/>} onClick={() => openComposer()}>Create post</Button><Button variant="secondary" startIcon={<Upload size={18}/>} endIcon={<ChevronDown size={18}/>} onClick={exportPosts}>Export File</Button></div></section>
+ <main className="workspace"><header className="topbar"><div className="header-inner"><div className="breadcrumb"><Button variant="icon" className="icon-button mobile-menu" aria-label="Open navigation" onClick={() => setMobile(true)}><PanelLeft size={20}/></Button><span>Workspace</span><ChevronRight size={14}/><strong>{analyticsPage ? 'Analytics' : allPostsPage ? 'All posts' : 'Post queue'}</strong></div><div className="header-actions"><ThemeSwitch/><Button variant="unstyled" className="header-settings" onClick={() => setPanel('Settings')}><Settings size={15}/><span>Setting</span></Button><Button variant="unstyled" className="header-notification" aria-label="Notifications" onClick={() => setPanel('Notification')}><Bell size={17}/></Button><Button variant="unstyled" className="header-avatar" aria-label="Open profile" onClick={() => setPanel('Profile')}><Avatar id="12" name="John Doe"/></Button></div></div></header>
+ {analyticsPage ? <AnalyticsPage posts={filtered} filters={filters} loading={loading} onOpenPost={setDetail}/> : allPostsPage ? <AllPostsPage posts={filtered} pending={pending} onSelect={setDetail} onRetry={retry} onClear={clearFilters} filters={filters} loading={loading} onCreate={openComposer}/> : <> <section className="welcome-row" aria-label="Workspace welcome"><div><h2><span>Good {new Date().getHours() < 12 ? 'Morning' : new Date().getHours() < 18 ? 'Afternoon' : 'Evening'},</span> John!</h2><p>Plan your content and keep your social channels moving.</p></div><div className="welcome-actions"><Button variant="primary" startIcon={<Plus size={18}/>} onClick={() => openComposer()}>Create post</Button><Button variant="secondary" startIcon={<Upload size={18}/>} endIcon={<ChevronDown size={18}/>} onClick={exportPosts}>Export File</Button></div></section>
 
  <div className="overview"><div><span>Scheduled</span><strong>{posts.filter(p => p.status === 'scheduled').length}<small>Ready when you are <ArrowUpRight size={14}/></small></strong></div><div><span>Published</span><strong>{posts.filter(p => p.status === 'published').length}<small>Out in the world <Check size={14}/></small></strong></div><div><span>Needs attention</span><strong>{posts.filter(p => p.status === 'failed').length}<small>Let’s give it another go <RotateCcw size={13}/></small></strong></div></div>
  <div className="page-content"><div className="queue-toolbar"><div className="queue-title"><h2>All posts</h2><span>{filtered.length}</span></div><PostFilters {...filters}/></div>

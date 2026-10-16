@@ -67,3 +67,13 @@ DateTimePicker and ThemeSwitch currently have one application instance each but 
 | `YearCalendar` | Year overview, delegating selected dates to the month view. |
 
 The page owns calendar view/date state; reusable components receive typed data and callbacks. `src/lib/calendar.ts` contains separately tested local-day grouping, month/week ranges, URL date parsing, and period navigation. No post data is duplicated between views.
+
+# Analytics components
+
+- `DataTable<T>`: typed columns/renderers, row keys, semantic headings/caption, keyboard-accessible horizontal scrolling, and empty state.
+- `MetricCard`: shared overview and per-post metric cards.
+- `MetricChart`: accessible SVG trend with reusable values/labels, gradient, and textual values in its accessible name.
+- `HeatmapValue`: normalized metric shading with exact-value tooltips and unavailable-data state.
+- `SegmentedControl`: reused for Analytics sections and chart metrics with the same stretching animation as the planner.
+
+All analytics values are mock fixtures and are generated only for published posts. The fixture calculations are separately tested in `tests/analytics.test.mjs`.
