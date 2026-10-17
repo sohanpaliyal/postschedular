@@ -1,5 +1,0 @@
-.segmented-control{position:relative;isolation:isolate;display:flex;align-items:center;padding:3px;background:var(--planner-hover,#eef2e7);border-radius:9px;gap:2px}
-.segmented-control-indicator{position:absolute;pointer-events:none;opacity:0;left:3px;top:3px;border-radius:7px;background:var(--planner-card,#fff);box-shadow:0 1px 4px #0000000a;z-index:0}
-.segmented-control>.button{position:relative;z-index:1;height:var(--button-height);min-width:30px;padding:0 10px;border-radius:7px;background:transparent;color:var(--planner-muted,#929c88);font-size:10px;display:flex;align-items:center;justify-content:center;transition:color .4s ease}
-.segmented-control>.button.is-active,.segmented-control>.button:hover{color:var(--planner-text,#4b5541)}
-@media(prefers-reduced-motion:reduce){.segmented-control>.button{transition:none}}

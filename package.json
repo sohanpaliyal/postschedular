@@ -7,8 +7,16 @@
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "node --experimental-strip-types --test tests/*.test.mjs"
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix --max-warnings=0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "check": "pnpm run lint && pnpm run format:check && pnpm run typecheck && pnpm test && pnpm run build",
+    "prepare": "husky"
   },
+  "packageManager": "pnpm@12.10.1",
   "dependencies": {
     "lucide-react": "^0.468.0",
     "react": "^19.1.0",
@@ -16,10 +24,33 @@
     "simple-icons": "^16.35.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
     "@vitejs/plugin-react": "^4.4.1",
+    "babel-plugin-react-compiler": "1.0.0",
+    "eslint": "^10.12.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.4.26",
+    "globals": "^16.5.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "3.9.10",
+    "tailwindcss": "^4.3.3",
     "typescript": "~5.8.3",
+    "typescript-eslint": "^8.71.2",
     "vite": "^6.3.5"
+  },
+  "engines": {
+    "node": ">=24.11.0",
+    "pnpm": ">=10"
+  },
+  "lint-staged": {
+    "*.{js,mjs,ts,tsx}": [
+      "eslint --fix --max-warnings=0",
+      "prettier --write"
+    ],
+    "*.{css,json,md,html,yml,yaml}": "prettier --write"
   }
 }

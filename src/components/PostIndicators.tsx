@@ -1,5 +1,21 @@
+import { cn } from '../ui/cn';
 import type { PostStatus } from '../types/post';
 export { PlatformIcon } from './PlatformIcon';
-export function StatusBadge({ status, pending = false }: { status: PostStatus; pending?: boolean }) {
-  return <span className={`status ${status}`}><i aria-hidden="true"/>{pending ? 'Retrying…' : status}</span>;
+export function StatusBadge({
+  status,
+  pending = false,
+}: {
+  status: PostStatus;
+  pending?: boolean;
+}) {
+  return (
+    <span
+      className={cn(
+        `status inline-flex items-center gap-[5px] [text-transform:capitalize] ${status}`,
+      )}
+    >
+      <i aria-hidden="true" />
+      {pending ? 'Retrying…' : status}
+    </span>
+  );
 }

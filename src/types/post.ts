@@ -10,4 +10,9 @@ export interface Post {
   errorMessage?: string;
 }
 export const platforms: Platform[] = ['X', 'Instagram', 'TikTok', 'Facebook'];
-export const limits: Record<Platform, number> = { X: 280, Instagram: 2200, TikTok: 2200, Facebook: 5000 };
+export const limits: Record<Platform, number> = {
+  X: 280,
+  Instagram: 2200,
+  TikTok: 2200,
+  Facebook: 5000,
+};

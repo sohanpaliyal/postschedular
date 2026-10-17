@@ -1,16 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+import { cn } from '../ui/cn';
+import { useEffect, useRef } from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { Button } from './Button';
-import './ThemeSwitch.css';
+import { useDarkTheme, updatePreferences } from '../state/preferences';
 
 export function ThemeSwitch() {
-  const [dark, setDark] = useState(() => document.documentElement.dataset.theme === 'dark');
+  const dark = useDarkTheme();
   const indicator = useRef<HTMLSpanElement>(null);
   const animation = useRef<Animation | null>(null);
-  useEffect(() => {
-    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-    try { localStorage.setItem('postflow-theme', dark ? 'dark' : 'light'); } catch { /* Theme still works when storage is unavailable. */ }
-  }, [dark]);
   useEffect(() => () => animation.current?.cancel(), []);
 
   function toggle() {
@@ -21,18 +18,53 @@ export function ThemeSwitch() {
       const left = current.left;
       const width = current.width;
       animation.current?.cancel();
-      animation.current = node.animate([
-        { left, width, offset: 0 },
-        { left: '5px', width: '64px', offset: .48 },
-        { left: dark ? '5px' : '39px', width: '30px', offset: 1 },
-      ], { duration: 650, easing: 'cubic-bezier(.65, 0, .35, 1)' });
+      animation.current = node.animate(
+        [
+          { left, width, offset: 0 },
+          { left: '5px', width: '64px', offset: 0.48 },
+          { left: dark ? '5px' : '39px', width: '30px', offset: 1 },
+        ],
+        { duration: 650, easing: 'cubic-bezier(.65, 0, .35, 1)' },
+      );
     }
-    setDark(value => !value);
+    updatePreferences({ theme: dark ? 'light' : 'dark' });
   }
 
-  return <Button variant="unstyled" className={`theme-switch ${dark ? 'is-dark' : ''}`} role="switch" aria-checked={dark} aria-label="Dark mode" title={dark ? 'Switch to light mode' : 'Switch to dark mode'} onClick={toggle}>
-    <span className="theme-switch-indicator" ref={indicator} aria-hidden="true"/>
-    <span className="theme-switch-icon theme-switch-sun" aria-hidden="true"><Sun size={20} fill="currentColor"/></span>
-    <span className="theme-switch-icon theme-switch-moon" aria-hidden="true"><Moon size={20} fill="currentColor"/></span>
-  </Button>;
+  return (
+    <Button
+      variant="unstyled"
+      className={cn(
+        `theme-switch relative block shrink-[0] w-[74px] h-[40px] p-[0] border-0 rounded-[999px] isolate ${dark ? 'is-dark' : ''}`,
+      )}
+      role="switch"
+      aria-checked={dark}
+      aria-label="Dark mode"
+      title={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+      onClick={toggle}
+    >
+      <span
+        className={cn(
+          'theme-switch-indicator absolute top-[5px] w-[30px] h-[30px] [background:#2d3329] rounded-[999px] z-[-1]',
+        )}
+        ref={indicator}
+        aria-hidden="true"
+      />
+      <span
+        className={cn(
+          'theme-switch-icon absolute top-[5px] w-[30px] h-[30px] grid place-items-center pointer-events-none theme-switch-sun left-[5px]',
+        )}
+        aria-hidden="true"
+      >
+        <Sun size={20} fill="currentColor" />
+      </span>
+      <span
+        className={cn(
+          'theme-switch-icon absolute top-[5px] w-[30px] h-[30px] grid place-items-center pointer-events-none theme-switch-moon right-[5px]',
+        )}
+        aria-hidden="true"
+      >
+        <Moon size={20} fill="currentColor" />
+      </span>
+    </Button>
+  );
 }

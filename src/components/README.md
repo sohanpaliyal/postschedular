@@ -42,29 +42,29 @@ Keyboard support: Arrow Up/Down, Home/End, Enter/Space, Escape, Tab, and type-ah
 
 # Shared component inventory
 
-| Component | Where used |
-| --- | --- |
-| `Button` | All buttons, including navigation, header, dropdown options, calendar, and dialogs. |
-| `Select` | Platform and status filters; calendar month/year; schedule hour/minute/AM-PM. |
-| `Avatar` | Sidebar contacts, sidebar profile, and header profile. |
-| `Modal` | Composer, Post Details, and reference menu demo panels. |
-| `MotionChevron` | Dashboard submenu and sidebar expand/collapse arrows. |
-| `DateTimePicker` | Composer scheduling field; composed from Button and Select. |
-| `ThemeSwitch` | Header theme control; composed from Button. |
+| Component        | Where used                                                                          |
+| ---------------- | ----------------------------------------------------------------------------------- |
+| `Button`         | All buttons, including navigation, header, dropdown options, calendar, and dialogs. |
+| `Select`         | Platform and status filters; calendar month/year; schedule hour/minute/AM-PM.       |
+| `Avatar`         | Sidebar contacts, sidebar profile, and header profile.                              |
+| `Modal`          | Composer, Post Details, and reference menu demo panels.                             |
+| `MotionChevron`  | Dashboard submenu and sidebar expand/collapse arrows.                               |
+| `DateTimePicker` | Composer scheduling field; composed from Button and Select.                         |
+| `ThemeSwitch`    | Header theme control; composed from Button.                                         |
 
-DateTimePicker and ThemeSwitch currently have one application instance each but are isolated reusable components. Composer and the main application remain feature-specific components in `main.tsx`.
+DateTimePicker and ThemeSwitch currently have one application instance each but are isolated reusable components. The application layout/state lives in `src/App.tsx`; `Composer.tsx` is shared by the dedicated composer route and modal.
 
 # Planner components
 
-| Component | Reuse |
-| --- | --- |
-| `PostFilters` | Dashboard and All Posts filters. |
-| `PostList` / `PostCard` | Dashboard, All Posts list view, and selected-day modal. |
-| `PlatformIcon` / `StatusBadge` | Queue cards, filter options, and calendar previews. |
-| `SegmentedControl` | List/calendar and week/month/year view selectors. |
-| `CalendarToolbar` | Shared calendar navigation and view controls. |
-| `PostCalendar` | Week and month calendar rendering. |
-| `YearCalendar` | Year overview, delegating selected dates to the month view. |
+| Component                      | Reuse                                                       |
+| ------------------------------ | ----------------------------------------------------------- |
+| `PostFilters`                  | Dashboard and All Posts filters.                            |
+| `PostList` / `PostCard`        | Dashboard, All Posts list view, and selected-day modal.     |
+| `PlatformIcon` / `StatusBadge` | Queue cards, filter options, and calendar previews.         |
+| `SegmentedControl`             | List/calendar and week/month/year view selectors.           |
+| `CalendarToolbar`              | Shared calendar navigation and view controls.               |
+| `PostCalendar`                 | Week and month calendar rendering.                          |
+| `YearCalendar`                 | Year overview, delegating selected dates to the month view. |
 
 The page owns calendar view/date state; reusable components receive typed data and callbacks. `src/lib/calendar.ts` contains separately tested local-day grouping, month/week ranges, URL date parsing, and period navigation. No post data is duplicated between views.
 
@@ -85,3 +85,13 @@ All analytics values are mock fixtures and are generated only for published post
 Brand treatments: Facebook blue, Instagram gradient, TikTok black with cyan/red accents, and X black/white. Context sizes remain compact in calendar/analytics cells. Shared use includes queue cards, calendar cards, analytics, dropdown triggers/options, composer platform choices/counters, and Post Details.
 
 Icon source: [Simple Icons](https://simpleicons.org/), distributed under CC0. Upstream Facebook and Instagram entries reference [Meta brand resources](https://about.meta.com/brand/resources/); TikTok and X entries reference their platform sites.
+
+## Styling
+
+Use Tailwind utilities for layout, spacing, typography, borders, and surfaces. Theme utilities (`bg-surface`, `bg-card`, `text-foreground`, `text-muted`, `bg-soft`, `text-accent`, and `border-outline`) follow the shared light/dark CSS variables.
+
+The only stylesheet is `src/styles.css`, imported once by `src/main.tsx`. It contains the Tailwind import, global element resets, theme tokens, and custom animation keyframes. Pages and components must not import CSS files.
+
+Reusable Tailwind compositions live in `src/ui/*Styles.ts`, grouped into layout, calendar, analytics, controls, and element defaults. `cn()` combines conditional classes, expands these shared compositions, and removes duplicate utility tokens. Semantic names are retained where descendant or state variants need stable hooks; their appearance is implemented entirely through Tailwind utilities. Utility strings are literal so Tailwind discovers them at build time.
+
+Use standard utilities for new layouts and styles. Use arbitrary variants for coordinated child, hover, dark-mode, and responsive states. Keep exact pixel values when preserving the established design. Add new animation keyframes to the global stylesheet and apply them with Tailwind animation utilities.

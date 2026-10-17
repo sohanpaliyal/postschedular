@@ -1,0 +1,242 @@
+[
+  {
+    "id": "post-0",
+    "content": "A little behind the scenes. A lot of good things on the way. ✨ Here's what we've been working on — and it's bigger than anything we've shipped before.",
+    "platforms": ["X", "Instagram"],
+    "mediaUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800",
+    "scheduledAt": "2026-10-15T09:30:00.000Z",
+    "status": "failed",
+    "errorMessage": "The platform could not process this post. Please try again."
+  },
+  {
+    "id": "post-1",
+    "content": "Good ideas deserve to be shared. Meet your new favorite way to make every day a little more creative — we built this for the makers, the dreamers, and the doers.",
+    "platforms": ["Instagram"],
+    "mediaUrl": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800",
+    "scheduledAt": "2026-10-15T12:30:00.000Z",
+    "status": "published"
+  },
+  {
+    "id": "post-2",
+    "content": "Slow mornings, fresh perspectives. What's inspiring you this week? ☕ Drop your answer in the comments — we read every single one.",
+    "platforms": ["TikTok"],
+    "scheduledAt": "2026-10-15T15:30:00.000Z",
+    "status": "published"
+  },
+  {
+    "id": "post-3",
+    "content": "Something new is coming. And we can't wait to share it with you. Stay close — big news lands this Friday. 🚀",
+    "platforms": ["Facebook", "X"],
+    "scheduledAt": "2026-10-15T18:30:00.000Z",
+    "status": "published"
+  },
+  {
+    "id": "post-4",
+    "content": "We asked our community what feature they wanted most. You answered loud and clear. Here's what we built — straight from your feedback. 💬",
+    "platforms": ["X"],
+    "scheduledAt": "2026-10-16T09:30:00.000Z",
+    "status": "published"
+  },
+  {
+    "id": "post-5",
+    "content": "Content creation doesn't have to be exhausting. Here are 3 habits our team swears by to stay consistent without burning out. 🧵",
+    "platforms": ["Instagram", "Facebook"],
+    "mediaUrl": "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800",
+    "scheduledAt": "2026-10-16T12:30:00.000Z",
+    "status": "published"
+  },
+  {
+    "id": "post-6",
+    "content": "Your audience is out there. They just haven't found you yet. Let's change that. Here's our step-by-step guide to growing organically in 2026. 👇",
+    "platforms": ["TikTok", "Facebook"],
+    "scheduledAt": "2026-10-16T15:30:00.000Z",
+    "status": "published"
+  },
+  {
+    "id": "post-7",
+    "content": "We hit a major milestone this week — 100,000 posts scheduled through Flintzy! 🎉 Thank you for trusting us with your content. This one's for you.",
+    "platforms": ["Facebook"],
+    "mediaUrl": "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=800",
+    "scheduledAt": "2026-10-16T18:30:00.000Z",
+    "status": "failed",
+    "errorMessage": "Rate limit exceeded. Please wait a few minutes before retrying."
+  },
+  {
+    "id": "post-8",
+    "content": "Quick tip: the best time to post is when your audience is actually online — not when the generic guides say so. Here's how to find YOUR golden window. 🕐",
+    "platforms": ["X"],
+    "scheduledAt": "2026-10-17T09:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-9",
+    "content": "We redesigned our dashboard from scratch after watching 200+ hours of user recordings. Every pixel has a reason now. Thread time. 🧵",
+    "platforms": ["Instagram", "TikTok"],
+    "mediaUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
+    "scheduledAt": "2026-10-17T12:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-10",
+    "content": "Not every post needs to go viral. The most meaningful content finds the right 100 people, not the wrong million. Keep creating with intention. 🌱",
+    "platforms": ["TikTok"],
+    "scheduledAt": "2026-10-17T15:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-11",
+    "content": "This week's team pick: we've been loving async video updates instead of long meetings. Faster, calmer, and honestly better for creativity. What tools are you using to stay in flow?",
+    "platforms": ["Facebook"],
+    "scheduledAt": "2026-10-17T18:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-12",
+    "content": "Dark mode just landed in Flintzy. 🌙 Your eyes (and your late-night scheduling sessions) will thank you. Update now — it's live for everyone.",
+    "platforms": ["X", "Instagram"],
+    "mediaUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800",
+    "scheduledAt": "2026-10-18T09:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-13",
+    "content": "Behind every great brand is a team that talks to their customers obsessively. We do weekly listening sessions — here's exactly how we run them and what we've learned.",
+    "platforms": ["Instagram"],
+    "scheduledAt": "2026-10-18T12:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-14",
+    "content": "Reminder: done is better than perfect, especially on social. Post the draft. Ship the idea. Iterate in public. The best creators aren't flawless — they're consistent. 💪",
+    "platforms": ["TikTok"],
+    "scheduledAt": "2026-10-18T15:30:00.000Z",
+    "status": "failed",
+    "errorMessage": "Media attachment could not be uploaded. Please check the URL and try again."
+  },
+  {
+    "id": "post-15",
+    "content": "We're opening up 5 spots for early access to our new AI-powered caption generator. No waitlist tricks — just leave a comment and we'll DM you a code. 🎁",
+    "platforms": ["Facebook", "X"],
+    "scheduledAt": "2026-10-18T18:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-16",
+    "content": "The algorithm doesn't reward consistency. People do. Show up for your audience and they'll show up for you — the numbers follow the relationship. ❤️",
+    "platforms": ["X"],
+    "scheduledAt": "2026-10-19T09:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-17",
+    "content": "We asked three creators how they batch a month of content in one afternoon. Their answers were surprisingly simple — and completely different from each other. 📅",
+    "platforms": ["Instagram"],
+    "mediaUrl": "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800",
+    "scheduledAt": "2026-10-19T12:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-18",
+    "content": "Fun fact: scheduling your posts in advance doesn't make them feel less authentic. It makes them feel more intentional. Here's the difference, and why it matters. ✨",
+    "platforms": ["TikTok", "Facebook"],
+    "scheduledAt": "2026-10-19T15:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-19",
+    "content": "We surveyed 500 social media managers and found that 73% regret posting reactively instead of from a plan. Here's what the other 27% do differently. 📊",
+    "platforms": ["Facebook"],
+    "scheduledAt": "2026-10-19T18:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-20",
+    "content": "Today we're launching Flintzy for Teams — one workspace, multiple contributors, zero drama. Built for agencies and in-house teams who move fast. 🚀",
+    "platforms": ["X"],
+    "mediaUrl": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800",
+    "scheduledAt": "2026-10-20T09:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-21",
+    "content": "Engagement rate > follower count. Every time. A 1,000-person community that replies beats 100K passive scrollers. Here's how we think about building genuine reach.",
+    "platforms": ["Instagram", "TikTok"],
+    "scheduledAt": "2026-10-20T12:30:00.000Z",
+    "status": "failed",
+    "errorMessage": "Post content contains restricted keywords. Please review and update your caption."
+  },
+  {
+    "id": "post-22",
+    "content": "We just open-sourced our internal analytics toolkit. It was built for our own use, but the team thought the community would find it useful too. Link in bio. 🛠️",
+    "platforms": ["TikTok"],
+    "scheduledAt": "2026-10-20T15:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-23",
+    "content": "Caption writing is a skill, not a talent. Here are 7 frameworks we use to write captions that actually get saved, shared, and remembered. Save this one. 📌",
+    "platforms": ["Facebook"],
+    "scheduledAt": "2026-10-20T18:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-24",
+    "content": "It's Q4. Your content calendar should already be planned. If it isn't, here's a 30-minute sprint to get you sorted before the holiday rush hits. 🗓️",
+    "platforms": ["X", "Instagram"],
+    "mediaUrl": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800",
+    "scheduledAt": "2026-10-21T09:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-25",
+    "content": "The best brands on social don't sell — they invite. They create spaces where people want to hang out, learn, and share. That shift in mindset changes everything. 💡",
+    "platforms": ["Instagram"],
+    "scheduledAt": "2026-10-21T12:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-26",
+    "content": "We've been quiet for a reason. Building in public is great — but sometimes you need heads-down time to build something truly great. We're almost there. Stay tuned. 🤫",
+    "platforms": ["TikTok"],
+    "scheduledAt": "2026-10-21T15:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-27",
+    "content": "Flintzy now supports bulk scheduling — upload a CSV and schedule dozens of posts in seconds. No copy-pasting, no manual dates. Just clean, fast scheduling. 🗂️",
+    "platforms": ["Facebook", "X"],
+    "scheduledAt": "2026-10-21T18:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-28",
+    "content": "Three years ago we were a two-person team scheduling posts in spreadsheets. Today we help 15,000+ creators stay consistent. Grateful doesn't begin to cover it. 🙏",
+    "platforms": ["X"],
+    "mediaUrl": "https://images.unsplash.com/photo-1543269865-cbf427effbad?w=800",
+    "scheduledAt": "2026-10-22T09:30:00.000Z",
+    "status": "failed",
+    "errorMessage": "The platform could not process this post. Please try again."
+  },
+  {
+    "id": "post-29",
+    "content": "Cross-posting the same content on every platform is a trap. Your TikTok audience and your LinkedIn audience are completely different people. Here's how to adapt without doubling your workload.",
+    "platforms": ["Instagram"],
+    "scheduledAt": "2026-10-22T12:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-30",
+    "content": "New feature drop: you can now preview exactly how your post will look on each platform before scheduling. No more surprise formatting. 👀",
+    "platforms": ["TikTok", "Facebook"],
+    "mediaUrl": "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?w=800",
+    "scheduledAt": "2026-10-22T15:30:00.000Z",
+    "status": "scheduled"
+  },
+  {
+    "id": "post-31",
+    "content": "Here's our honest take: social media scheduling tools should be invisible. You shouldn't be thinking about the tool — you should be thinking about your audience. That's the product we're building. 🎯",
+    "platforms": ["Facebook"],
+    "scheduledAt": "2026-10-22T18:30:00.000Z",
+    "status": "scheduled"
+  }
+]
