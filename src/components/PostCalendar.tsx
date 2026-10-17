@@ -1,3 +1,21 @@
+import { outsideStyles } from '../ui/layoutStyles';
+import {
+  calendarPostStyles,
+  calendarStatusDotStyles,
+  calendarPostTitleStyles,
+  calendarPostPlatformStyles,
+  calendarPostMetaStyles,
+  postCalendarStyles,
+  calendarDayStyles,
+  calendarDayHeadingStyles,
+  calendarDateStyles,
+  calendarSeeAllStyles,
+  calendarCreateStyles,
+  yearCalendarStyles,
+  miniCalendarStyles,
+  miniWeekdayStyles,
+  miniDateStyles,
+} from '../ui/calendarStyles';
 import { cn } from '../ui/cn';
 import { useTimeFormatter } from '../state/preferences';
 import { Plus } from 'lucide-react';
@@ -20,7 +38,10 @@ function CalendarPost({
     <Button
       variant="unstyled"
       className={cn(
-        `calendar-post [color:var(--planner-text)] text-left ${details ? 'with-details' : ''}`,
+        cn(
+          `calendar-post [color:var(--planner-text)] text-left ${details ? 'with-details' : ''}`,
+          calendarPostStyles,
+        ),
       )}
       onClick={() => onSelect(post)}
       aria-label={`${post.content}, ${post.status}, ${formatTime(new Date(post.scheduledAt))}`}
@@ -33,19 +54,29 @@ function CalendarPost({
       <span className={cn('flex items-center gap-[5px] min-w-[0]')}>
         <i
           className={cn(
-            `calendar-status-dot [display:inline-block] shrink-[0] w-[6px] h-[6px] rounded-full ${post.status}`,
+            cn(
+              `calendar-status-dot [display:inline-block] shrink-[0] w-[6px] h-[6px] rounded-full ${post.status}`,
+              calendarStatusDotStyles,
+            ),
           )}
           aria-hidden="true"
         />
         <span
           className={cn(
-            'calendar-post-title overflow-hidden whitespace-nowrap text-ellipsis leading-[1.5] flex-1',
+            cn(
+              'calendar-post-title overflow-hidden whitespace-nowrap text-ellipsis leading-[1.5] flex-1',
+              calendarPostTitleStyles,
+            ),
           )}
         >
           {post.content}
         </span>
         {!details && (
-          <span className={cn('calendar-post-platform flex items-center gap-[3px]')}>
+          <span
+            className={cn(
+              cn('calendar-post-platform flex items-center gap-[3px]', calendarPostPlatformStyles),
+            )}
+          >
             <PlatformIcon platform={post.platforms[0]} />
             {post.platforms.length > 1 && <small>+{post.platforms.length - 1}</small>}
           </span>
@@ -53,7 +84,12 @@ function CalendarPost({
       </span>
       {details && (
         <span
-          className={cn('calendar-post-meta flex items-center justify-between gap-[4px] flex-wrap')}
+          className={cn(
+            cn(
+              'calendar-post-meta flex items-center justify-between gap-[4px] flex-wrap',
+              calendarPostMetaStyles,
+            ),
+          )}
         >
           <StatusBadge status={post.status} />
           <span className={cn('flex gap-[5px]')}>
@@ -99,7 +135,10 @@ export function PostCalendar({
     >
       <div
         className={cn(
-          `post-calendar grid [grid-template-columns:repeat(7,_minmax(0,_1fr))] min-w-[760px] [border-top:1px_solid_var(--planner-border)] ${view}`,
+          cn(
+            `post-calendar grid [grid-template-columns:repeat(7,_minmax(0,_1fr))] min-w-[760px] [border-top:1px_solid_var(--planner-border)] ${view}`,
+            postCalendarStyles,
+          ),
         )}
       >
         {weekdays.map((day) => (
@@ -122,16 +161,24 @@ export function PostCalendar({
             <section
               key={key}
               className={cn(
-                `calendar-day p-[9px_7px_7px] relative flex flex-col gap-[7px] ${outside ? 'outside' : ''} ${isToday ? 'is-today' : ''}`,
+                cn(
+                  `calendar-day p-[9px_7px_7px] relative flex flex-col gap-[7px] ${outside ? cn('outside', outsideStyles) : ''} ${isToday ? 'is-today' : ''}`,
+                  calendarDayStyles,
+                ),
               )}
               aria-label={`${day.toLocaleDateString(undefined, { dateStyle: 'full' })}, ${entries.length} posts`}
             >
               <div
-                className={cn('calendar-day-heading flex items-center justify-center min-h-[22px]')}
+                className={cn(
+                  cn(
+                    'calendar-day-heading flex items-center justify-center min-h-[22px]',
+                    calendarDayHeadingStyles,
+                  ),
+                )}
               >
                 <Button
                   variant="unstyled"
-                  className={cn('calendar-date p-[4px_6px] rounded-[5px]')}
+                  className={cn(cn('calendar-date p-[4px_6px] rounded-[5px]', calendarDateStyles))}
                   aria-current={isToday ? 'date' : undefined}
                   aria-label={`View posts on ${day.toLocaleDateString(undefined, { dateStyle: 'full' })}`}
                   onClick={() => onDay(day, entries)}
@@ -150,7 +197,10 @@ export function PostCalendar({
                   <Button
                     variant="unstyled"
                     className={cn(
-                      'calendar-see-all block [border:1px_solid_var(--planner-border)] rounded-[4px] text-center p-[5px] text-[8px] [color:var(--planner-muted)]',
+                      cn(
+                        'calendar-see-all block [border:1px_solid_var(--planner-border)] rounded-[4px] text-center p-[5px] text-[8px] [color:var(--planner-muted)]',
+                        calendarSeeAllStyles,
+                      ),
                     )}
                     onClick={() => onDay(day, entries)}
                   >
@@ -162,7 +212,10 @@ export function PostCalendar({
                 <Button
                   variant="unstyled"
                   className={cn(
-                    'calendar-create flex items-center justify-center gap-[4px] text-[9px] [color:#809264] p-[5px_2px] mt-[auto]',
+                    cn(
+                      'calendar-create flex items-center justify-center gap-[4px] text-[9px] [color:#809264] p-[5px_2px] mt-[auto]',
+                      calendarCreateStyles,
+                    ),
                   )}
                   startIcon={<Plus size={13} />}
                   onClick={() => onCreate(day)}
@@ -190,14 +243,17 @@ export function YearCalendar({
   const groups = groupPostsByDay(posts);
   const today = dateKey(new Date());
   return (
-    <div className={cn('year-calendar grid')}>
+    <div className={cn(cn('year-calendar grid', yearCalendarStyles))}>
       {Array.from({ length: 12 }, (_, month) => {
         const anchor = new Date(date.getFullYear(), month, 1);
         const days = calendarRange(anchor, 'month');
         return (
           <section
             className={cn(
-              'mini-calendar [background:var(--planner-card)] [border:1px_solid_var(--planner-border)] rounded-[12px]',
+              cn(
+                'mini-calendar [background:var(--planner-card)] [border:1px_solid_var(--planner-border)] rounded-[12px]',
+                miniCalendarStyles,
+              ),
             )}
             key={month}
           >
@@ -207,7 +263,12 @@ export function YearCalendar({
             <div className={cn('grid [grid-template-columns:repeat(7,_minmax(0,_1fr))] gap-[3px]')}>
               {weekdays.map((day) => (
                 <span
-                  className={cn('mini-weekday text-center [color:var(--planner-muted)] pb-[8px]')}
+                  className={cn(
+                    cn(
+                      'mini-weekday text-center [color:var(--planner-muted)] pb-[8px]',
+                      miniWeekdayStyles,
+                    ),
+                  )}
                   key={day}
                 >
                   {day[0]}
@@ -218,7 +279,10 @@ export function YearCalendar({
                   key={dateKey(day)}
                   variant="unstyled"
                   className={cn(
-                    `mini-date grid place-items-center ${day.getMonth() !== month ? 'outside' : ''} ${dateKey(day) === today ? 'is-today' : ''}`,
+                    cn(
+                      `mini-date grid place-items-center ${day.getMonth() !== month ? cn('outside', outsideStyles) : ''} ${dateKey(day) === today ? 'is-today' : ''}`,
+                      miniDateStyles,
+                    ),
                   )}
                   aria-label={`${day.toLocaleDateString(undefined, { dateStyle: 'full' })}, ${groups.get(dateKey(day))?.length || 0} posts`}
                   onClick={() => onMonth(day)}

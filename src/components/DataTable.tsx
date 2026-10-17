@@ -1,3 +1,5 @@
+import { emptyStateStyles } from '../ui/layoutStyles';
+import { dataTableScrollStyles, dataTableStyles } from '../ui/analyticsStyles';
 import { cn } from '../ui/cn';
 import type { ReactNode } from 'react';
 export interface TableColumn<T> {
@@ -22,13 +24,16 @@ export function DataTable<T>({
   return (
     <div
       className={cn(
-        'data-table-scroll overflow-auto [scrollbar-width:thin] [scrollbar-color:#b3c39d_transparent]',
+        cn(
+          'data-table-scroll overflow-auto [scrollbar-width:thin] [scrollbar-color:#b3c39d_transparent]',
+          dataTableScrollStyles,
+        ),
       )}
       role="region"
       aria-label={caption}
       tabIndex={0}
     >
-      <table className={cn('data-table text-foreground text-left')}>
+      <table className={cn(cn('data-table text-foreground text-left', dataTableStyles))}>
         <caption
           className={cn(
             'absolute w-[1px] h-[1px] p-[0] m-[-1px] overflow-hidden [clip:rect(0,_0,_0,_0)] whitespace-nowrap border-0',
@@ -59,7 +64,9 @@ export function DataTable<T>({
           ) : (
             <tr>
               <td colSpan={columns.length}>
-                <div className={cn('empty-state text-center p-[42px_20px]')}>{empty}</div>
+                <div className={cn(cn('empty-state text-center p-[42px_20px]', emptyStateStyles))}>
+                  {empty}
+                </div>
               </td>
             </tr>
           )}

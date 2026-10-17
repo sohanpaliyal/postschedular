@@ -1,3 +1,4 @@
+import { statusStyles } from '../ui/layoutStyles';
 import { cn } from '../ui/cn';
 import type { PostStatus } from '../types/post';
 export { PlatformIcon } from './PlatformIcon';
@@ -11,7 +12,10 @@ export function StatusBadge({
   return (
     <span
       className={cn(
-        `status inline-flex items-center gap-[5px] [text-transform:capitalize] ${status}`,
+        cn(
+          `status inline-flex items-center gap-[5px] [text-transform:capitalize] ${status}`,
+          statusStyles,
+        ),
       )}
     >
       <i aria-hidden="true" />

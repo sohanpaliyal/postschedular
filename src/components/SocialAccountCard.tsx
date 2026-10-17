@@ -4,7 +4,6 @@ import { ArrowUpRight, Check, ChevronDown, Link2, Unplug } from 'lucide-react';
 import { Button } from './Button';
 import { PlatformIcon } from './PlatformIcon';
 import type { Platform } from '../types/post';
-
 export interface SocialAccount {
   platform: Platform;
   name: string;
@@ -14,7 +13,6 @@ export interface SocialAccount {
   scheduledPosts: number;
   publishedPosts: number;
 }
-
 export function SocialAccountCard({
   account,
   connected,
@@ -26,7 +24,6 @@ export function SocialAccountCard({
 }) {
   const [expanded, setExpanded] = useState(false);
   const detailsId = useId();
-
   return (
     <article
       className={cn(

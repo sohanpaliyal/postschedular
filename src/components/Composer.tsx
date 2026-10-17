@@ -1,3 +1,13 @@
+import { appTextareaStyles, appInputStyles, appH1Styles } from '../ui/elementStyles';
+import { platformOptionsStyles } from '../ui/controlsStyles';
+import {
+  fieldLabelStyles,
+  countersStyles,
+  inputWithIconStyles,
+  imagePreviewStyles,
+  postErrorStyles,
+  formActionsStyles,
+} from '../ui/layoutStyles';
 import { cn } from '../ui/cn';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { CalendarDays, Check, Image as ImageIcon } from 'lucide-react';
@@ -9,7 +19,6 @@ import { DateTimePicker } from './DateTimePicker';
 import { isFuture } from './dateTime';
 import { isAbort } from '../services/posts';
 import { usePreferences, preferredSchedule } from '../state/preferences';
-
 export function Composer({
   initialDate,
   inline = false,
@@ -90,13 +99,19 @@ export function Composer({
           'mb-[10px] [&_.field-label]:m-0 flex items-center justify-between gap-[12px]',
         )}
       >
-        <span className={cn('field-label block')} id="composer-channels-label">
+        <span
+          className={cn(cn('field-label block', fieldLabelStyles))}
+          id="composer-channels-label"
+        >
           Where would you like to share?
         </span>
       </div>
       <div
         className={cn(
-          'platform-options [&_.composer-select-all]:[flex-shrink:0] [&_.composer-select-all]:text-[12px]',
+          cn(
+            'platform-options [&_.composer-select-all]:[flex-shrink:0] [&_.composer-select-all]:text-[12px]',
+            platformOptionsStyles,
+          ),
         )}
         role="group"
         aria-labelledby="composer-channels-label"
@@ -126,12 +141,12 @@ export function Composer({
           </Button>
         ))}
       </div>
-      <label className={cn('field-label block')} htmlFor="content">
+      <label className={cn(cn('field-label block', fieldLabelStyles))} htmlFor="content">
         Your post
       </label>
       <textarea
         className={cn(
-          'app-textarea',
+          cn('app-textarea', appTextareaStyles),
           cn('focus:outline-none focus:shadow-none focus-visible:outline-none'),
         )}
         id="content"
@@ -140,7 +155,7 @@ export function Composer({
         placeholder="Good things start with a few words…"
         rows={5}
       />
-      <div className={cn('counters flex-wrap')}>
+      <div className={cn(cn('counters flex-wrap', countersStyles))}>
         {selected.map((p) => (
           <span key={p} className={cn(count > limits[p] ? 'over-limit' : '')}>
             <PlatformIcon platform={p} decorative />
@@ -151,13 +166,13 @@ export function Composer({
           </span>
         ))}
       </div>
-      <label className={cn('field-label block')} htmlFor="image">
+      <label className={cn(cn('field-label block', fieldLabelStyles))} htmlFor="image">
         Image URL <span>optional</span>
       </label>
-      <div className={cn('input-with-icon flex items-center pl-[12px]')}>
+      <div className={cn(cn('input-with-icon flex items-center pl-[12px]', inputWithIconStyles))}>
         <ImageIcon size={17} />
         <input
-          className={cn('app-input')}
+          className={cn(cn('app-input', appInputStyles))}
           id="image"
           type="url"
           value={image}
@@ -168,7 +183,7 @@ export function Composer({
       {image && /^https?:\/\//.test(image) && (
         <img
           key={image}
-          className={cn('image-preview')}
+          className={cn(cn('image-preview', imagePreviewStyles))}
           src={image}
           alt="Image preview"
           onError={(e) => {
@@ -176,19 +191,25 @@ export function Composer({
           }}
         />
       )}
-      <label className={cn('field-label block')} htmlFor="date">
+      <label className={cn(cn('field-label block', fieldLabelStyles))} htmlFor="date">
         Schedule for
       </label>
       <DateTimePicker id="date" value={date} onChange={setDate} />
       {error && (
         <p
           role="alert"
-          className={cn('post-error leading-[1.6] rounded-[7px] p-[9px_11px] mb-[2px]')}
+          className={cn(
+            cn('post-error leading-[1.6] rounded-[7px] p-[9px_11px] mb-[2px]', postErrorStyles),
+          )}
         >
           {error}
         </p>
       )}
-      <div className={cn('form-actions flex gap-[10px] justify-end mt-[24px] pt-[20px]')}>
+      <div
+        className={cn(
+          cn('form-actions flex gap-[10px] justify-end mt-[24px] pt-[20px]', formActionsStyles),
+        )}
+      >
         <Button variant="secondary" onClick={close}>
           Cancel
         </Button>
@@ -211,7 +232,7 @@ export function Composer({
         'm-[28px_auto_0] [&_h1]:text-[29px] [&_h1]:m-[0_0_24px] [&_h1]:tracking-[-1px] max-[760px]:mt-[22px] max-w-[1280px] pb-[24px] text-foreground composer-page [&_.route-card]:max-w-[650px] [&_.field-label:first-child]:mt-[0]',
       )}
     >
-      <h1 className={cn('app-h1')}>Create post</h1>
+      <h1 className={cn(cn('app-h1', appH1Styles))}>Create post</h1>
       <div
         className={cn(
           'route-card border border-outline rounded-[18px] p-[28px] max-[760px]:p-[20px] max-[760px]:rounded-[14px] bg-surface',

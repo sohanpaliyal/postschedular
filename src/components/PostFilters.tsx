@@ -1,3 +1,5 @@
+import { appInputStyles } from '../ui/elementStyles';
+import { filtersStyles, searchFieldStyles } from '../ui/layoutStyles';
 import { cn } from '../ui/cn';
 import { Check, Clock3, LayoutGrid, RotateCcw, Search } from 'lucide-react';
 import type { Ref } from 'react';
@@ -23,11 +25,11 @@ export function PostFilters({
   searchRef,
 }: PostFiltersProps) {
   return (
-    <div className={cn('filters flex gap-[7px]')}>
-      <label className={cn('search-field flex items-center gap-[8px]')}>
+    <div className={cn(cn('filters flex gap-[7px]', filtersStyles))}>
+      <label className={cn(cn('search-field flex items-center gap-[8px]', searchFieldStyles))}>
         <Search size={16} />
         <input
-          className={cn('app-input')}
+          className={cn(cn('app-input', appInputStyles))}
           ref={searchRef}
           value={query}
           onChange={(e) => onQuery(e.target.value)}

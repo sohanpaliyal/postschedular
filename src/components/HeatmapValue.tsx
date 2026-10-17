@@ -1,10 +1,14 @@
+import { heatmapValueStyles } from '../ui/analyticsStyles';
 import { cn } from '../ui/cn';
 import { compactNumber, heatLevel } from '../lib/analytics';
 export function HeatmapValue({ value, maximum }: { value: number | null; maximum: number }) {
   return (
     <span
       className={cn(
-        `heatmap-value flex items-center justify-center text-[11px] [font-variant-numeric:tabular-nums] heat-${value === null ? 0 : heatLevel(value, maximum)}`,
+        cn(
+          `heatmap-value flex items-center justify-center text-[11px] [font-variant-numeric:tabular-nums] heat-${value === null ? 0 : heatLevel(value, maximum)}`,
+          heatmapValueStyles,
+        ),
       )}
       title={value === null ? 'No performance data until published' : value.toLocaleString()}
     >

@@ -1,7 +1,7 @@
+import { segmentedControlStyles } from '../ui/controlsStyles';
 import { cn } from '../ui/cn';
 import { useLayoutEffect, useRef, type ReactNode } from 'react';
 import { Button } from './Button';
-
 export function SegmentedControl<T extends string>({
   label,
   value,
@@ -10,14 +10,22 @@ export function SegmentedControl<T extends string>({
 }: {
   label: string;
   value: T;
-  options: { value: T; label: string; icon?: ReactNode }[];
+  options: {
+    value: T;
+    label: string;
+    icon?: ReactNode;
+  }[];
   onChange: (value: T) => void;
 }) {
   const root = useRef<HTMLDivElement>(null);
   const indicator = useRef<HTMLSpanElement>(null);
   const animation = useRef<Animation | null>(null);
-  const target = useRef<{ left: number; width: number; top: number; height: number } | null>(null);
-
+  const target = useRef<{
+    left: number;
+    width: number;
+    top: number;
+    height: number;
+  } | null>(null);
   useLayoutEffect(() => {
     function update(animate: boolean) {
       const node = indicator.current;
@@ -71,10 +79,9 @@ export function SegmentedControl<T extends string>({
     return () => observer.disconnect();
   }, [value, options]);
   useLayoutEffect(() => () => animation.current?.cancel(), []);
-
   return (
     <div
-      className={cn('segmented-control isolate gap-[2px]')}
+      className={cn(cn('segmented-control isolate gap-[2px]', segmentedControlStyles))}
       ref={root}
       role="group"
       aria-label={label}

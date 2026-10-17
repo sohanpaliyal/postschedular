@@ -5,7 +5,6 @@ import { Button } from './Button';
 import { PlatformIcon, StatusBadge } from './PostIndicators';
 import type { Post } from '../types/post';
 import { useTimeFormatter } from '../state/preferences';
-
 export function PostSummaryTable({
   posts,
   pending,

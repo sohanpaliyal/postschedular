@@ -1,3 +1,4 @@
+import { appH1Styles, appInputStyles } from '../ui/elementStyles';
 import { cn } from '../ui/cn';
 import { useState } from 'react';
 import { Button } from '../components/Button';
@@ -7,12 +8,10 @@ import { Modal } from '../components/Modal';
 import { PlatformIcon } from '../components/PlatformIcon';
 import { platforms } from '../types/post';
 import { usePreferences, updatePreferences, type Preferences } from '../state/preferences';
-
 const sectionClasses =
   'route-card border border-outline rounded-[18px] p-[28px] max-[760px]:p-[20px] max-[760px]:rounded-[14px] bg-surface [&_p]:text-muted [&_p]:text-[12px] [&_p]:leading-[1.8] [grid-template-columns:1fr_1.2fr] gap-[40px] mb-[18px] [&_h2]:m-[0_0_8px] [&_h2]:text-[17px] [&_h2]:font-medium [&_p]:m-0 [&_p]:max-w-[340px] max-[760px]:[grid-template-columns:1fr] max-[760px]:gap-[22px] grid';
 const controlClasses =
   'min-w-0 [&_>_label]:text-[12px] [&_>_label]:text-foreground [&_legend]:text-[12px] [&_legend]:text-foreground [&_input]:min-w-0 [&_input]:border [&_input]:border-outline [&_input]:bg-card [&_input]:text-foreground [&_input]:rounded-[10px] [&_input]:p-[9px_12px] [&_input]:[font:inherit] [&_input]:text-[13px] [&_fieldset]:border-0 [&_fieldset]:p-0 [&_fieldset]:m-[0_0_6px] [&_legend]:mb-[12px] [&_.rich-select]:w-full flex flex-col items-start gap-[12px]';
-
 export function SettingsPage({ onReset }: { onReset: () => void }) {
   const preferences = usePreferences();
   const [name, setName] = useState(preferences.name);
@@ -28,7 +27,7 @@ export function SettingsPage({ onReset }: { onReset: () => void }) {
         'm-[28px_auto_0] [&_h1]:text-[29px] [&_h1]:m-[0_0_24px] [&_h1]:tracking-[-1px] max-[760px]:mt-[22px] max-w-[1280px] pb-[24px] text-foreground [&_h1]:mb-[10px]',
       )}
     >
-      <h1 className={cn('app-h1')}>Settings.</h1>
+      <h1 className={cn(cn('app-h1', appH1Styles))}>Settings.</h1>
       <p className={cn('text-muted text-[12px] leading-[1.8]')}>
         Make this workspace feel like yours. Preferences are saved on this device.
       </p>
@@ -50,7 +49,7 @@ export function SettingsPage({ onReset }: { onReset: () => void }) {
           <label htmlFor="settings-name">Display name</label>
           <div className={cn('[&_input]:flex-1 max-[760px]:flex-wrap flex gap-[10px] w-full')}>
             <input
-              className={cn('app-input')}
+              className={cn(cn('app-input', appInputStyles))}
               id="settings-name"
               required
               maxLength={60}
@@ -159,7 +158,7 @@ export function SettingsPage({ onReset }: { onReset: () => void }) {
           </fieldset>
           <label htmlFor="settings-posting-time">Preferred posting time</label>
           <input
-            className={cn('app-input')}
+            className={cn(cn('app-input', appInputStyles))}
             id="settings-posting-time"
             type="time"
             required

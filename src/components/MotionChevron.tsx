@@ -1,3 +1,5 @@
+import { motionChevronStyles } from '../ui/controlsStyles';
+import { navChevronStyles, labelStyles } from '../ui/layoutStyles';
 import { cn } from '../ui/cn';
 export function MotionChevron({
   flipped,
@@ -11,7 +13,10 @@ export function MotionChevron({
       aria-hidden="true"
       viewBox="0 0 24 24"
       className={cn(
-        `motion-chevron [overflow:visible] shrink-[0] ${horizontal ? 'horizontal' : 'nav-chevron [color:#8d8d8d] label'} ${flipped ? 'flipped' : ''}`,
+        cn(
+          `motion-chevron [overflow:visible] shrink-[0] ${horizontal ? 'horizontal' : cn('nav-chevron [color:#8d8d8d] label', navChevronStyles, labelStyles)} ${flipped ? 'flipped' : ''}`,
+          motionChevronStyles,
+        ),
       )}
       fill="none"
       stroke="currentColor"

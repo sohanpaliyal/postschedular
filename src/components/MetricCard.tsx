@@ -1,3 +1,4 @@
+import { metricCardStyles } from '../ui/analyticsStyles';
 import { cn } from '../ui/cn';
 import type { ReactNode } from 'react';
 export function MetricCard({
@@ -12,7 +13,11 @@ export function MetricCard({
   icon: ReactNode;
 }) {
   return (
-    <article className={cn('metric-card bg-card border border-outline rounded-[12px]')}>
+    <article
+      className={cn(
+        cn('metric-card bg-card border border-outline rounded-[12px]', metricCardStyles),
+      )}
+    >
       <div>
         <span>{label}</span>
         {icon}

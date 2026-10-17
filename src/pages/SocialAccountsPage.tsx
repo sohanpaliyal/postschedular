@@ -1,14 +1,13 @@
+import { appH1Styles } from '../ui/elementStyles';
 import { storage } from '../services/storage';
 import { cn } from '../ui/cn';
 import { useState } from 'react';
 import { SocialAccountCard } from '../components/SocialAccountCard';
 import type { Platform, Post } from '../types/post';
 import { demoAccounts, connectionKey, initialConnections } from '../lib/socialAccounts';
-
 export function SocialAccountsPage({ posts }: { posts: Post[] }) {
   const [connections, setConnections] = useState(initialConnections);
   const connectedCount = Object.values(connections).filter(Boolean).length;
-
   function changeConnection(platform: Platform, nextConnected: boolean) {
     setConnections((current) => ({ ...current, [platform]: nextConnected }));
     try {
@@ -17,14 +16,13 @@ export function SocialAccountsPage({ posts }: { posts: Post[] }) {
       // The demo remains interactive when browser storage is unavailable.
     }
   }
-
   return (
     <section
       className={cn(
         'm-[28px_auto_0] [&_h1]:text-[29px] [&_h1]:m-[0_0_24px] [&_h1]:tracking-[-1px] max-[760px]:mt-[22px] max-w-[1280px] pb-[24px] text-foreground [&_h1]:mb-[10px]',
       )}
     >
-      <h1 className={cn('app-h1')}>Social accounts.</h1>
+      <h1 className={cn(cn('app-h1', appH1Styles))}>Social accounts.</h1>
       <p className={cn('m-[0_0_36px] text-[13px] leading-[1.7] text-muted')}>
         Your channels, in good company. Manage where your content goes.
       </p>

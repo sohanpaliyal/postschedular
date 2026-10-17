@@ -1,3 +1,8 @@
+import {
+  calendarToolbarStyles,
+  calendarViewControlsStyles,
+  calendarPeriodControlsStyles,
+} from '../ui/calendarStyles';
 import { cn } from '../ui/cn';
 import { CalendarDays, ChevronLeft, ChevronRight, Eye, EyeOff, List } from 'lucide-react';
 import { Button } from './Button';
@@ -29,8 +34,12 @@ export function CalendarToolbar({
   const years = Array.from({ length: 15 }, (_, i) => thisYear - 5 + i);
   if (!years.includes(date.getFullYear())) years.push(date.getFullYear());
   return (
-    <div className={cn('calendar-toolbar flex justify-between items-center flex-wrap')}>
-      <div className={cn('calendar-view-controls')}>
+    <div
+      className={cn(
+        cn('calendar-toolbar flex justify-between items-center flex-wrap', calendarToolbarStyles),
+      )}
+    >
+      <div className={cn(cn('calendar-view-controls', calendarViewControlsStyles))}>
         <SegmentedControl
           label="Post layout"
           value={view === 'list' ? 'list' : 'calendar'}
@@ -54,7 +63,14 @@ export function CalendarToolbar({
         )}
       </div>
       {view !== 'list' && (
-        <div className={cn('calendar-period-controls [background:var(--planner-card)] p-[2px]')}>
+        <div
+          className={cn(
+            cn(
+              'calendar-period-controls [background:var(--planner-card)] p-[2px]',
+              calendarPeriodControlsStyles,
+            ),
+          )}
+        >
           <Button
             variant="icon"
             size="sm"

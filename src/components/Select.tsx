@@ -1,3 +1,16 @@
+import { isOpenStyles } from '../ui/layoutStyles';
+import { appInputStyles } from '../ui/elementStyles';
+import {
+  richSelectStyles,
+  richSelectTriggerStyles,
+  richSelectIconStyles,
+  richSelectChevronStyles,
+  richSelectMenuStyles,
+  richSelectSearchStyles,
+  richSelectOptionsStyles,
+  richSelectOptionStyles,
+  richSelectOptionTextStyles,
+} from '../ui/controlsStyles';
 import { cn } from '../ui/cn';
 import {
   useEffect,
@@ -10,7 +23,6 @@ import {
 } from 'react';
 import { Check, ChevronDown, Search } from 'lucide-react';
 import { Button } from './Button';
-
 export interface SelectOption<T extends string | number = string> {
   value: T;
   label: string;
@@ -32,7 +44,6 @@ export interface SelectProps<T extends string | number = string> {
   className?: string;
   name?: string;
 }
-
 /** Controlled single select. The top-layer menu also works inside native dialogs. */
 export function Select<T extends string | number>({
   value,
@@ -66,7 +77,6 @@ export function Select<T extends string | number>({
       option.label.toLowerCase().includes(query.toLowerCase()) ||
       option.description?.toLowerCase().includes(query.toLowerCase()),
   );
-
   function close(restoreFocus = false) {
     setOpen(false);
     if (restoreFocus) trigger.current?.focus();
@@ -88,7 +98,6 @@ export function Select<T extends string | number>({
     onChange(option.value);
     close(true);
   }
-
   useLayoutEffect(() => {
     if (!open) return;
     const node = panel.current;
@@ -127,7 +136,6 @@ export function Select<T extends string | number>({
       window.removeEventListener('resize', place);
     };
   }, [open, searchable, filtered.length]);
-
   useEffect(() => {
     if (!open) return;
     const outside = (e: PointerEvent) => {
@@ -141,7 +149,6 @@ export function Select<T extends string | number>({
     if (open)
       document.getElementById(`${uid}-option-${active}`)?.scrollIntoView({ block: 'nearest' });
   }, [active, open, uid]);
-
   function keyDown(e: KeyboardEvent<HTMLDivElement>) {
     if (e.key === 'Escape' && open) {
       e.preventDefault();
@@ -205,18 +212,20 @@ export function Select<T extends string | number>({
       }
     }
   }
-
   return (
     <div
       className={cn(
-        `rich-select relative rich-select--${size} rich-select--${variant} ${className}`,
+        cn(
+          `rich-select relative rich-select--${size} rich-select--${variant} ${className}`,
+          richSelectStyles,
+        ),
       )}
       ref={root}
       onKeyDown={keyDown}
     >
       {name && (
         <input
-          className={cn('app-input')}
+          className={cn(cn('app-input', appInputStyles))}
           type="hidden"
           name={name}
           value={value}
@@ -228,7 +237,10 @@ export function Select<T extends string | number>({
         id={id}
         variant="unstyled"
         className={cn(
-          `rich-select-trigger flex items-center w-full text-left whitespace-nowrap ${open ? 'is-open' : ''}`,
+          cn(
+            `rich-select-trigger flex items-center w-full text-left whitespace-nowrap ${open ? cn('is-open', isOpenStyles) : ''}`,
+            richSelectTriggerStyles,
+          ),
         )}
         role="combobox"
         aria-label={label}
@@ -240,7 +252,12 @@ export function Select<T extends string | number>({
       >
         {selected?.icon && (
           <span
-            className={cn('rich-select-icon inline-flex items-center justify-center shrink-[0]')}
+            className={cn(
+              cn(
+                'rich-select-icon inline-flex items-center justify-center shrink-[0]',
+                richSelectIconStyles,
+              ),
+            )}
             aria-hidden="true"
           >
             {selected.icon}
@@ -251,7 +268,9 @@ export function Select<T extends string | number>({
         </span>
         <ChevronDown
           size={14}
-          className={cn('rich-select-chevron shrink-[0] [color:#939b89]')}
+          className={cn(
+            cn('rich-select-chevron shrink-[0] [color:#939b89]', richSelectChevronStyles),
+          )}
           aria-hidden="true"
         />
       </Button>
@@ -260,7 +279,10 @@ export function Select<T extends string | number>({
           ref={panel}
           popover="manual"
           className={cn(
-            'rich-select-menu fixed [inset:auto] m-[0] p-[5px] overflow-hidden flex-col z-[1000]',
+            cn(
+              'rich-select-menu fixed [inset:auto] m-[0] p-[5px] overflow-hidden flex-col z-[1000]',
+              richSelectMenuStyles,
+            ),
           )}
           style={{
             left: position.left,
@@ -272,12 +294,15 @@ export function Select<T extends string | number>({
           {searchable && (
             <label
               className={cn(
-                'rich-select-search flex items-center gap-[7px] m-[3px_3px_5px] shrink-[0]',
+                cn(
+                  'rich-select-search flex items-center gap-[7px] m-[3px_3px_5px] shrink-[0]',
+                  richSelectSearchStyles,
+                ),
               )}
             >
               <Search size={14} />
               <input
-                className={cn('app-input')}
+                className={cn(cn('app-input', appInputStyles))}
                 ref={search}
                 role="combobox"
                 aria-expanded={true}
@@ -309,7 +334,10 @@ export function Select<T extends string | number>({
             tabIndex={-1}
             aria-activedescendant={active >= 0 ? `${uid}-option-${active}` : undefined}
             className={cn(
-              'rich-select-options overflow-auto [overscroll-behavior:contain] min-h-[0] [scrollbar-width:thin] [scrollbar-color:#d5ddca_transparent]',
+              cn(
+                'rich-select-options overflow-auto [overscroll-behavior:contain] min-h-[0] [scrollbar-width:thin] [scrollbar-color:#d5ddca_transparent]',
+                richSelectOptionsStyles,
+              ),
             )}
           >
             {filtered.map((option, index) => (
@@ -322,7 +350,10 @@ export function Select<T extends string | number>({
                 aria-disabled={option.disabled || undefined}
                 tabIndex={-1}
                 className={cn(
-                  `rich-select-option flex items-center gap-[9px] min-h-[36px] w-full p-[9px_10px] border-0 rounded-[8px] text-left ${active === index ? 'is-active' : ''} ${option.value === value ? 'is-selected' : ''}`,
+                  cn(
+                    `rich-select-option flex items-center gap-[9px] min-h-[36px] w-full p-[9px_10px] border-0 rounded-[8px] text-left ${active === index ? 'is-active' : ''} ${option.value === value ? 'is-selected' : ''}`,
+                    richSelectOptionStyles,
+                  ),
                 )}
                 onPointerMove={() => {
                   if (!option.disabled) setActive(index);
@@ -333,14 +364,24 @@ export function Select<T extends string | number>({
                 {option.icon && (
                   <span
                     className={cn(
-                      'rich-select-icon inline-flex items-center justify-center shrink-[0]',
+                      cn(
+                        'rich-select-icon inline-flex items-center justify-center shrink-[0]',
+                        richSelectIconStyles,
+                      ),
                     )}
                     aria-hidden="true"
                   >
                     {option.icon}
                   </span>
                 )}
-                <span className={cn('rich-select-option-text flex flex-1 flex-col gap-[3px]')}>
+                <span
+                  className={cn(
+                    cn(
+                      'rich-select-option-text flex flex-1 flex-col gap-[3px]',
+                      richSelectOptionTextStyles,
+                    ),
+                  )}
+                >
                   <span>{option.label}</span>
                   {option.description && <small>{option.description}</small>}
                 </span>

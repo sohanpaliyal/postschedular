@@ -1,3 +1,14 @@
+import {
+  postCardRetryingStyles,
+  postCardStyles,
+  postContentStyles,
+  postImageStyles,
+  postErrorStyles,
+  postBottomStyles,
+  emptyStateStyles,
+  dayHeadingStyles,
+  postGridStyles,
+} from '../ui/layoutStyles';
 import { cn } from '../ui/cn';
 import { useTimeFormatter } from '../state/preferences';
 import { CalendarDays, Clock3, MoreHorizontal, RotateCcw } from 'lucide-react';
@@ -5,7 +16,6 @@ import type { Post } from '../types/post';
 import { dayLabel, groupPostsByDay } from '../lib/calendar';
 import { Button } from './Button';
 import { PlatformIcon, StatusBadge } from './PostIndicators';
-
 export interface PostListProps {
   posts: Post[];
   pending: string[];
@@ -13,7 +23,6 @@ export interface PostListProps {
   onRetry: (post: Post) => void;
   onClear?: () => void;
 }
-
 export function PostCard({
   post,
   pending,
@@ -29,7 +38,10 @@ export function PostCard({
   return (
     <article
       className={cn(
-        `post-card p-[18px_18px_0] ${pending ? 'post-card--retrying [border-color:#d4dac8] pointer-events-none' : ''}`,
+        cn(
+          `post-card p-[18px_18px_0] ${pending ? cn('post-card--retrying [border-color:#d4dac8] pointer-events-none', postCardRetryingStyles) : ''}`,
+          postCardStyles,
+        ),
       )}
     >
       <div className={cn('flex items-center justify-between')}>
@@ -43,7 +55,10 @@ export function PostCard({
       <Button
         variant="unstyled"
         className={cn(
-          'post-content text-[12px] leading-[1.8] [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical] overflow-hidden text-left m-[17px_0_18px] p-[0]',
+          cn(
+            'post-content text-[12px] leading-[1.8] [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical] overflow-hidden text-left m-[17px_0_18px] p-[0]',
+            postContentStyles,
+          ),
         )}
         onClick={() => onSelect(post)}
       >
@@ -51,7 +66,7 @@ export function PostCard({
       </Button>
       {post.mediaUrl && (
         <img
-          className={cn('post-image')}
+          className={cn(cn('post-image', postImageStyles))}
           src={post.mediaUrl}
           alt="Post attachment"
           loading="lazy"
@@ -59,7 +74,9 @@ export function PostCard({
       )}
       {post.errorMessage && !pending && (
         <p
-          className={cn('post-error leading-[1.6] rounded-[7px] p-[9px_11px] mb-[2px]')}
+          className={cn(
+            cn('post-error leading-[1.6] rounded-[7px] p-[9px_11px] mb-[2px]', postErrorStyles),
+          )}
           role="alert"
         >
           {post.errorMessage}
@@ -73,7 +90,7 @@ export function PostCard({
           Sending to the platform…
         </p>
       )}
-      <div className={cn('post-bottom justify-between')}>
+      <div className={cn(cn('post-bottom justify-between', postBottomStyles))}>
         <span>
           <Clock3 size={14} />
           {formatTime(new Date(post.scheduledAt))}
@@ -105,11 +122,10 @@ export function PostCard({
     </article>
   );
 }
-
 export function PostList({ posts, pending, onSelect, onRetry, onClear }: PostListProps) {
   if (!posts.length)
     return (
-      <div className={cn('empty-state text-center p-[42px_20px]')}>
+      <div className={cn(cn('empty-state text-center p-[42px_20px]', emptyStateStyles))}>
         <CalendarDays size={30} />
         <h3>No posts found</h3>
         <p>Try a different search or make room for something new.</p>
@@ -124,12 +140,12 @@ export function PostList({ posts, pending, onSelect, onRetry, onClear }: PostLis
     <>
       {Array.from(groupPostsByDay(posts), ([day, entries]) => (
         <section className={cn('day-group')} key={day}>
-          <div className={cn('day-heading flex items-center gap-[10px]')}>
+          <div className={cn(cn('day-heading flex items-center gap-[10px]', dayHeadingStyles))}>
             <h3>{dayLabel(day)}</h3>
             <span>{entries.length} posts</span>
             <div />
           </div>
-          <div className={cn('post-grid grid gap-[12px]')}>
+          <div className={cn(cn('post-grid grid gap-[12px]', postGridStyles))}>
             {entries.map((post) => (
               <PostCard
                 key={post.id}

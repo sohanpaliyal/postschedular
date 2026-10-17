@@ -1,3 +1,27 @@
+import { appH1Styles } from '../ui/elementStyles';
+import { engagementTrackStyles, skeletonsStyles, emptyStateStyles } from '../ui/layoutStyles';
+import {
+  analyticsPostCellStyles,
+  analyticsThumbnailStyles,
+  analyticsPostNameStyles,
+  analyticsPostPlatformsStyles,
+  analyticsPageStyles,
+  analyticsHeadingStyles,
+  analyticsHeadingTitleStyles,
+  analyticsSurfaceStyles,
+  analyticsTabsStyles,
+  analyticsDemoLabelStyles,
+  analyticsSectionHeadingStyles,
+  analyticsFilterRowStyles,
+  analyticsDataNoteStyles,
+  analyticsTableToolsStyles,
+  heatmapLegendStyles,
+  heatmapValueStyles,
+  analyticsMetricsStyles,
+  analyticsOverviewChartStyles,
+  analyticsPlatformNoteStyles,
+  analyticsDetailStatsStyles,
+} from '../ui/analyticsStyles';
 import { cn } from '../ui/cn';
 import { useTimeFormatter } from '../state/preferences';
 import { useEffect, useState } from 'react';
@@ -23,10 +47,12 @@ import { Modal } from '../components/Modal';
 import { PostFilters, type PostFiltersProps } from '../components/PostFilters';
 import { Pagination } from '../components/Pagination';
 import { PlatformIcon, StatusBadge } from '../components/PostIndicators';
-
 type Tab = 'overview' | 'performance' | 'platforms';
 type Metric = 'impressions' | 'reach' | 'likes';
-type Row = { post: Post; metrics: PostMetrics | null };
+type Row = {
+  post: Post;
+  metrics: PostMetrics | null;
+};
 function readTab(): Tab {
   const tab = new URLSearchParams(location.search).get('tab');
   return tab === 'overview' || tab === 'platforms' ? tab : 'performance';
@@ -104,10 +130,15 @@ export function AnalyticsPage({
       heading: 'Post',
       className: cn('w-[29%] min-w-[260px]'),
       render: ({ post }) => (
-        <div className={cn('analytics-post-cell items-center gap-[10px]')}>
+        <div
+          className={cn(cn('analytics-post-cell items-center gap-[10px]', analyticsPostCellStyles))}
+        >
           <div
             className={cn(
-              'analytics-thumbnail rounded-[5px] bg-soft grid place-items-center shrink-[0] text-muted overflow-hidden',
+              cn(
+                'analytics-thumbnail rounded-[5px] bg-soft grid place-items-center shrink-[0] text-muted overflow-hidden',
+                analyticsThumbnailStyles,
+              ),
             )}
           >
             {post.mediaUrl ? (
@@ -120,7 +151,10 @@ export function AnalyticsPage({
             <Button
               variant="unstyled"
               className={cn(
-                'analytics-post-name block text-left text-foreground text-[11px] font-medium whitespace-nowrap overflow-hidden text-ellipsis max-w-[220px] p-[0] leading-[1.6]',
+                cn(
+                  'analytics-post-name block text-left text-foreground text-[11px] font-medium whitespace-nowrap overflow-hidden text-ellipsis max-w-[220px] p-[0] leading-[1.6]',
+                  analyticsPostNameStyles,
+                ),
               )}
               onClick={() => onOpenPost(post)}
               title={post.content}
@@ -134,7 +168,14 @@ export function AnalyticsPage({
               })}{' '}
               · {formatTime(new Date(post.scheduledAt))}
             </small>
-            <div className={cn('analytics-post-platforms flex items-center gap-[4px]')}>
+            <div
+              className={cn(
+                cn(
+                  'analytics-post-platforms flex items-center gap-[4px]',
+                  analyticsPostPlatformsStyles,
+                ),
+              )}
+            >
               <StatusBadge status={post.status} />
               {post.platforms.map((platform) => (
                 <PlatformIcon key={platform} platform={platform} />
@@ -156,7 +197,9 @@ export function AnalyticsPage({
         <div className={cn('min-w-[68px] text-[10px]')}>
           <span>{row.metrics ? `${row.metrics.engagement}%` : '—'}</span>
           {row.metrics && (
-            <div className={cn('engagement-track overflow-hidden mt-[7px]')}>
+            <div
+              className={cn(cn('engagement-track overflow-hidden mt-[7px]', engagementTrackStyles))}
+            >
               <i style={{ width: `${Math.min(100, row.metrics.engagement)}%` }} />
             </div>
           )}
@@ -245,11 +288,29 @@ export function AnalyticsPage({
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
   return (
-    <div className={cn('analytics-page max-w-[1280px] pb-[24px] text-foreground')}>
-      <header className={cn('analytics-heading flex justify-between items-center gap-[18px]')}>
+    <div
+      className={cn(
+        cn('analytics-page max-w-[1280px] pb-[24px] text-foreground', analyticsPageStyles),
+      )}
+    >
+      <header
+        className={cn(
+          cn(
+            'analytics-heading flex justify-between items-center gap-[18px]',
+            analyticsHeadingStyles,
+          ),
+        )}
+      >
         <div>
-          <div className={cn('analytics-heading-title flex items-center gap-[12px]')}>
-            <h1 className={cn('app-h1')}>Analytics</h1>
+          <div
+            className={cn(
+              cn(
+                'analytics-heading-title flex items-center gap-[12px]',
+                analyticsHeadingTitleStyles,
+              ),
+            )}
+          >
+            <h1 className={cn(cn('app-h1', appH1Styles))}>Analytics</h1>
           </div>
           <p>A closer look at your content’s performance.</p>
         </div>
@@ -262,10 +323,15 @@ export function AnalyticsPage({
           Export report
         </Button>
       </header>
-      <div className={cn('analytics-surface bg-surface overflow-hidden')}>
+      <div
+        className={cn(cn('analytics-surface bg-surface overflow-hidden', analyticsSurfaceStyles))}
+      >
         <div
           className={cn(
-            'analytics-tabs flex justify-between [border-bottom:1px_solid_var(--analytics-border)]',
+            cn(
+              'analytics-tabs flex justify-between [border-bottom:1px_solid_var(--analytics-border)]',
+              analyticsTabsStyles,
+            ),
           )}
         >
           <SegmentedControl<Tab>
@@ -280,13 +346,16 @@ export function AnalyticsPage({
           />
           <span
             className={cn(
-              'analytics-demo-label flex items-center gap-[6px] text-muted text-[9px] whitespace-nowrap',
+              cn(
+                'analytics-demo-label flex items-center gap-[6px] text-muted text-[9px] whitespace-nowrap',
+                analyticsDemoLabelStyles,
+              ),
             )}
           >
             <i /> Mock analytics
           </span>
         </div>
-        <div className={cn('analytics-section-heading')}>
+        <div className={cn(cn('analytics-section-heading', analyticsSectionHeadingStyles))}>
           <h2>
             {tab === 'performance'
               ? 'Detailed post performance'
@@ -302,7 +371,11 @@ export function AnalyticsPage({
                 : 'See how your posts are distributed across your social channels.'}
           </p>
         </div>
-        <div className={cn('analytics-filter-row flex justify-between gap-[14px]')}>
+        <div
+          className={cn(
+            cn('analytics-filter-row flex justify-between gap-[14px]', analyticsFilterRowStyles),
+          )}
+        >
           <Select
             label="Analytics date range"
             value={period}
@@ -315,13 +388,19 @@ export function AnalyticsPage({
           />
           <PostFilters {...filters} />
         </div>
-        <div className={cn('analytics-data-note text-[9px] text-muted leading-[1.6]')}>
+        <div
+          className={cn(
+            cn('analytics-data-note text-[9px] text-muted leading-[1.6]', analyticsDataNoteStyles),
+          )}
+        >
           Illustrative metrics for published posts only. Scheduled and failed posts show —. No
           social platform data is connected.
         </div>
         {loading ? (
           <div
-            className={cn('skeletons grid gap-[14px] mt-[25px] p-[0_23px_23px]')}
+            className={cn(
+              cn('skeletons grid gap-[14px] mt-[25px] p-[0_23px_23px]', skeletonsStyles),
+            )}
             role="status"
             aria-label="Loading analytics"
           >
@@ -331,7 +410,11 @@ export function AnalyticsPage({
           </div>
         ) : tab === 'performance' ? (
           <>
-            <div className={cn('analytics-table-tools flex items-center')}>
+            <div
+              className={cn(
+                cn('analytics-table-tools flex items-center', analyticsTableToolsStyles),
+              )}
+            >
               <span>
                 {rows.length} posts · {published} with mock performance
               </span>
@@ -346,14 +429,21 @@ export function AnalyticsPage({
                   { value: 'impressions', label: 'Most impressions' },
                 ]}
               />
-              <div className={cn('heatmap-legend items-center text-[9px] text-muted')}>
+              <div
+                className={cn(
+                  cn('heatmap-legend items-center text-[9px] text-muted', heatmapLegendStyles),
+                )}
+              >
                 <span>Low</span>
                 <div>
                   {[1, 2, 3, 4, 5].map((level) => (
                     <i
                       key={level}
                       className={cn(
-                        `heatmap-value flex items-center justify-center text-[11px] [font-variant-numeric:tabular-nums] heat-${level}`,
+                        cn(
+                          `heatmap-value flex items-center justify-center text-[11px] [font-variant-numeric:tabular-nums] heat-${level}`,
+                          heatmapValueStyles,
+                        ),
                       )}
                     />
                   ))}
@@ -385,7 +475,7 @@ export function AnalyticsPage({
           </>
         ) : tab === 'overview' ? (
           <>
-            <div className={cn('analytics-metrics grid')}>
+            <div className={cn(cn('analytics-metrics grid', analyticsMetricsStyles))}>
               <MetricCard
                 label="Impressions"
                 value={compactNumber(totals.impressions)}
@@ -412,7 +502,7 @@ export function AnalyticsPage({
               />
             </div>
             {published > 0 ? (
-              <div className={cn('analytics-overview-chart')}>
+              <div className={cn(cn('analytics-overview-chart', analyticsOverviewChartStyles))}>
                 <SegmentedControl<Metric>
                   label="Overview chart metric"
                   value={metric}
@@ -430,7 +520,7 @@ export function AnalyticsPage({
                 />
               </div>
             ) : (
-              <div className={cn('empty-state text-center p-[42px_20px]')}>
+              <div className={cn(cn('empty-state text-center p-[42px_20px]', emptyStateStyles))}>
                 <BarChart3 size={30} />
                 <h3>No published posts in this selection</h3>
                 <p>Change your filters to explore the sample performance data.</p>
@@ -468,7 +558,14 @@ export function AnalyticsPage({
               ]}
               empty="No platforms"
             />
-            <p className={cn('analytics-platform-note text-[10px] text-muted leading-[1.7]')}>
+            <p
+              className={cn(
+                cn(
+                  'analytics-platform-note text-[10px] text-muted leading-[1.7]',
+                  analyticsPlatformNoteStyles,
+                ),
+              )}
+            >
               Multi-platform posts appear under each selected platform. Counts reflect your current
               filters and date range.
             </p>
@@ -488,7 +585,10 @@ export function AnalyticsPage({
             <>
               <div
                 className={cn(
-                  'analytics-detail-stats grid [grid-template-columns:1fr_1fr] gap-[10px] m-[20px_0]',
+                  cn(
+                    'analytics-detail-stats grid [grid-template-columns:1fr_1fr] gap-[10px] m-[20px_0]',
+                    analyticsDetailStatsStyles,
+                  ),
                 )}
               >
                 <MetricCard
@@ -521,7 +621,7 @@ export function AnalyticsPage({
               />
             </>
           ) : (
-            <div className={cn('empty-state text-center p-[42px_20px]')}>
+            <div className={cn(cn('empty-state text-center p-[42px_20px]', emptyStateStyles))}>
               <BarChart3 size={30} />
               <h3>Performance starts after publishing</h3>
               <p>This post is {selected.post.status}. There are no performance metrics yet.</p>

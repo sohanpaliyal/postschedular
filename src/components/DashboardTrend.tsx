@@ -4,14 +4,15 @@ import { Select } from './Select';
 import { MetricChart } from './MetricChart';
 import { dailyPerformance } from '../lib/analytics';
 import type { Post } from '../types/post';
-
 type TrendMetric = 'impressions' | 'engagement' | 'interactions';
-const metrics: { value: TrendMetric; label: string }[] = [
+const metrics: {
+  value: TrendMetric;
+  label: string;
+}[] = [
   { value: 'impressions', label: 'Impressions' },
   { value: 'engagement', label: 'Engagement' },
   { value: 'interactions', label: 'Interactions' },
 ];
-
 export function DashboardTrend({
   posts,
   now,

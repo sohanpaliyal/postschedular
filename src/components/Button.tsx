@@ -1,7 +1,25 @@
+import {
+  buttonStyles,
+  buttonStyledStyles,
+  buttonFullStyles,
+  buttonSpinnerStyles,
+  buttonPrimaryStyles,
+  buttonSecondaryStyles,
+  buttonOutlineStyles,
+  buttonSoftStyles,
+  buttonDangerStyles,
+  buttonIconStyles,
+  buttonTextStyles,
+  buttonUnstyledStyles,
+  buttonPillStyles,
+  buttonRoundedStyles,
+  buttonSizeSmStyles,
+  buttonSizeMdStyles,
+  buttonSizeLgStyles,
+} from '../ui/controlsStyles';
 import { cn } from '../ui/cn';
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { LoaderCircle } from 'lucide-react';
-
 export type ButtonVariant =
   'primary' | 'secondary' | 'outline' | 'soft' | 'danger' | 'icon' | 'text' | 'unstyled';
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -15,11 +33,19 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   badge?: ReactNode;
   fullWidth?: boolean;
 }
+const variantClasses: Record<ButtonVariant, readonly string[]> = {
+  primary: buttonPrimaryStyles,
+  secondary: buttonSecondaryStyles,
+  outline: buttonOutlineStyles,
+  soft: buttonSoftStyles,
+  danger: buttonDangerStyles,
+  icon: buttonIconStyles,
+  text: buttonTextStyles,
+  unstyled: buttonUnstyledStyles,
+};
+const sizeClasses = { sm: buttonSizeSmStyles, md: buttonSizeMdStyles, lg: buttonSizeLgStyles };
 
-/** Native button semantics with shared visual variants and async feedback.
- * Use `unstyled` for navigation rows, backdrops, and other custom layouts.
- * Icon-only buttons must receive an accessible `aria-label`.
- */
+/** Shared native button. Icon-only controls require an accessible aria-label. */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   {
     variant = 'primary',
@@ -47,50 +73,40 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       disabled={disabled || loading}
       aria-busy={loading || undefined}
       className={cn(
-        [
-          'button',
-          variant !== 'unstyled' && 'button--styled',
-          variant !== 'unstyled' &&
-            variant !== 'icon' &&
-            variant !== 'text' &&
-            `button-size-${size}`,
-          `button--${variant}`,
-          `button--${size}`,
-          `button--${shape}`,
-          fullWidth && 'button--full',
-          className,
-        ]
-          .filter(Boolean)
-          .join(' '),
+        'button',
+        buttonStyles,
+        `button--${variant}`,
+        variantClasses[variant],
+        `button--${size}`,
+        `button--${shape}`,
+        variant !== 'unstyled' && buttonStyledStyles,
+        variant !== 'unstyled' && (shape === 'pill' ? buttonPillStyles : buttonRoundedStyles),
+        variant !== 'unstyled' && variant !== 'icon' && variant !== 'text' && sizeClasses[size],
+        fullWidth && buttonFullStyles,
+        className,
       )}
     >
       {loading ? (
-        <LoaderCircle className={cn('button-spinner shrink-[0]')} size={16} aria-hidden="true" />
+        <LoaderCircle
+          className={cn('button-spinner shrink-0', buttonSpinnerStyles)}
+          size={16}
+          aria-hidden="true"
+        />
       ) : (
         startIcon && (
-          <span
-            className={cn('inline-flex items-center justify-center shrink-[0]')}
-            aria-hidden="true"
-          >
+          <span className="inline-flex shrink-0 items-center justify-center" aria-hidden="true">
             {startIcon}
           </span>
         )
       )}
       {loading && loadingText ? loadingText : children}
       {endIcon && (
-        <span
-          className={cn('inline-flex items-center justify-center shrink-[0]')}
-          aria-hidden="true"
-        >
+        <span className="inline-flex shrink-0 items-center justify-center" aria-hidden="true">
           {endIcon}
         </span>
       )}
       {badge !== undefined && (
-        <span
-          className={cn(
-            'inline-grid place-items-center min-w-[22px] h-[22px] p-[0_5px] [border:1px_solid_currentColor] rounded-[999px] text-[0.85em]',
-          )}
-        >
+        <span className="inline-grid h-[22px] min-w-[22px] place-items-center rounded-full border border-current px-[5px] text-[0.85em]">
           {badge}
         </span>
       )}

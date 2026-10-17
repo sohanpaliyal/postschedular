@@ -1,8 +1,15 @@
+import {
+  paginationStyles,
+  paginationMetaStyles,
+  paginationPageLabelStyles,
+  paginationSizeSelectStyles,
+  paginationBtnStyles,
+  paginationPageBtnStyles,
+} from '../ui/analyticsStyles';
 import { cn } from '../ui/cn';
 import { ChevronFirst, ChevronLast, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from './Button';
 import { Select } from './Select';
-
 export interface PaginationProps {
   /** Total number of items across all pages. */
   total: number;
@@ -18,9 +25,7 @@ export interface PaginationProps {
   pageSizeOptions?: number[];
   className?: string;
 }
-
 const DEFAULT_PAGE_SIZE_OPTIONS = [5, 10, 20, 50];
-
 /** Generates the visible page numbers with ellipsis gaps. */
 function buildPages(current: number, total: number): (number | '...')[] {
   if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
@@ -34,7 +39,6 @@ function buildPages(current: number, total: number): (number | '...')[] {
   }
   return pages;
 }
-
 export function Pagination({
   total,
   page,
@@ -47,20 +51,23 @@ export function Pagination({
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
   const safePage = Math.min(Math.max(1, page), totalPages);
   const pages = buildPages(safePage, totalPages);
-
   const pageSizeSelectOptions = pageSizeOptions.map((n) => ({ value: n, label: String(n) }));
-
   return (
     <div
       className={cn(
-        `pagination flex items-center justify-between flex-wrap text-[11px] [color:var(--analytics-muted,_#929b87)] ${className}`,
+        cn(
+          `pagination flex items-center justify-between flex-wrap text-[11px] [color:var(--analytics-muted,_#929b87)] ${className}`,
+          paginationStyles,
+        ),
       )}
       role="navigation"
       aria-label="Pagination"
     >
       {/* Left side: page label + rows-per-page */}
-      <div className={cn('pagination-meta flex items-center')}>
-        <span className={cn('pagination-page-label whitespace-nowrap')}>
+      <div className={cn(cn('pagination-meta flex items-center', paginationMetaStyles))}>
+        <span
+          className={cn(cn('pagination-page-label whitespace-nowrap', paginationPageLabelStyles))}
+        >
           Page <strong>{safePage}</strong> of {totalPages}
         </span>
         <span
@@ -79,7 +86,7 @@ export function Pagination({
           }}
           options={pageSizeSelectOptions}
           size="sm"
-          className={cn('pagination-size-select')}
+          className={cn(cn('pagination-size-select', paginationSizeSelectStyles))}
         />
       </div>
 
@@ -92,7 +99,7 @@ export function Pagination({
           aria-label="First page"
           disabled={safePage === 1}
           onClick={() => onPageChange(1)}
-          className={cn('pagination-btn')}
+          className={cn(cn('pagination-btn', paginationBtnStyles))}
         >
           <ChevronFirst size={14} />
         </Button>
@@ -103,7 +110,7 @@ export function Pagination({
           aria-label="Previous page"
           disabled={safePage === 1}
           onClick={() => onPageChange(safePage - 1)}
-          className={cn('pagination-btn')}
+          className={cn(cn('pagination-btn', paginationBtnStyles))}
         >
           <ChevronLeft size={14} />
         </Button>
@@ -128,7 +135,13 @@ export function Pagination({
               aria-label={`Page ${p}`}
               aria-current={p === safePage ? 'page' : undefined}
               onClick={() => onPageChange(p as number)}
-              className={cn('pagination-btn pagination-page-btn')}
+              className={cn(
+                cn(
+                  'pagination-btn pagination-page-btn',
+                  paginationBtnStyles,
+                  paginationPageBtnStyles,
+                ),
+              )}
             >
               {p}
             </Button>
@@ -142,7 +155,7 @@ export function Pagination({
           aria-label="Next page"
           disabled={safePage === totalPages}
           onClick={() => onPageChange(safePage + 1)}
-          className={cn('pagination-btn')}
+          className={cn(cn('pagination-btn', paginationBtnStyles))}
         >
           <ChevronRight size={14} />
         </Button>
@@ -153,7 +166,7 @@ export function Pagination({
           aria-label="Last page"
           disabled={safePage === totalPages}
           onClick={() => onPageChange(totalPages)}
-          className={cn('pagination-btn')}
+          className={cn(cn('pagination-btn', paginationBtnStyles))}
         >
           <ChevronLast size={14} />
         </Button>

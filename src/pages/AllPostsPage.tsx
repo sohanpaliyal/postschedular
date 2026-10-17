@@ -1,3 +1,15 @@
+import { appH1Styles } from '../ui/elementStyles';
+import {
+  allPostsPageStyles,
+  allPostsHeadingStyles,
+  allPostsSurfaceStyles,
+  allPostsFilterRowStyles,
+  calendarCaptionStyles,
+  calendarLoadingStyles,
+  allPostsListStyles,
+  calendarLegendStyles,
+  calendarStatusDotStyles,
+} from '../ui/calendarStyles';
 import { cn } from '../ui/cn';
 import { useEffect, useState } from 'react';
 import { CalendarDays, Clock3, Plus } from 'lucide-react';
@@ -55,10 +67,21 @@ export function AllPostsPage({
     return time.getMonth() === date.getMonth() && time.getFullYear() === date.getFullYear();
   }).length;
   return (
-    <div className={cn('all-posts-page max-w-[1280px] pb-[20px] [color:var(--planner-text)]')}>
-      <section className={cn('all-posts-heading flex justify-between gap-[18px]')}>
+    <div
+      className={cn(
+        cn(
+          'all-posts-page max-w-[1280px] pb-[20px] [color:var(--planner-text)]',
+          allPostsPageStyles,
+        ),
+      )}
+    >
+      <section
+        className={cn(
+          cn('all-posts-heading flex justify-between gap-[18px]', allPostsHeadingStyles),
+        )}
+      >
         <div>
-          <h1 className={cn('app-h1')}>
+          <h1 className={cn(cn('app-h1', appH1Styles))}>
             All posts<span>.</span>
           </h1>
           <p>Your content, all in one place. Make room for what’s next.</p>
@@ -68,10 +91,15 @@ export function AllPostsPage({
         </Button>
       </section>
       <section
-        className={cn('all-posts-surface [background:var(--planner-surface)] overflow-hidden')}
+        className={cn(
+          cn(
+            'all-posts-surface [background:var(--planner-surface)] overflow-hidden',
+            allPostsSurfaceStyles,
+          ),
+        )}
         aria-label="All posts planner"
       >
-        <div className={cn('all-posts-filter-row justify-between')}>
+        <div className={cn(cn('all-posts-filter-row justify-between', allPostsFilterRowStyles))}>
           <div>
             <CalendarDays size={17} />
             <strong>Content planner</strong>
@@ -88,7 +116,14 @@ export function AllPostsPage({
           onMove={(direction) => setDate((current) => movePeriod(current, view, direction))}
           onDetails={() => setDetails((value) => !value)}
         />
-        <div className={cn('calendar-caption justify-between [color:var(--planner-muted)]')}>
+        <div
+          className={cn(
+            cn(
+              'calendar-caption justify-between [color:var(--planner-muted)]',
+              calendarCaptionStyles,
+            ),
+          )}
+        >
           <span aria-live="polite">
             {view === 'list'
               ? 'All dates'
@@ -105,7 +140,12 @@ export function AllPostsPage({
         </div>
         {loading ? (
           <div
-            className={cn('calendar-loading grid [grid-template-columns:repeat(7,_1fr)] gap-[1px]')}
+            className={cn(
+              cn(
+                'calendar-loading grid [grid-template-columns:repeat(7,_1fr)] gap-[1px]',
+                calendarLoadingStyles,
+              ),
+            )}
             role="status"
             aria-label="Loading posts"
           >
@@ -114,7 +154,7 @@ export function AllPostsPage({
             ))}
           </div>
         ) : view === 'list' ? (
-          <div className={cn('all-posts-list')}>
+          <div className={cn(cn('all-posts-list', allPostsListStyles))}>
             <PostList
               posts={posts}
               pending={pending}
@@ -166,11 +206,16 @@ export function AllPostsPage({
             No posts in this month. Choose another month or create a post.
           </div>
         )}
-        <footer className={cn('calendar-legend [color:var(--planner-muted)]')}>
+        <footer
+          className={cn(cn('calendar-legend [color:var(--planner-muted)]', calendarLegendStyles))}
+        >
           <span>
             <i
               className={cn(
-                'calendar-status-dot [display:inline-block] shrink-[0] w-[6px] h-[6px] rounded-full scheduled',
+                cn(
+                  'calendar-status-dot [display:inline-block] shrink-[0] w-[6px] h-[6px] rounded-full scheduled',
+                  calendarStatusDotStyles,
+                ),
               )}
             />
             Scheduled
@@ -178,7 +223,10 @@ export function AllPostsPage({
           <span>
             <i
               className={cn(
-                'calendar-status-dot [display:inline-block] shrink-[0] w-[6px] h-[6px] rounded-full published',
+                cn(
+                  'calendar-status-dot [display:inline-block] shrink-[0] w-[6px] h-[6px] rounded-full published',
+                  calendarStatusDotStyles,
+                ),
               )}
             />
             Published
@@ -186,7 +234,10 @@ export function AllPostsPage({
           <span>
             <i
               className={cn(
-                'calendar-status-dot [display:inline-block] shrink-[0] w-[6px] h-[6px] rounded-full failed',
+                cn(
+                  'calendar-status-dot [display:inline-block] shrink-[0] w-[6px] h-[6px] rounded-full failed',
+                  calendarStatusDotStyles,
+                ),
               )}
             />
             Failed

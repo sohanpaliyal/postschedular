@@ -1,11 +1,9 @@
 import { useId, useState } from 'react';
-
 export interface DoughnutSegment {
   label: string;
   value: number;
   color: string;
 }
-
 /** Responsive doughnut with immediate pointer and keyboard data feedback. */
 export function DoughnutChart({ title, segments }: { title: string; segments: DoughnutSegment[] }) {
   const titleId = useId();

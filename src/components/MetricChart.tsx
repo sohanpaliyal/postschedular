@@ -1,3 +1,8 @@
+import {
+  metricChartStyles,
+  metricChartGridStyles,
+  metricChartLabelStyles,
+} from '../ui/analyticsStyles';
 import { cn } from '../ui/cn';
 import { useId } from 'react';
 import { compactNumber } from '../lib/analytics';
@@ -21,7 +26,7 @@ export function MetricChart({
       `${20 + (i / Math.max(1, values.length - 1)) * (width - 40)},${height - 10 - (value / max) * (height - 30)}`,
   );
   return (
-    <figure className={cn('metric-chart')}>
+    <figure className={cn(cn('metric-chart', metricChartStyles))}>
       <figcaption>
         {title}
         <span>Illustrative mock trend</span>
@@ -44,12 +49,12 @@ export function MetricChart({
               y1={height - 10 - level * (height - 30)}
               x2="580"
               y2={height - 10 - level * (height - 30)}
-              className={cn('metric-chart-grid')}
+              className={cn(cn('metric-chart-grid', metricChartGridStyles))}
             />
             <text
               x="0"
               y={height - 13 - level * (height - 30)}
-              className={cn('metric-chart-label text-[7px]')}
+              className={cn(cn('metric-chart-label text-[7px]', metricChartLabelStyles))}
             >
               {formatValue(Math.round(max * level * 10) / 10)}
             </text>

@@ -1,8 +1,8 @@
+import { appModalStyles, modalHeaderStyles, iconButtonStyles } from '../ui/layoutStyles';
 import { cn } from '../ui/cn';
 import { useEffect, useId, useRef, type ReactNode } from 'react';
 import { X } from 'lucide-react';
 import { Button } from './Button';
-
 export function Modal({
   title,
   onClose,
@@ -21,7 +21,7 @@ export function Modal({
   }, []);
   return (
     <dialog
-      className={cn('app-modal')}
+      className={cn(cn('app-modal', appModalStyles))}
       ref={ref}
       aria-labelledby={titleId}
       onCancel={onClose}
@@ -37,13 +37,15 @@ export function Modal({
           onClose();
       }}
     >
-      <div className={cn('modal-header flex items-center justify-between')}>
+      <div className={cn(cn('modal-header flex items-center justify-between', modalHeaderStyles))}>
         <div>
           <h2 id={titleId}>{title}</h2>
         </div>
         <Button
           variant="icon"
-          className={cn('icon-button grid place-items-center p-[5px] rounded-[7px]')}
+          className={cn(
+            cn('icon-button grid place-items-center p-[5px] rounded-[7px]', iconButtonStyles),
+          )}
           aria-label="Close dialog"
           onClick={onClose}
         >

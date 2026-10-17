@@ -1,3 +1,4 @@
+import { pageFooterStyles } from '../ui/layoutStyles';
 import { useEffect, useState, type ReactNode } from 'react';
 import { ArrowUpRight, Plus } from 'lucide-react';
 import { Button } from './Button';
@@ -8,7 +9,6 @@ import { cn } from '../ui/cn';
 import { dashboardPosts } from '../lib/dashboard';
 import { compactNumber, mockMetrics, sumMetrics } from '../lib/analytics';
 import type { Post } from '../types/post';
-
 function DashboardSection({
   title,
   description,
@@ -33,7 +33,6 @@ function DashboardSection({
     </section>
   );
 }
-
 export function DashboardPanels({
   posts,
   pending,
@@ -71,7 +70,6 @@ export function DashboardPanels({
       ))}
     </div>
   );
-
   return (
     <div className="mx-auto mb-[24px] mt-[24px] grid w-full max-w-[1280px] gap-[20px] text-foreground">
       <div
@@ -176,7 +174,11 @@ export function DashboardPanels({
           )}
         </DashboardSection>
       </div>
-      <footer className={cn('page-footer flex flex-wrap justify-between gap-[10px] pt-[12px]')}>
+      <footer
+        className={cn(
+          cn('page-footer flex flex-wrap justify-between gap-[10px] pt-[12px]', pageFooterStyles),
+        )}
+      >
         A calmer way to stay connected.<span>Flintzy © {new Date(now).getFullYear()}</span>
       </footer>
     </div>

@@ -1,3 +1,18 @@
+import {
+  datePickerTriggerStyles,
+  datePickerTriggerIconStyles,
+  datePickerValueStyles,
+  datePickerPanelStyles,
+  datePickerQuickStyles,
+  datePickerMonthStyles,
+  datePickerNavigationStyles,
+  datePickerDayStyles,
+  datePickerTimeStyles,
+  datePickerTimeControlsStyles,
+  datePickerFooterStyles,
+  datePickerZoneStyles,
+} from '../ui/controlsStyles';
+import { isOpenStyles, outsideStyles } from '../ui/layoutStyles';
 import { cn } from '../ui/cn';
 import { useTimeFormatter } from '../state/preferences';
 import { useEffect, useLayoutEffect, useId, useRef, useState, type KeyboardEvent } from 'react';
@@ -13,7 +28,6 @@ import {
 import { Button } from './Button';
 import { Select } from './Select';
 import { calendarDays, isFuture, localToUtcIso, sameDay, toLocalDateTime } from './dateTime';
-
 /**
  * `value`  — a UTC ISO-8601 string (e.g. "2026-10-17T03:30:00.000Z") or "".
  * `onChange` — called with a UTC ISO-8601 string (or "" when cleared).
@@ -22,12 +36,15 @@ import { calendarDays, isFuture, localToUtcIso, sameDay, toLocalDateTime } from 
  * The conversion local → UTC happens before calling onChange; UTC → local
  * happens when reading `value` for display.
  */
-type DateTimePickerProps = { id: string; value: string; onChange: (value: string) => void };
+type DateTimePickerProps = {
+  id: string;
+  value: string;
+  onChange: (value: string) => void;
+};
 const months = Array.from({ length: 12 }, (_, month) =>
   new Date(2000, month, 1).toLocaleDateString(undefined, { month: 'long' }),
 );
 const weekdays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-
 export function DateTimePicker({ id, value, onChange }: DateTimePickerProps) {
   const formatTime = useTimeFormatter();
   const [open, setOpen] = useState(false);
@@ -45,7 +62,6 @@ export function DateTimePicker({ id, value, onChange }: DateTimePickerProps) {
   const hours = selected?.getHours() ?? 9;
   const minutes = selected?.getMinutes() ?? 0;
   const years = Array.from({ length: 11 }, (_, i) => today.getFullYear() + i);
-
   useEffect(() => {
     if (!open) return;
     const outside = (e: PointerEvent) => {
@@ -54,7 +70,6 @@ export function DateTimePicker({ id, value, onChange }: DateTimePickerProps) {
     document.addEventListener('pointerdown', outside);
     return () => document.removeEventListener('pointerdown', outside);
   }, [open]);
-
   useLayoutEffect(() => {
     if (!open) return;
     const node = panel.current;
@@ -102,12 +117,10 @@ export function DateTimePicker({ id, value, onChange }: DateTimePickerProps) {
       window.visualViewport?.removeEventListener('scroll', place);
     };
   }, [open]);
-
   /** Emit UTC ISO from a local Date. */
   function emit(localDate: Date) {
     onChange(localToUtcIso(toLocalDateTime(localDate)));
   }
-
   function chooseDay(day: Date, now: number) {
     const next = new Date(day.getFullYear(), day.getMonth(), day.getDate(), hours, minutes);
     // When the user first taps "today", advance to +1 hour so the time is
@@ -124,7 +137,6 @@ export function DateTimePicker({ id, value, onChange }: DateTimePickerProps) {
     emit(next);
     setMonth(new Date(next.getFullYear(), next.getMonth(), 1));
   }
-
   function changeTime(hour: number, minute: number) {
     const next = selected
       ? new Date(selected)
@@ -132,7 +144,6 @@ export function DateTimePicker({ id, value, onChange }: DateTimePickerProps) {
     next.setHours(hour, minute, 0, 0);
     emit(next);
   }
-
   function quickPick(kind: 'hour' | 'tomorrow' | 'week') {
     const next = new Date();
     if (kind === 'hour') next.setTime(next.getTime() + 60 * 60 * 1000);
@@ -143,7 +154,6 @@ export function DateTimePicker({ id, value, onChange }: DateTimePickerProps) {
     emit(next);
     setMonth(new Date(next.getFullYear(), next.getMonth(), 1));
   }
-
   function dayKey(e: KeyboardEvent<HTMLButtonElement>, day: Date) {
     const deltas: Record<string, number> = {
       ArrowLeft: -1,
@@ -167,7 +177,6 @@ export function DateTimePicker({ id, value, onChange }: DateTimePickerProps) {
     setOpen(false);
     trigger.current?.focus();
   }
-
   return (
     <div
       className={cn('date-picker')}
@@ -185,7 +194,10 @@ export function DateTimePicker({ id, value, onChange }: DateTimePickerProps) {
         id={id}
         variant="unstyled"
         className={cn(
-          `date-picker-trigger flex items-center gap-[12px] w-full min-h-[52px] p-[10px_13px] text-left ${open ? 'is-open' : ''}`,
+          cn(
+            `date-picker-trigger flex items-center gap-[12px] w-full min-h-[52px] p-[10px_13px] text-left ${open ? cn('is-open', isOpenStyles) : ''}`,
+            datePickerTriggerStyles,
+          ),
         )}
         aria-expanded={open}
         aria-controls={panelId}
@@ -200,14 +212,20 @@ export function DateTimePicker({ id, value, onChange }: DateTimePickerProps) {
       >
         <span
           className={cn(
-            'date-picker-trigger-icon w-[30px] h-[30px] rounded-[8px] grid place-items-center shrink-[0]',
+            cn(
+              'date-picker-trigger-icon w-[30px] h-[30px] rounded-[8px] grid place-items-center shrink-[0]',
+              datePickerTriggerIconStyles,
+            ),
           )}
         >
           <CalendarDays size={18} />
         </span>
         <span
           className={cn(
-            `date-picker-value flex-1 flex gap-[8px] items-center flex-wrap ${value ? '' : 'placeholder'}`,
+            cn(
+              `date-picker-value flex-1 flex gap-[8px] items-center flex-wrap ${value ? '' : 'placeholder'}`,
+              datePickerValueStyles,
+            ),
           )}
         >
           {selected ? (
@@ -234,12 +252,15 @@ export function DateTimePicker({ id, value, onChange }: DateTimePickerProps) {
           ref={panel}
           popover="manual"
           className={cn(
-            'date-picker-panel fixed [inset:auto] m-[0] overflow-y-auto [overscroll-behavior:contain] [box-shadow:0_6px_22px_#29332108]',
+            cn(
+              'date-picker-panel fixed [inset:auto] m-[0] overflow-y-auto [overscroll-behavior:contain] [box-shadow:0_6px_22px_#29332108]',
+              datePickerPanelStyles,
+            ),
           )}
           role="group"
           aria-label="Choose schedule date and time"
         >
-          <div className={cn('date-picker-quick flex flex-wrap')}>
+          <div className={cn(cn('date-picker-quick flex flex-wrap', datePickerQuickStyles))}>
             <Button variant="soft" size="sm" onClick={() => quickPick('hour')}>
               In 1 hour
             </Button>
@@ -251,7 +272,7 @@ export function DateTimePicker({ id, value, onChange }: DateTimePickerProps) {
             </Button>
           </div>
           <div className={cn('flex items-center justify-between gap-[10px] p-[13px_0_9px]')}>
-            <div className={cn('date-picker-month')}>
+            <div className={cn(cn('date-picker-month', datePickerMonthStyles))}>
               <Select
                 label="Calendar month"
                 size="sm"
@@ -270,7 +291,7 @@ export function DateTimePicker({ id, value, onChange }: DateTimePickerProps) {
                 options={years.map((value) => ({ label: String(value), value }))}
               />
             </div>
-            <div className={cn('date-picker-navigation')}>
+            <div className={cn(cn('date-picker-navigation', datePickerNavigationStyles))}>
               <Button
                 variant="icon"
                 size="sm"
@@ -315,7 +336,10 @@ export function DateTimePicker({ id, value, onChange }: DateTimePickerProps) {
                   key={key}
                   data-day={key}
                   className={cn(
-                    `date-picker-day grid place-items-center p-[0] ${chosen ? 'chosen' : ''} ${outside ? 'outside' : ''} ${isToday ? 'today' : ''}`,
+                    cn(
+                      `date-picker-day grid place-items-center p-[0] ${chosen ? 'chosen' : ''} ${outside ? cn('outside', outsideStyles) : ''} ${isToday ? 'today' : ''}`,
+                      datePickerDayStyles,
+                    ),
                   )}
                   disabled={past || day.getFullYear() > years.at(-1)!}
                   aria-label={day.toLocaleDateString(undefined, { dateStyle: 'full' })}
@@ -329,11 +353,22 @@ export function DateTimePicker({ id, value, onChange }: DateTimePickerProps) {
               );
             })}
           </div>
-          <div className={cn('date-picker-time justify-between p-[14px_0] mt-[12px]')}>
+          <div
+            className={cn(
+              cn('date-picker-time justify-between p-[14px_0] mt-[12px]', datePickerTimeStyles),
+            )}
+          >
             <span>
               <Clock3 size={15} /> Time
             </span>
-            <div className={cn('date-picker-time-controls flex items-center gap-[5px]')}>
+            <div
+              className={cn(
+                cn(
+                  'date-picker-time-controls flex items-center gap-[5px]',
+                  datePickerTimeControlsStyles,
+                ),
+              )}
+            >
               <Select
                 label="Schedule hour"
                 size="sm"
@@ -373,7 +408,14 @@ export function DateTimePicker({ id, value, onChange }: DateTimePickerProps) {
               Scheduled time must be in the future.
             </p>
           )}
-          <div className={cn('date-picker-footer flex justify-between items-center pt-[11px]')}>
+          <div
+            className={cn(
+              cn(
+                'date-picker-footer flex justify-between items-center pt-[11px]',
+                datePickerFooterStyles,
+              ),
+            )}
+          >
             <Button variant="text" size="sm" disabled={!value} onClick={() => onChange('')}>
               Clear
             </Button>
@@ -391,7 +433,10 @@ export function DateTimePicker({ id, value, onChange }: DateTimePickerProps) {
       )}
       <p
         className={cn(
-          'date-picker-zone flex items-center gap-[5px] text-[10px] m-[10px_0_0] flex-wrap',
+          cn(
+            'date-picker-zone flex items-center gap-[5px] text-[10px] m-[10px_0_0] flex-wrap',
+            datePickerZoneStyles,
+          ),
         )}
         id={`${panelId}-zone`}
       >

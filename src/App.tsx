@@ -1,5 +1,46 @@
+import { allPostsLinkStyles } from './ui/calendarStyles';
+import { appInputStyles, appKbdStyles } from './ui/elementStyles';
+import {
+  appShellStyles,
+  mobileBackdropStyles,
+  collapsedStyles,
+  sidebarStyles,
+  brandRowStyles,
+  brandMarkStyles,
+  labelStyles,
+  collapseButtonStyles,
+  sidebarSearchStyles,
+  sidebarMenuInputStyles,
+  sectionHeadingStyles,
+  navItemStyles,
+  sidebarFooterStyles,
+  profileMenuStyles,
+  profileButtonStyles,
+  profileNameStyles,
+  workspaceStyles,
+  topbarStyles,
+  headerInnerStyles,
+  breadcrumbStyles,
+  iconButtonStyles,
+  mobileMenuStyles,
+  headerActionsStyles,
+  headerSettingsStyles,
+  headerNotificationStyles,
+  headerAvatarStyles,
+  welcomeRowStyles,
+  welcomeActionsStyles,
+  toastStyles,
+  statusStyles,
+  detailContentStyles,
+  detailImageStyles,
+  detailMetaStyles,
+  detailPlatformListStyles,
+  postErrorStyles,
+  emptyStateStyles,
+} from './ui/layoutStyles';
 import { cn } from './ui/cn';
-import { useEffect, useRef, useState } from 'react';
+import { toastErrorStyles } from './ui/layoutStyles';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import {
   Search,
   UsersRound,
@@ -21,21 +62,28 @@ import {
 import { Button } from './components/Button';
 import { PlatformIcon } from './components/PlatformIcon';
 import { DashboardPanels } from './components/DashboardPanels';
-import { AllPostsPage } from './pages/AllPostsPage';
-import { AnalyticsPage } from './pages/AnalyticsPage';
-import { SettingsPage } from './pages/SettingsPage';
+const AllPostsPage = lazy(() =>
+  import('./pages/AllPostsPage').then((module) => ({ default: module.AllPostsPage })),
+);
+const AnalyticsPage = lazy(() =>
+  import('./pages/AnalyticsPage').then((module) => ({ default: module.AnalyticsPage })),
+);
+const SettingsPage = lazy(() =>
+  import('./pages/SettingsPage').then((module) => ({ default: module.SettingsPage })),
+);
 import { usePreferences } from './state/preferences';
 import { usePosts } from './hooks/usePosts';
 import { storage } from './services/storage';
 import { scopedQuery } from './lib/routeQuery';
-import { SocialAccountsPage } from './pages/SocialAccountsPage';
+const SocialAccountsPage = lazy(() =>
+  import('./pages/SocialAccountsPage').then((module) => ({ default: module.SocialAccountsPage })),
+);
 import { platforms, type Platform, type Post } from './types/post';
 import { Avatar } from './components/Avatar';
 import { Modal } from './components/Modal';
 import { MotionChevron } from './components/MotionChevron';
 import { Composer } from './components/Composer';
 import { ThemeSwitch } from './components/ThemeSwitch';
-
 const routes = [
   { path: '/', label: 'Dashboard', icon: LayoutGrid },
   { path: '/posts', label: 'All posts', icon: CalendarDays },
@@ -197,23 +245,28 @@ export default function App() {
     );
   }
   return (
-    <div className={cn('app-shell flex items-start min-h-[100vh]')}>
+    <div className={cn(cn('app-shell flex items-start min-h-[100vh]', appShellStyles))}>
       {mobile && (
         <Button
           variant="unstyled"
-          className={cn('mobile-backdrop')}
+          className={cn(cn('mobile-backdrop', mobileBackdropStyles))}
           aria-label="Close navigation"
           onClick={() => setMobile(false)}
         />
       )}
       <aside
-        className={cn(`sidebar ${collapsed ? 'collapsed' : ''} ${mobile ? 'mobile-open' : ''}`)}
+        className={cn(
+          cn(
+            `sidebar ${collapsed ? cn('collapsed', collapsedStyles) : ''} ${mobile ? 'mobile-open' : ''}`,
+            sidebarStyles,
+          ),
+        )}
         aria-label="Main navigation"
       >
-        <div className={cn('brand-row h-[58px] relative flex items-start')}>
+        <div className={cn(cn('brand-row h-[58px] relative flex items-start', brandRowStyles))}>
           <Button
             variant="unstyled"
-            className={cn('brand-mark p-[0]')}
+            className={cn(cn('brand-mark p-[0]', brandMarkStyles))}
             aria-label="Flintzy home"
             onClick={() => navigate('/')}
           >
@@ -223,7 +276,10 @@ export default function App() {
           </Button>
           <span
             className={cn(
-              'label ml-[10px] inline-flex h-[31px] items-center gap-[5px] text-[19px] leading-none tracking-[-0.5px]',
+              cn(
+                'label ml-[10px] inline-flex h-[31px] items-center gap-[5px] text-[19px] leading-none tracking-[-0.5px]',
+                labelStyles,
+              ),
             )}
           >
             <span className="text-muted font-medium">Post</span>
@@ -232,7 +288,10 @@ export default function App() {
           <Button
             variant="unstyled"
             className={cn(
-              'collapse-button absolute top-[0] rounded-full place-items-center p-[0] leading-[0]',
+              cn(
+                'collapse-button absolute top-[0] rounded-full place-items-center p-[0] leading-[0]',
+                collapseButtonStyles,
+              ),
             )}
             onClick={() => setCollapsed((c) => !c)}
             aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
@@ -243,7 +302,10 @@ export default function App() {
         </div>
         <div
           className={cn(
-            'sidebar-search h-[39px] [box-shadow:0_1px_2px_#00000003] flex items-center whitespace-nowrap overflow-hidden',
+            cn(
+              'sidebar-search h-[39px] [box-shadow:0_1px_2px_#00000003] flex items-center whitespace-nowrap overflow-hidden',
+              sidebarSearchStyles,
+            ),
           )}
         >
           <Button
@@ -260,9 +322,13 @@ export default function App() {
           <input
             ref={sidebarSearchRef}
             className={cn(
-              'app-input',
+              cn('app-input', appInputStyles),
               cn(
-                'sidebar-menu-input min-w-[0] w-full flex-1 border-0 [background:transparent] [font:inherit] label',
+                cn(
+                  'sidebar-menu-input min-w-[0] w-full flex-1 border-0 [background:transparent] [font:inherit] label',
+                  sidebarMenuInputStyles,
+                  labelStyles,
+                ),
               ),
             )}
             type="search"
@@ -272,15 +338,23 @@ export default function App() {
             onChange={(event) => setMenuSearch(event.target.value)}
             tabIndex={collapsed ? -1 : 0}
           />
-          <span className={cn('ml-[auto] flex gap-[4px] label')} aria-hidden="true">
-            <kbd className={cn('app-kbd')}>
+          <span
+            className={cn(cn('ml-[auto] flex gap-[4px] label', labelStyles))}
+            aria-hidden="true"
+          >
+            <kbd className={cn(cn('app-kbd', appKbdStyles))}>
               <Command size={14} />
             </kbd>
-            <kbd className={cn('app-kbd')}>S</kbd>
+            <kbd className={cn(cn('app-kbd', appKbdStyles))}>S</kbd>
           </span>
         </div>
         <div
-          className={cn('section-heading flex items-center tracking-[0.045em] whitespace-nowrap')}
+          className={cn(
+            cn(
+              'section-heading flex items-center tracking-[0.045em] whitespace-nowrap',
+              sectionHeadingStyles,
+            ),
+          )}
         >
           MAIN
         </div>
@@ -294,7 +368,11 @@ export default function App() {
                 href={path}
                 aria-current={selected ? 'page' : undefined}
                 className={cn(
-                  `nav-item flex items-center whitespace-nowrap text-left all-posts-link ${selected ? 'selected' : ''}`,
+                  cn(
+                    `nav-item flex items-center whitespace-nowrap text-left all-posts-link ${selected ? 'selected' : ''}`,
+                    navItemStyles,
+                    allPostsLinkStyles,
+                  ),
                 )}
                 title={collapsed ? label : undefined}
                 onClick={(e) => {
@@ -306,7 +384,7 @@ export default function App() {
                 }}
               >
                 <Icon size={20} />
-                <span className={cn('label')}>{label}</span>
+                <span className={cn(cn('label', labelStyles))}>{label}</span>
               </a>
             ))}
           {!routes.some((route) =>
@@ -317,9 +395,16 @@ export default function App() {
             </p>
           )}
         </nav>
-        <div className={cn('sidebar-footer mt-[auto] relative')}>
+        <div className={cn(cn('sidebar-footer mt-[auto] relative', sidebarFooterStyles))}>
           {profile && (
-            <div className={cn('profile-menu absolute bottom-[70px] left-[0] w-[205px] flex-col')}>
+            <div
+              className={cn(
+                cn(
+                  'profile-menu absolute bottom-[70px] left-[0] w-[205px] flex-col',
+                  profileMenuStyles,
+                ),
+              )}
+            >
               <strong>{preferences.name}</strong>
               <span>Demo workspace</span>
               <Button
@@ -335,35 +420,54 @@ export default function App() {
           )}
           <Button
             variant="unstyled"
-            className={cn('profile-button flex items-center overflow-hidden whitespace-nowrap')}
+            className={cn(
+              cn(
+                'profile-button flex items-center overflow-hidden whitespace-nowrap',
+                profileButtonStyles,
+              ),
+            )}
             aria-expanded={profile}
             onClick={() => setProfile((p) => !p)}
           >
             <Avatar id={preferences.avatarId} name={preferences.name} />
-            <span className={cn('profile-name text-left flex gap-[2px] label')}>
+            <span
+              className={cn(
+                cn('profile-name text-left flex gap-[2px] label', profileNameStyles, labelStyles),
+              )}
+            >
               <strong>{preferences.name}</strong>
               <small>Designer</small>
             </span>
-            <ChevronDown className={cn('label')} size={18} />
+            <ChevronDown className={cn(cn('label', labelStyles))} size={18} />
           </Button>
         </div>
       </aside>
-      <main className={cn('workspace flex-1')}>
+      <main className={cn(cn('workspace flex-1', workspaceStyles))}>
         <header
           className={cn(
-            'topbar flex items-center justify-between [backdrop-filter:blur(14px)] isolate',
+            cn(
+              'topbar flex items-center justify-between [backdrop-filter:blur(14px)] isolate',
+              topbarStyles,
+            ),
           )}
         >
           <div
             className={cn(
-              'header-inner max-w-[1280px] [margin-inline:auto] flex items-center justify-between gap-[12px]',
+              cn(
+                'header-inner max-w-[1280px] [margin-inline:auto] flex items-center justify-between gap-[12px]',
+                headerInnerStyles,
+              ),
             )}
           >
-            <div className={cn('breadcrumb items-center')}>
+            <div className={cn(cn('breadcrumb items-center', breadcrumbStyles))}>
               <Button
                 variant="icon"
                 className={cn(
-                  'icon-button grid place-items-center p-[5px] rounded-[7px] mobile-menu',
+                  cn(
+                    'icon-button grid place-items-center p-[5px] rounded-[7px] mobile-menu',
+                    iconButtonStyles,
+                    mobileMenuStyles,
+                  ),
                 )}
                 aria-label="Open navigation"
                 onClick={() => setMobile(true)}
@@ -372,11 +476,11 @@ export default function App() {
               </Button>
               <strong>{currentRoute?.label || 'Dashboard'}</strong>
             </div>
-            <div className={cn('header-actions flex items-center')}>
+            <div className={cn(cn('header-actions flex items-center', headerActionsStyles))}>
               <ThemeSwitch />
               <Button
                 variant="unstyled"
-                className={cn('header-settings')}
+                className={cn(cn('header-settings', headerSettingsStyles))}
                 onClick={() => navigate('/settings')}
               >
                 <Settings size={15} />
@@ -384,7 +488,7 @@ export default function App() {
               </Button>
               <Button
                 variant="unstyled"
-                className={cn('header-notification p-[0]')}
+                className={cn(cn('header-notification p-[0]', headerNotificationStyles))}
                 aria-label="Notifications"
                 onClick={() => setPanel('Notification')}
               >
@@ -392,7 +496,9 @@ export default function App() {
               </Button>
               <Button
                 variant="unstyled"
-                className={cn('header-avatar p-[0] ml-[2px] grid place-items-center')}
+                className={cn(
+                  cn('header-avatar p-[0] ml-[2px] grid place-items-center', headerAvatarStyles),
+                )}
                 aria-label="Open profile"
                 onClick={() => setPanel('Profile')}
               >
@@ -401,121 +507,137 @@ export default function App() {
             </div>
           </div>
         </header>
-        {loadError ? (
-          <section
-            role="alert"
-            className="mx-auto mt-[32px] max-w-[600px] rounded-[20px] border border-outline bg-surface p-[28px] text-foreground"
-          >
-            <h1 className="text-[22px] font-medium">Posts could not be loaded</h1>
-            <p className="my-[16px] text-muted">{loadError}</p>
-            <Button
-              onClick={() => {
-                void repository.load();
-              }}
-            >
-              Try again
-            </Button>
-          </section>
-        ) : currentPath === '/compose' ? (
-          <Composer
-            inline
-            onClose={() => navigate('/posts')}
-            onCreate={repository.create}
-            onSave={() => {
-              setNoticeType('success');
-              setNotice('Your post is scheduled. Looking good!');
-              navigate('/posts');
-            }}
-          />
-        ) : currentPath === '/social-accounts' ? (
-          <SocialAccountsPage posts={posts} />
-        ) : currentPath === '/settings' ? (
-          <SettingsPage
-            onReset={() => {
-              repository.reset();
-              for (const platform of platforms) {
-                try {
-                  storage.remove(`flintzy-demo-${platform.toLowerCase()}-connected`);
-                } catch {
-                  /* Storage may be unavailable. */
-                }
-              }
-            }}
-          />
-        ) : analyticsPage ? (
-          <AnalyticsPage
-            posts={filtered}
-            filters={filters}
-            loading={loading}
-            onOpenPost={setDetail}
-          />
-        ) : allPostsPage ? (
-          <AllPostsPage
-            posts={filtered}
-            pending={pending}
-            onSelect={setDetail}
-            onRetry={retry}
-            onClear={clearFilters}
-            filters={filters}
-            loading={loading}
-            onCreate={openComposer}
-          />
-        ) : (
-          <>
-            {' '}
+        <Suspense
+          fallback={
+            <div role="status" className="p-[28px] text-muted">
+              Loading page…
+            </div>
+          }
+        >
+          {loadError ? (
             <section
-              className={cn('welcome-row flex justify-between p-[0_1px]')}
-              aria-label="Workspace welcome"
+              role="alert"
+              className="mx-auto mt-[32px] max-w-[600px] rounded-[20px] border border-outline bg-surface p-[28px] text-foreground"
             >
-              <div>
-                <h2>
-                  <span>
-                    Good{' '}
-                    {new Date().getHours() < 12
-                      ? 'Morning'
-                      : new Date().getHours() < 18
-                        ? 'Afternoon'
-                        : 'Evening'}
-                    ,
-                  </span>{' '}
-                  {preferences.name.split(/\s+/)[0]}!
-                </h2>
-                <p>Plan your content and keep your social channels moving.</p>
-              </div>
-              <div className={cn('welcome-actions flex items-center shrink-[0]')}>
-                <Button
-                  variant="primary"
-                  startIcon={<Plus size={18} />}
-                  onClick={() => openComposer()}
-                >
-                  Create post
-                </Button>
-                <Button
-                  variant="secondary"
-                  startIcon={<Upload size={18} />}
-                  endIcon={<ChevronDown size={18} />}
-                  onClick={exportPosts}
-                >
-                  Export File
-                </Button>
-              </div>
+              <h1 className="text-[22px] font-medium">Posts could not be loaded</h1>
+              <p className="my-[16px] text-muted">{loadError}</p>
+              <Button
+                onClick={() => {
+                  void repository.load();
+                }}
+              >
+                Try again
+              </Button>
             </section>
-            <DashboardPanels
-              posts={posts}
-              pending={pending}
+          ) : currentPath === '/compose' ? (
+            <Composer
+              inline
+              onClose={() => navigate('/posts')}
+              onCreate={repository.create}
+              onSave={() => {
+                setNoticeType('success');
+                setNotice('Your post is scheduled. Looking good!');
+                navigate('/posts');
+              }}
+            />
+          ) : currentPath === '/social-accounts' ? (
+            <SocialAccountsPage posts={posts} />
+          ) : currentPath === '/settings' ? (
+            <SettingsPage
+              onReset={() => {
+                repository.reset();
+                for (const platform of platforms) {
+                  try {
+                    storage.remove(`flintzy-demo-${platform.toLowerCase()}-connected`);
+                  } catch {
+                    /* Storage may be unavailable. */
+                  }
+                }
+              }}
+            />
+          ) : analyticsPage ? (
+            <AnalyticsPage
+              posts={filtered}
+              filters={filters}
               loading={loading}
+              onOpenPost={setDetail}
+            />
+          ) : allPostsPage ? (
+            <AllPostsPage
+              posts={filtered}
+              pending={pending}
               onSelect={setDetail}
               onRetry={retry}
-              onCreate={() => openComposer()}
-              onNavigate={navigate}
+              onClear={clearFilters}
+              filters={filters}
+              loading={loading}
+              onCreate={openComposer}
             />
-          </>
-        )}
+          ) : (
+            <>
+              {' '}
+              <section
+                className={cn(cn('welcome-row flex justify-between p-[0_1px]', welcomeRowStyles))}
+                aria-label="Workspace welcome"
+              >
+                <div>
+                  <h2>
+                    <span>
+                      Good{' '}
+                      {new Date().getHours() < 12
+                        ? 'Morning'
+                        : new Date().getHours() < 18
+                          ? 'Afternoon'
+                          : 'Evening'}
+                      ,
+                    </span>{' '}
+                    {preferences.name.split(/\s+/)[0]}!
+                  </h2>
+                  <p>Plan your content and keep your social channels moving.</p>
+                </div>
+                <div
+                  className={cn(
+                    cn('welcome-actions flex items-center shrink-[0]', welcomeActionsStyles),
+                  )}
+                >
+                  <Button
+                    variant="primary"
+                    startIcon={<Plus size={18} />}
+                    onClick={() => openComposer()}
+                  >
+                    Create post
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    startIcon={<Upload size={18} />}
+                    endIcon={<ChevronDown size={18} />}
+                    onClick={exportPosts}
+                  >
+                    Export File
+                  </Button>
+                </div>
+              </section>
+              <DashboardPanels
+                posts={posts}
+                pending={pending}
+                loading={loading}
+                onSelect={setDetail}
+                onRetry={retry}
+                onCreate={() => openComposer()}
+                onNavigate={navigate}
+              />
+            </>
+          )}
+        </Suspense>
       </main>
       {notice && (
         <div
           className={cn(
-            `toast fixed bottom-[25px] left-[50%] z-[100] [background:#30362b] rounded-[12px] [box-shadow:0_10px_30px_#0002] items-center gap-[12px] text-[12px] max-w-[calc(100vw_-_30px)] toast--${noticeType}`,
+            cn(
+              `toast fixed bottom-[25px] left-[50%] z-[100] [background:#30362b] rounded-[12px] [box-shadow:0_10px_30px_#0002] items-center gap-[12px] text-[12px] max-w-[calc(100vw_-_30px)] toast--${noticeType}`,
+              toastStyles,
+              noticeType === 'error' && toastErrorStyles,
+            ),
           )}
           role="status"
           aria-live="assertive"
@@ -543,23 +665,35 @@ export default function App() {
         <Modal title="Post details" onClose={() => setDetail(null)}>
           <span
             className={cn(
-              `status inline-flex items-center gap-[5px] [text-transform:capitalize] ${pending.includes(detail.id) ? 'retrying' : detail.status}`,
+              cn(
+                `status inline-flex items-center gap-[5px] [text-transform:capitalize] ${pending.includes(detail.id) ? 'retrying' : detail.status}`,
+                statusStyles,
+              ),
             )}
           >
             <i />
             {pending.includes(detail.id) ? 'Retrying…' : detail.status}
           </span>
-          <p className={cn('detail-content leading-[1.9] m-[24px_0]')}>{detail.content}</p>
+          <p className={cn(cn('detail-content leading-[1.9] m-[24px_0]', detailContentStyles))}>
+            {detail.content}
+          </p>
           {detail.mediaUrl && (
-            <img className={cn('detail-image')} src={detail.mediaUrl} alt="Post attachment" />
+            <img
+              className={cn(cn('detail-image', detailImageStyles))}
+              src={detail.mediaUrl}
+              alt="Post attachment"
+            />
           )}
           <div
             className={cn(
-              'detail-meta grid [grid-template-columns:110px_1fr] gap-[14px] m-[25px_0]',
+              cn(
+                'detail-meta grid [grid-template-columns:110px_1fr] gap-[14px] m-[25px_0]',
+                detailMetaStyles,
+              ),
             )}
           >
             <span>Platforms</span>
-            <div className={cn('detail-platform-list flex-wrap')}>
+            <div className={cn(cn('detail-platform-list flex-wrap', detailPlatformListStyles))}>
               {detail.platforms.map((platform) => (
                 <span key={platform}>
                   <PlatformIcon platform={platform} decorative />
@@ -577,7 +711,11 @@ export default function App() {
             <strong>{Intl.DateTimeFormat().resolvedOptions().timeZone}</strong>
           </div>
           {detail.errorMessage && (
-            <p className={cn('post-error leading-[1.6] rounded-[7px] p-[9px_11px] mb-[2px]')}>
+            <p
+              className={cn(
+                cn('post-error leading-[1.6] rounded-[7px] p-[9px_11px] mb-[2px]', postErrorStyles),
+              )}
+            >
               {detail.errorMessage}
             </p>
           )}
@@ -600,7 +738,7 @@ export default function App() {
       )}
       {panel && (
         <Modal title={panel} onClose={() => setPanel(null)}>
-          <div className={cn('empty-state text-center p-[42px_20px]')}>
+          <div className={cn(cn('empty-state text-center p-[42px_20px]', emptyStateStyles))}>
             <Files size={32} />
             <h3>{`${panel} preview`}</h3>
             <p>Your post scheduling tools are available in Dashboard and All posts.</p>

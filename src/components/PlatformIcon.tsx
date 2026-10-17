@@ -1,3 +1,4 @@
+import { platformStyles } from '../ui/controlsStyles';
 import { cn } from '../ui/cn';
 import { siFacebook, siInstagram, siTiktok, siX } from 'simple-icons';
 import type { Platform } from '../types/post';
@@ -15,7 +16,10 @@ export function PlatformIcon({
   return (
     <span
       className={cn(
-        `platform place-items-center brand-icon platform-${platform.toLowerCase()} ${size ? `brand-icon--${size}` : ''}`,
+        cn(
+          `platform place-items-center brand-icon platform-${platform.toLowerCase()} ${size ? `brand-icon--${size}` : ''}`,
+          platformStyles,
+        ),
       )}
       data-platform={platform}
       role={decorative ? undefined : 'img'}
