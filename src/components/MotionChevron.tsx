@@ -1,4 +1,4 @@
-import { cn, labelStyles, motionChevronStyles, navChevronStyles } from '../ui';
+import { cn, labelStyles, motionChevronStyles, navChevronStyles } from '@/ui';
 export function MotionChevron({
   flipped,
   horizontal = false,

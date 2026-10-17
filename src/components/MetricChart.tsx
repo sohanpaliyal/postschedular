@@ -1,6 +1,6 @@
 import { useId } from 'react';
-import { compactNumber } from '../lib';
-import { cn, metricChartGridStyles, metricChartLabelStyles, metricChartStyles } from '../ui';
+import { compactNumber } from '@/lib';
+import { cn, metricChartGridStyles, metricChartLabelStyles, metricChartStyles } from '@/ui';
 export function MetricChart({
   title,
   values,

@@ -6,7 +6,7 @@ import {
   groupPostsByDay,
   movePeriod,
   parseCalendarDate,
-} from '../src/lib/calendar.ts';
+} from '@/lib/calendar.ts';
 
 test('month starts Sunday and covers every day plus adjacent dates', () => {
   const days = calendarRange(new Date(2026, 9, 16), 'month');

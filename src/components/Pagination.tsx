@@ -6,10 +6,10 @@ import {
   paginationPageLabelStyles,
   paginationSizeSelectStyles,
   paginationStyles,
-} from '../ui';
+} from '@/ui';
 import { ChevronFirst, ChevronLast, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from './Button';
-import { Select } from './Select';
+import { Button } from '@/components/Button';
+import { Select } from '@/components/Select';
 export interface PaginationProps {
   /** Total number of items across all pages. */
   total: number;

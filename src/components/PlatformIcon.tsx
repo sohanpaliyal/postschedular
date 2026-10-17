@@ -1,6 +1,6 @@
 import { siFacebook, siInstagram, siTiktok, siX } from 'simple-icons';
-import type { Platform } from '../types';
-import { cn, platformStyles } from '../ui';
+import type { Platform } from '@/types';
+import { cn, platformStyles } from '@/ui';
 const icons = { Facebook: siFacebook, Instagram: siInstagram, TikTok: siTiktok, X: siX };
 export function PlatformIcon({
   platform,

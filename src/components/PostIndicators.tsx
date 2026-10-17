@@ -1,6 +1,6 @@
-import type { PostStatus } from '../types';
-import { cn, statusStyles } from '../ui';
-export { PlatformIcon } from './PlatformIcon';
+import type { PostStatus } from '@/types';
+import { cn, statusStyles } from '@/ui';
+export { PlatformIcon } from '@/components/PlatformIcon';
 export function StatusBadge({
   status,
   pending = false,

@@ -10,8 +10,8 @@ import {
   YearCalendar,
   type PostFiltersProps,
   type PostListProps,
-} from '../components';
-import { dateKey, movePeriod, parseCalendarDate, type CalendarView } from '../lib';
+} from '@/components';
+import { dateKey, movePeriod, parseCalendarDate, type CalendarView } from '@/lib';
 import {
   allPostsFilterRowStyles,
   allPostsHeadingStyles,
@@ -24,7 +24,7 @@ import {
   calendarLoadingStyles,
   calendarStatusDotStyles,
   cn,
-} from '../ui';
+} from '@/ui';
 function readView(): CalendarView {
   const view = new URLSearchParams(location.search).get('view');
   return view === 'list' || view === 'week' || view === 'year' ? view : 'month';

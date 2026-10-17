@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { scopedQuery } from '../src/lib/routeQuery.ts';
+import { scopedQuery } from '@/lib/routeQuery.ts';
 
 test('posts retain refreshable filters and calendar state only', () => {
   assert.equal(

@@ -11,7 +11,7 @@ import {
   richSelectSearchStyles,
   richSelectStyles,
   richSelectTriggerStyles,
-} from '../ui';
+} from '@/ui';
 import {
   useEffect,
   useId,
@@ -22,7 +22,7 @@ import {
   type ReactNode,
 } from 'react';
 import { Check, ChevronDown, Search } from 'lucide-react';
-import { Button } from './Button';
+import { Button } from '@/components/Button';
 export interface SelectOption<T extends string | number = string> {
   value: T;
   label: string;

@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { SegmentedControl } from './SegmentedControl';
-import { Select } from './Select';
-import { MetricChart } from './MetricChart';
-import { dailyPerformance } from '../lib';
-import type { Post } from '../types';
+import { SegmentedControl } from '@/components/SegmentedControl';
+import { Select } from '@/components/Select';
+import { MetricChart } from '@/components/MetricChart';
+import { dailyPerformance } from '@/lib';
+import type { Post } from '@/types';
 type TrendMetric = 'impressions' | 'engagement' | 'interactions';
 const metrics: {
   value: TrendMetric;

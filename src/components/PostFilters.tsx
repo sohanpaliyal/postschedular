@@ -1,9 +1,9 @@
 import type { Ref } from 'react';
 import { Check, Clock3, LayoutGrid, RotateCcw, Search } from 'lucide-react';
-import { PlatformIcon } from './PostIndicators';
-import { Select } from './Select';
-import { platforms } from '../types';
-import { appInputStyles, cn, filtersStyles, searchFieldStyles } from '../ui';
+import { PlatformIcon } from '@/components/PostIndicators';
+import { Select } from '@/components/Select';
+import { platforms } from '@/types';
+import { appInputStyles, cn, filtersStyles, searchFieldStyles } from '@/ui';
 export interface PostFiltersProps {
   query: string;
   platform: string;

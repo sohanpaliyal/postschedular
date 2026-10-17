@@ -1,14 +1,14 @@
 import { CalendarDays, ChevronLeft, ChevronRight, Eye, EyeOff, List } from 'lucide-react';
-import { Button } from './Button';
-import { SegmentedControl } from './SegmentedControl';
-import { Select } from './Select';
-import type { CalendarView } from '../lib';
+import { Button } from '@/components/Button';
+import { SegmentedControl } from '@/components/SegmentedControl';
+import { Select } from '@/components/Select';
+import type { CalendarView } from '@/lib';
 import {
   calendarPeriodControlsStyles,
   calendarToolbarStyles,
   calendarViewControlsStyles,
   cn,
-} from '../ui';
+} from '@/ui';
 const months = Array.from({ length: 12 }, (_, value) => ({
   value,
   label: new Date(2026, value, 1).toLocaleDateString(undefined, { month: 'long' }),

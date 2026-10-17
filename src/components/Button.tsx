@@ -17,7 +17,7 @@ import {
   buttonTextStyles,
   buttonUnstyledStyles,
   cn,
-} from '../ui';
+} from '@/ui';
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { LoaderCircle } from 'lucide-react';
 export type ButtonVariant =

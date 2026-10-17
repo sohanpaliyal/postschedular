@@ -1,12 +1,12 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { ArrowUpRight, Plus } from 'lucide-react';
-import { Button } from './Button';
-import { DashboardTrend } from './DashboardTrend';
-import { PostStatusChart } from './PostStatusChart';
-import { PostSummaryTable } from './PostSummaryTable';
-import { compactNumber, dashboardPosts, mockMetrics, sumMetrics } from '../lib';
-import type { Post } from '../types';
-import { cn, pageFooterStyles } from '../ui';
+import { Button } from '@/components/Button';
+import { DashboardTrend } from '@/components/DashboardTrend';
+import { PostStatusChart } from '@/components/PostStatusChart';
+import { PostSummaryTable } from '@/components/PostSummaryTable';
+import { compactNumber, dashboardPosts, mockMetrics, sumMetrics } from '@/lib';
+import type { Post } from '@/types';
+import { cn, pageFooterStyles } from '@/ui';
 function DashboardSection({
   title,
   description,

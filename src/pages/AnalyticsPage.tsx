@@ -15,7 +15,7 @@ import {
   StatusBadge,
   type PostFiltersProps,
   type TableColumn,
-} from '../components';
+} from '@/components';
 import {
   compactNumber,
   metricSeries,
@@ -23,9 +23,9 @@ import {
   sumMetrics,
   withinPeriod,
   type PostMetrics,
-} from '../lib';
-import { useTimeFormatter } from '../state';
-import { platforms, type Platform, type Post } from '../types';
+} from '@/lib';
+import { useTimeFormatter } from '@/state';
+import { platforms, type Platform, type Post } from '@/types';
 import {
   analyticsDataNoteStyles,
   analyticsDemoLabelStyles,
@@ -52,7 +52,7 @@ import {
   heatmapLegendStyles,
   heatmapValueStyles,
   skeletonsStyles,
-} from '../ui';
+} from '@/ui';
 type Tab = 'overview' | 'performance' | 'platforms';
 type Metric = 'impressions' | 'reach' | 'likes';
 type Row = {

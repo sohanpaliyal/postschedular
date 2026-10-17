@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { appH1Styles, cn } from '../ui';
+import { appH1Styles, cn } from '@/ui';
 export function PlaceholderPage({
   title,
   icon,

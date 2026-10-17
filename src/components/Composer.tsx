@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { CalendarDays, Check, Image as ImageIcon } from 'lucide-react';
-import { Button } from './Button';
-import { DateTimePicker } from './DateTimePicker';
-import { isFuture } from './dateTime';
-import { Modal } from './Modal';
-import { PlatformIcon } from './PlatformIcon';
-import { isAbort } from '../services';
-import { preferredSchedule, usePreferences } from '../state';
-import { limits, platforms, type Platform, type Post } from '../types';
+import { Button } from '@/components/Button';
+import { DateTimePicker } from '@/components/DateTimePicker';
+import { isFuture } from '@/components/dateTime';
+import { Modal } from '@/components/Modal';
+import { PlatformIcon } from '@/components/PlatformIcon';
+import { isAbort } from '@/services';
+import { preferredSchedule, usePreferences } from '@/state';
+import { limits, platforms, type Platform, type Post } from '@/types';
 import {
   appH1Styles,
   appInputStyles,
@@ -20,7 +20,7 @@ import {
   inputWithIconStyles,
   platformOptionsStyles,
   postErrorStyles,
-} from '../ui';
+} from '@/ui';
 export function Composer({
   initialDate,
   inline = false,

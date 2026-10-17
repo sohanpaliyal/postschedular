@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { dashboardPosts } from '../src/lib/dashboard.ts';
+import { dashboardPosts } from '@/lib/dashboard.ts';
 
 const now = Date.parse('2026-10-17T12:00:00Z');
 function post(id, offset, status = 'scheduled') {

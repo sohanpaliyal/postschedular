@@ -1,5 +1,5 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState, type KeyboardEvent } from 'react';
-import { useTimeFormatter } from '../state';
+import { useTimeFormatter } from '@/state';
 import {
   cn,
   datePickerDayStyles,
@@ -16,7 +16,7 @@ import {
   datePickerZoneStyles,
   isOpenStyles,
   outsideStyles,
-} from '../ui';
+} from '@/ui';
 import {
   CalendarDays,
   Check,
@@ -26,9 +26,15 @@ import {
   Clock3,
   Globe2,
 } from 'lucide-react';
-import { Button } from './Button';
-import { Select } from './Select';
-import { calendarDays, isFuture, localToUtcIso, sameDay, toLocalDateTime } from './dateTime';
+import { Button } from '@/components/Button';
+import { Select } from '@/components/Select';
+import {
+  calendarDays,
+  isFuture,
+  localToUtcIso,
+  sameDay,
+  toLocalDateTime,
+} from '@/components/dateTime';
 /**
  * `value`  — a UTC ISO-8601 string (e.g. "2026-10-17T03:30:00.000Z") or "".
  * `onChange` — called with a UTC ISO-8601 string (or "" when cleared).

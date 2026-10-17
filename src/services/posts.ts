@@ -1,6 +1,6 @@
-import fixtures from '../data/posts.json' with { type: 'json' };
-import { platforms, limits, type Post } from '../types';
-import { storage, type StorageAdapter } from './storage.ts';
+import fixtures from '@/data/posts.json' with { type: 'json' };
+import { platforms, limits, type Post } from '@/types';
+import { storage, type StorageAdapter } from '@/services/storage.ts';
 
 export function isPost(value: unknown): value is Post {
   if (!value || typeof value !== 'object') return false;

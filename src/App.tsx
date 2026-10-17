@@ -26,12 +26,12 @@ import {
   MotionChevron,
   PlatformIcon,
   ThemeSwitch,
-} from './components';
-import { usePosts } from './hooks';
-import { scopedQuery } from './lib';
-import { storage } from './services';
-import { usePreferences } from './state';
-import { platforms, type Platform, type Post } from './types';
+} from '@/components';
+import { usePosts } from '@/hooks';
+import { scopedQuery } from '@/lib';
+import { storage } from '@/services';
+import { usePreferences } from '@/state';
+import { platforms, type Platform, type Post } from '@/types';
 import {
   allPostsLinkStyles,
   appInputStyles,
@@ -74,19 +74,19 @@ import {
   welcomeActionsStyles,
   welcomeRowStyles,
   workspaceStyles,
-} from './ui';
+} from '@/ui';
 
 const AllPostsPage = lazy(() =>
-  import('./pages/AllPostsPage').then((module) => ({ default: module.AllPostsPage })),
+  import('@/pages/AllPostsPage').then((module) => ({ default: module.AllPostsPage })),
 );
 const AnalyticsPage = lazy(() =>
-  import('./pages/AnalyticsPage').then((module) => ({ default: module.AnalyticsPage })),
+  import('@/pages/AnalyticsPage').then((module) => ({ default: module.AnalyticsPage })),
 );
 const SettingsPage = lazy(() =>
-  import('./pages/SettingsPage').then((module) => ({ default: module.SettingsPage })),
+  import('@/pages/SettingsPage').then((module) => ({ default: module.SettingsPage })),
 );
 const SocialAccountsPage = lazy(() =>
-  import('./pages/SocialAccountsPage').then((module) => ({ default: module.SocialAccountsPage })),
+  import('@/pages/SocialAccountsPage').then((module) => ({ default: module.SocialAccountsPage })),
 );
 const routes = [
   { path: '/', label: 'Dashboard', icon: LayoutGrid },

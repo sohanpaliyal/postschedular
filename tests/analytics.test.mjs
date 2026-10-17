@@ -7,7 +7,7 @@ import {
   heatLevel,
   metricSeries,
   withinPeriod,
-} from '../src/lib/analytics.ts';
+} from '@/lib/analytics.ts';
 const post = {
   id: 'test-post',
   content: 'A new beginning',

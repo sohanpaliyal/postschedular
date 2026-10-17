@@ -95,3 +95,17 @@ When a user retries a failed post, the UI immediately shows it as `scheduled` an
 - Character counting uses Unicode code points uniformly. Platform-specific weighted rules (e.g., Twitter's 2-unit URL counting) are outside the stated scope.
 - Analytics metrics are illustrative mock values derived from post IDs. They are clearly labelled as simulated in the UI.
 - Social Accounts and Settings pages are implemented (connect/disconnect demo accounts, profile name, avatar, theme, time format, default platforms, posting time). They are not required by the core assignment.
+
+### Import conventions
+
+Use `@/` for imports from `src`, for example `import { Button } from '@/components'`
+and `import type { Post } from '@/types'`. Folder `index.ts` files provide public
+barrel exports for components, hooks, utilities, services, state, types, and styles.
+Inside a folder, import the implementation directly (for example,
+`@/components/Button`) instead of importing its own barrel to avoid circular
+references. Keep barrel re-exports relative to their own folder.
+
+Lazy-loaded pages use direct imports such as `import('@/pages/AllPostsPage')`;
+keep these separate from the pages barrel so route bundles stay independent.
+TypeScript, Vite, editor auto-imports, and the native Node test runner all support
+the same alias. Run tests with `pnpm test` to register the test resolver.

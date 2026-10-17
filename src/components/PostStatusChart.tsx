@@ -1,5 +1,5 @@
-import { DoughnutChart } from './DoughnutChart';
-import type { Post } from '../types';
+import { DoughnutChart } from '@/components/DoughnutChart';
+import type { Post } from '@/types';
 export function PostStatusChart({ posts, loading }: { posts: Post[]; loading: boolean }) {
   return (
     <section

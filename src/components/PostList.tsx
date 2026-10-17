@@ -1,9 +1,9 @@
 import { CalendarDays, Clock3, MoreHorizontal, RotateCcw } from 'lucide-react';
-import { Button } from './Button';
-import { PlatformIcon, StatusBadge } from './PostIndicators';
-import { dayLabel, groupPostsByDay } from '../lib';
-import { useTimeFormatter } from '../state';
-import type { Post } from '../types';
+import { Button } from '@/components/Button';
+import { PlatformIcon, StatusBadge } from '@/components/PostIndicators';
+import { dayLabel, groupPostsByDay } from '@/lib';
+import { useTimeFormatter } from '@/state';
+import type { Post } from '@/types';
 import {
   cn,
   dayHeadingStyles,
@@ -15,7 +15,7 @@ import {
   postErrorStyles,
   postGridStyles,
   postImageStyles,
-} from '../ui';
+} from '@/ui';
 export interface PostListProps {
   posts: Post[];
   pending: string[];

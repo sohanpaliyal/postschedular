@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Moon, Sun } from 'lucide-react';
-import { Button } from './Button';
-import { updatePreferences, useDarkTheme } from '../state';
+import { Button } from '@/components/Button';
+import { updatePreferences, useDarkTheme } from '@/state';
 import {
   cn,
   themeSwitchIconStyles,
@@ -9,7 +9,7 @@ import {
   themeSwitchMoonStyles,
   themeSwitchSunStyles,
   themeSwitchStyles,
-} from '../ui';
+} from '@/ui';
 export function ThemeSwitch() {
   const dark = useDarkTheme();
   const indicator = useRef<HTMLSpanElement>(null);

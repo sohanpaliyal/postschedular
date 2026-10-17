@@ -1,10 +1,10 @@
 import { RotateCcw } from 'lucide-react';
-import { Button } from './Button';
-import { DataTable, type TableColumn } from './DataTable';
-import { PlatformIcon, StatusBadge } from './PostIndicators';
-import { useTimeFormatter } from '../state';
-import type { Post } from '../types';
-import { cn } from '../ui';
+import { Button } from '@/components/Button';
+import { DataTable, type TableColumn } from '@/components/DataTable';
+import { PlatformIcon, StatusBadge } from '@/components/PostIndicators';
+import { useTimeFormatter } from '@/state';
+import type { Post } from '@/types';
+import { cn } from '@/ui';
 export function PostSummaryTable({
   posts,
   pending,

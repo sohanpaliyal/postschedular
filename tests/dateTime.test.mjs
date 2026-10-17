@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { calendarDays, toLocalDateTime, isFuture, sameDay } from '../src/components/dateTime.ts';
+import { calendarDays, toLocalDateTime, isFuture, sameDay } from '@/components/dateTime.ts';
 
 test('calendar starts on Sunday and includes leap day', () => {
   const days = calendarDays(new Date(2028, 1, 1));

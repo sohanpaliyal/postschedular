@@ -1,4 +1,4 @@
-import { cn, metricCardStyles } from '../ui';
+import { cn, metricCardStyles } from '@/ui';
 import type { ReactNode } from 'react';
 export function MetricCard({
   label,

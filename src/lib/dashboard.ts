@@ -1,4 +1,4 @@
-import type { Post } from '../types';
+import type { Post } from '@/types';
 
 export function dashboardPosts(posts: Post[], now: number, pending: string[] = []) {
   return {

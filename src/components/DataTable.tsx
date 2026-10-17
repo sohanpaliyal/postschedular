@@ -1,4 +1,4 @@
-import { cn, dataTableScrollStyles, dataTableStyles, emptyStateStyles } from '../ui';
+import { cn, dataTableScrollStyles, dataTableStyles, emptyStateStyles } from '@/ui';
 import type { ReactNode } from 'react';
 export interface TableColumn<T> {
   key: string;

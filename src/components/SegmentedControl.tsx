@@ -1,6 +1,6 @@
-import { cn, segmentedControlStyles } from '../ui';
+import { cn, segmentedControlStyles } from '@/ui';
 import { useLayoutEffect, useRef, type ReactNode } from 'react';
-import { Button } from './Button';
+import { Button } from '@/components/Button';
 export function SegmentedControl<T extends string>({
   label,
   value,

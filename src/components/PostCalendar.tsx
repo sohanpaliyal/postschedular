@@ -1,9 +1,9 @@
 import { Plus } from 'lucide-react';
-import { Button } from './Button';
-import { PlatformIcon, StatusBadge } from './PostIndicators';
-import { calendarRange, dateKey, groupPostsByDay } from '../lib';
-import { useTimeFormatter } from '../state';
-import type { Post } from '../types';
+import { Button } from '@/components/Button';
+import { PlatformIcon, StatusBadge } from '@/components/PostIndicators';
+import { calendarRange, dateKey, groupPostsByDay } from '@/lib';
+import { useTimeFormatter } from '@/state';
+import type { Post } from '@/types';
 import {
   calendarCreateStyles,
   calendarDateStyles,
@@ -22,7 +22,7 @@ import {
   outsideStyles,
   postCalendarStyles,
   yearCalendarStyles,
-} from '../ui';
+} from '@/ui';
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 function CalendarPost({
   post,
