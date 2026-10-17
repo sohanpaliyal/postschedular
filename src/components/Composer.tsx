@@ -1,24 +1,26 @@
-import { appTextareaStyles, appInputStyles, appH1Styles } from '../ui/elementStyles';
-import { platformOptionsStyles } from '../ui/controlsStyles';
-import {
-  fieldLabelStyles,
-  countersStyles,
-  inputWithIconStyles,
-  imagePreviewStyles,
-  postErrorStyles,
-  formActionsStyles,
-} from '../ui/layoutStyles';
-import { cn } from '../ui/cn';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { CalendarDays, Check, Image as ImageIcon } from 'lucide-react';
-import { platforms, limits, type Platform, type Post } from '../types/post';
 import { Button } from './Button';
-import { PlatformIcon } from './PlatformIcon';
-import { Modal } from './Modal';
 import { DateTimePicker } from './DateTimePicker';
 import { isFuture } from './dateTime';
-import { isAbort } from '../services/posts';
-import { usePreferences, preferredSchedule } from '../state/preferences';
+import { Modal } from './Modal';
+import { PlatformIcon } from './PlatformIcon';
+import { isAbort } from '../services';
+import { preferredSchedule, usePreferences } from '../state';
+import { limits, platforms, type Platform, type Post } from '../types';
+import {
+  appH1Styles,
+  appInputStyles,
+  appTextareaStyles,
+  cn,
+  countersStyles,
+  fieldLabelStyles,
+  formActionsStyles,
+  imagePreviewStyles,
+  inputWithIconStyles,
+  platformOptionsStyles,
+  postErrorStyles,
+} from '../ui';
 export function Composer({
   initialDate,
   inline = false,

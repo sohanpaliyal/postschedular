@@ -1,5 +1,5 @@
-import { storage } from '../services/storage';
-import type { Platform } from '../types/post';
+import { storage } from '../services';
+import type { Platform } from '../types';
 
 export const demoAccounts = [
   { platform: 'Instagram', handle: '@flintzy.studio', accountType: 'Business account' },

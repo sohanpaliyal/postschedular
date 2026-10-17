@@ -1,33 +1,21 @@
-import { appH1Styles } from '../ui/elementStyles';
-import { engagementTrackStyles, skeletonsStyles, emptyStateStyles } from '../ui/layoutStyles';
-import {
-  analyticsPostCellStyles,
-  analyticsThumbnailStyles,
-  analyticsPostNameStyles,
-  analyticsPostPlatformsStyles,
-  analyticsPageStyles,
-  analyticsHeadingStyles,
-  analyticsHeadingTitleStyles,
-  analyticsSurfaceStyles,
-  analyticsTabsStyles,
-  analyticsDemoLabelStyles,
-  analyticsSectionHeadingStyles,
-  analyticsFilterRowStyles,
-  analyticsDataNoteStyles,
-  analyticsTableToolsStyles,
-  heatmapLegendStyles,
-  heatmapValueStyles,
-  analyticsMetricsStyles,
-  analyticsOverviewChartStyles,
-  analyticsPlatformNoteStyles,
-  analyticsDetailStatsStyles,
-} from '../ui/analyticsStyles';
-import { cn } from '../ui/cn';
-import { useTimeFormatter } from '../state/preferences';
 import { useEffect, useState } from 'react';
 import { Activity, BarChart3, Download, Eye, Heart, TrendingUp } from 'lucide-react';
-import type { Post, Platform } from '../types/post';
-import { platforms } from '../types/post';
+import {
+  Button,
+  DataTable,
+  HeatmapValue,
+  MetricCard,
+  MetricChart,
+  Modal,
+  Pagination,
+  PlatformIcon,
+  PostFilters,
+  SegmentedControl,
+  Select,
+  StatusBadge,
+  type PostFiltersProps,
+  type TableColumn,
+} from '../components';
 import {
   compactNumber,
   metricSeries,
@@ -35,18 +23,36 @@ import {
   sumMetrics,
   withinPeriod,
   type PostMetrics,
-} from '../lib/analytics';
-import { Button } from '../components/Button';
-import { Select } from '../components/Select';
-import { SegmentedControl } from '../components/SegmentedControl';
-import { DataTable, type TableColumn } from '../components/DataTable';
-import { HeatmapValue } from '../components/HeatmapValue';
-import { MetricCard } from '../components/MetricCard';
-import { MetricChart } from '../components/MetricChart';
-import { Modal } from '../components/Modal';
-import { PostFilters, type PostFiltersProps } from '../components/PostFilters';
-import { Pagination } from '../components/Pagination';
-import { PlatformIcon, StatusBadge } from '../components/PostIndicators';
+} from '../lib';
+import { useTimeFormatter } from '../state';
+import { platforms, type Platform, type Post } from '../types';
+import {
+  analyticsDataNoteStyles,
+  analyticsDemoLabelStyles,
+  analyticsDetailStatsStyles,
+  analyticsFilterRowStyles,
+  analyticsHeadingStyles,
+  analyticsHeadingTitleStyles,
+  analyticsMetricsStyles,
+  analyticsOverviewChartStyles,
+  analyticsPageStyles,
+  analyticsPlatformNoteStyles,
+  analyticsPostCellStyles,
+  analyticsPostNameStyles,
+  analyticsPostPlatformsStyles,
+  analyticsSectionHeadingStyles,
+  analyticsSurfaceStyles,
+  analyticsTableToolsStyles,
+  analyticsTabsStyles,
+  analyticsThumbnailStyles,
+  appH1Styles,
+  cn,
+  emptyStateStyles,
+  engagementTrackStyles,
+  heatmapLegendStyles,
+  heatmapValueStyles,
+  skeletonsStyles,
+} from '../ui';
 type Tab = 'overview' | 'performance' | 'platforms';
 type Metric = 'impressions' | 'reach' | 'likes';
 type Row = {

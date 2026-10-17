@@ -1,28 +1,28 @@
-import { outsideStyles } from '../ui/layoutStyles';
-import {
-  calendarPostStyles,
-  calendarStatusDotStyles,
-  calendarPostTitleStyles,
-  calendarPostPlatformStyles,
-  calendarPostMetaStyles,
-  postCalendarStyles,
-  calendarDayStyles,
-  calendarDayHeadingStyles,
-  calendarDateStyles,
-  calendarSeeAllStyles,
-  calendarCreateStyles,
-  yearCalendarStyles,
-  miniCalendarStyles,
-  miniWeekdayStyles,
-  miniDateStyles,
-} from '../ui/calendarStyles';
-import { cn } from '../ui/cn';
-import { useTimeFormatter } from '../state/preferences';
 import { Plus } from 'lucide-react';
-import type { Post } from '../types/post';
-import { calendarRange, dateKey, groupPostsByDay } from '../lib/calendar';
 import { Button } from './Button';
 import { PlatformIcon, StatusBadge } from './PostIndicators';
+import { calendarRange, dateKey, groupPostsByDay } from '../lib';
+import { useTimeFormatter } from '../state';
+import type { Post } from '../types';
+import {
+  calendarCreateStyles,
+  calendarDateStyles,
+  calendarDayHeadingStyles,
+  calendarDayStyles,
+  calendarPostMetaStyles,
+  calendarPostPlatformStyles,
+  calendarPostStyles,
+  calendarPostTitleStyles,
+  calendarSeeAllStyles,
+  calendarStatusDotStyles,
+  cn,
+  miniCalendarStyles,
+  miniDateStyles,
+  miniWeekdayStyles,
+  outsideStyles,
+  postCalendarStyles,
+  yearCalendarStyles,
+} from '../ui';
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 function CalendarPost({
   post,

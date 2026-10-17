@@ -1,11 +1,9 @@
-import { appInputStyles } from '../ui/elementStyles';
-import { filtersStyles, searchFieldStyles } from '../ui/layoutStyles';
-import { cn } from '../ui/cn';
-import { Check, Clock3, LayoutGrid, RotateCcw, Search } from 'lucide-react';
 import type { Ref } from 'react';
-import { platforms } from '../types/post';
-import { Select } from './Select';
+import { Check, Clock3, LayoutGrid, RotateCcw, Search } from 'lucide-react';
 import { PlatformIcon } from './PostIndicators';
+import { Select } from './Select';
+import { platforms } from '../types';
+import { appInputStyles, cn, filtersStyles, searchFieldStyles } from '../ui';
 export interface PostFiltersProps {
   query: string;
   platform: string;

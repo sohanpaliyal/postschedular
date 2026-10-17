@@ -1,12 +1,12 @@
 import {
-  paginationStyles,
+  cn,
+  paginationBtnStyles,
   paginationMetaStyles,
+  paginationPageBtnStyles,
   paginationPageLabelStyles,
   paginationSizeSelectStyles,
-  paginationBtnStyles,
-  paginationPageBtnStyles,
-} from '../ui/analyticsStyles';
-import { cn } from '../ui/cn';
+  paginationStyles,
+} from '../ui';
 import { ChevronFirst, ChevronLast, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from './Button';
 import { Select } from './Select';

@@ -1,6 +1,5 @@
-import { statusStyles } from '../ui/layoutStyles';
-import { cn } from '../ui/cn';
-import type { PostStatus } from '../types/post';
+import type { PostStatus } from '../types';
+import { cn, statusStyles } from '../ui';
 export { PlatformIcon } from './PlatformIcon';
 export function StatusBadge({
   status,

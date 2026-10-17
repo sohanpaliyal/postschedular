@@ -1,67 +1,81 @@
-import { allPostsLinkStyles } from './ui/calendarStyles';
-import { appInputStyles, appKbdStyles } from './ui/elementStyles';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import {
+  Bell,
+  BarChart3,
+  CalendarDays,
+  Check,
+  ChevronDown,
+  Command,
+  Files,
+  LayoutGrid,
+  PanelLeft,
+  Plus,
+  RotateCcw,
+  Search,
+  Settings,
+  Upload,
+  UsersRound,
+  X,
+} from 'lucide-react';
+import {
+  Avatar,
+  Button,
+  Composer,
+  DashboardPanels,
+  Modal,
+  MotionChevron,
+  PlatformIcon,
+  ThemeSwitch,
+} from './components';
+import { usePosts } from './hooks';
+import { scopedQuery } from './lib';
+import { storage } from './services';
+import { usePreferences } from './state';
+import { platforms, type Platform, type Post } from './types';
+import {
+  allPostsLinkStyles,
+  appInputStyles,
+  appKbdStyles,
   appShellStyles,
-  mobileBackdropStyles,
-  collapsedStyles,
-  sidebarStyles,
-  brandRowStyles,
   brandMarkStyles,
-  labelStyles,
-  collapseButtonStyles,
-  sidebarSearchStyles,
-  sidebarMenuInputStyles,
-  sectionHeadingStyles,
-  navItemStyles,
-  sidebarFooterStyles,
-  profileMenuStyles,
-  profileButtonStyles,
-  profileNameStyles,
-  workspaceStyles,
-  topbarStyles,
-  headerInnerStyles,
+  brandRowStyles,
   breadcrumbStyles,
-  iconButtonStyles,
-  mobileMenuStyles,
-  headerActionsStyles,
-  headerSettingsStyles,
-  headerNotificationStyles,
-  headerAvatarStyles,
-  welcomeRowStyles,
-  welcomeActionsStyles,
-  toastStyles,
-  statusStyles,
+  cn,
+  collapseButtonStyles,
+  collapsedStyles,
   detailContentStyles,
   detailImageStyles,
   detailMetaStyles,
   detailPlatformListStyles,
-  postErrorStyles,
   emptyStateStyles,
-} from './ui/layoutStyles';
-import { cn } from './ui/cn';
-import { toastErrorStyles } from './ui/layoutStyles';
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
-import {
-  Search,
-  UsersRound,
-  BarChart3,
-  LayoutGrid,
-  Files,
-  Bell,
-  Settings,
-  Upload,
-  ChevronDown,
-  Plus,
-  X,
-  CalendarDays,
-  Check,
-  RotateCcw,
-  PanelLeft,
-  Command,
-} from 'lucide-react';
-import { Button } from './components/Button';
-import { PlatformIcon } from './components/PlatformIcon';
-import { DashboardPanels } from './components/DashboardPanels';
+  headerActionsStyles,
+  headerAvatarStyles,
+  headerInnerStyles,
+  headerNotificationStyles,
+  headerSettingsStyles,
+  iconButtonStyles,
+  labelStyles,
+  mobileBackdropStyles,
+  mobileMenuStyles,
+  navItemStyles,
+  postErrorStyles,
+  profileButtonStyles,
+  profileMenuStyles,
+  profileNameStyles,
+  sectionHeadingStyles,
+  sidebarFooterStyles,
+  sidebarMenuInputStyles,
+  sidebarSearchStyles,
+  sidebarStyles,
+  statusStyles,
+  toastErrorStyles,
+  toastStyles,
+  topbarStyles,
+  welcomeActionsStyles,
+  welcomeRowStyles,
+  workspaceStyles,
+} from './ui';
+
 const AllPostsPage = lazy(() =>
   import('./pages/AllPostsPage').then((module) => ({ default: module.AllPostsPage })),
 );
@@ -71,19 +85,9 @@ const AnalyticsPage = lazy(() =>
 const SettingsPage = lazy(() =>
   import('./pages/SettingsPage').then((module) => ({ default: module.SettingsPage })),
 );
-import { usePreferences } from './state/preferences';
-import { usePosts } from './hooks/usePosts';
-import { storage } from './services/storage';
-import { scopedQuery } from './lib/routeQuery';
 const SocialAccountsPage = lazy(() =>
   import('./pages/SocialAccountsPage').then((module) => ({ default: module.SocialAccountsPage })),
 );
-import { platforms, type Platform, type Post } from './types/post';
-import { Avatar } from './components/Avatar';
-import { Modal } from './components/Modal';
-import { MotionChevron } from './components/MotionChevron';
-import { Composer } from './components/Composer';
-import { ThemeSwitch } from './components/ThemeSwitch';
 const routes = [
   { path: '/', label: 'Dashboard', icon: LayoutGrid },
   { path: '/posts', label: 'All posts', icon: CalendarDays },

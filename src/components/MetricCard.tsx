@@ -1,5 +1,4 @@
-import { metricCardStyles } from '../ui/analyticsStyles';
-import { cn } from '../ui/cn';
+import { cn, metricCardStyles } from '../ui';
 import type { ReactNode } from 'react';
 export function MetricCard({
   label,

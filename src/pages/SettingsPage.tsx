@@ -1,13 +1,8 @@
-import { appH1Styles, appInputStyles } from '../ui/elementStyles';
-import { cn } from '../ui/cn';
 import { useState } from 'react';
-import { Button } from '../components/Button';
-import { Select } from '../components/Select';
-import { Avatar } from '../components/Avatar';
-import { Modal } from '../components/Modal';
-import { PlatformIcon } from '../components/PlatformIcon';
-import { platforms } from '../types/post';
-import { usePreferences, updatePreferences, type Preferences } from '../state/preferences';
+import { Avatar, Button, Modal, PlatformIcon, Select } from '../components';
+import { updatePreferences, usePreferences, type Preferences } from '../state';
+import { platforms } from '../types';
+import { appH1Styles, appInputStyles, cn } from '../ui';
 const sectionClasses =
   'route-card border border-outline rounded-[18px] p-[28px] max-[760px]:p-[20px] max-[760px]:rounded-[14px] bg-surface [&_p]:text-muted [&_p]:text-[12px] [&_p]:leading-[1.8] [grid-template-columns:1fr_1.2fr] gap-[40px] mb-[18px] [&_h2]:m-[0_0_8px] [&_h2]:text-[17px] [&_h2]:font-medium [&_p]:m-0 [&_p]:max-w-[340px] max-[760px]:[grid-template-columns:1fr] max-[760px]:gap-[22px] grid';
 const controlClasses =

@@ -1,4 +1,4 @@
-import type { Post } from '../types/post';
+import type { Post } from '../types';
 export interface PostMetrics {
   followers: number;
   likes: number;

@@ -1,6 +1,5 @@
-import { heatmapValueStyles } from '../ui/analyticsStyles';
-import { cn } from '../ui/cn';
-import { compactNumber, heatLevel } from '../lib/analytics';
+import { compactNumber, heatLevel } from '../lib';
+import { cn, heatmapValueStyles } from '../ui';
 export function HeatmapValue({ value, maximum }: { value: number | null; maximum: number }) {
   return (
     <span

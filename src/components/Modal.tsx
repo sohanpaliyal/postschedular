@@ -1,5 +1,4 @@
-import { appModalStyles, modalHeaderStyles, iconButtonStyles } from '../ui/layoutStyles';
-import { cn } from '../ui/cn';
+import { appModalStyles, cn, iconButtonStyles, modalHeaderStyles } from '../ui';
 import { useEffect, useId, useRef, type ReactNode } from 'react';
 import { X } from 'lucide-react';
 import { Button } from './Button';

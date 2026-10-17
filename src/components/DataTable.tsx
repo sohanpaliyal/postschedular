@@ -1,6 +1,4 @@
-import { emptyStateStyles } from '../ui/layoutStyles';
-import { dataTableScrollStyles, dataTableStyles } from '../ui/analyticsStyles';
-import { cn } from '../ui/cn';
+import { cn, dataTableScrollStyles, dataTableStyles, emptyStateStyles } from '../ui';
 import type { ReactNode } from 'react';
 export interface TableColumn<T> {
   key: string;

@@ -1,21 +1,22 @@
+import { useEffect, useId, useLayoutEffect, useRef, useState, type KeyboardEvent } from 'react';
+import { useTimeFormatter } from '../state';
 import {
-  datePickerTriggerStyles,
-  datePickerTriggerIconStyles,
-  datePickerValueStyles,
-  datePickerPanelStyles,
-  datePickerQuickStyles,
+  cn,
+  datePickerDayStyles,
+  datePickerFooterStyles,
   datePickerMonthStyles,
   datePickerNavigationStyles,
-  datePickerDayStyles,
-  datePickerTimeStyles,
+  datePickerPanelStyles,
+  datePickerQuickStyles,
   datePickerTimeControlsStyles,
-  datePickerFooterStyles,
+  datePickerTimeStyles,
+  datePickerTriggerIconStyles,
+  datePickerTriggerStyles,
+  datePickerValueStyles,
   datePickerZoneStyles,
-} from '../ui/controlsStyles';
-import { isOpenStyles, outsideStyles } from '../ui/layoutStyles';
-import { cn } from '../ui/cn';
-import { useTimeFormatter } from '../state/preferences';
-import { useEffect, useLayoutEffect, useId, useRef, useState, type KeyboardEvent } from 'react';
+  isOpenStyles,
+  outsideStyles,
+} from '../ui';
 import {
   CalendarDays,
   Check,

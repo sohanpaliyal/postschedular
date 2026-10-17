@@ -1,17 +1,17 @@
-import { isOpenStyles } from '../ui/layoutStyles';
-import { appInputStyles } from '../ui/elementStyles';
 import {
-  richSelectStyles,
-  richSelectTriggerStyles,
-  richSelectIconStyles,
+  appInputStyles,
+  cn,
+  isOpenStyles,
   richSelectChevronStyles,
+  richSelectIconStyles,
   richSelectMenuStyles,
-  richSelectSearchStyles,
-  richSelectOptionsStyles,
   richSelectOptionStyles,
   richSelectOptionTextStyles,
-} from '../ui/controlsStyles';
-import { cn } from '../ui/cn';
+  richSelectOptionsStyles,
+  richSelectSearchStyles,
+  richSelectStyles,
+  richSelectTriggerStyles,
+} from '../ui';
 import {
   useEffect,
   useId,

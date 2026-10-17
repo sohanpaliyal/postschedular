@@ -1,6 +1,6 @@
-import { storage } from '../services/storage';
 import { useSyncExternalStore } from 'react';
-import { platforms, type Platform } from '../types/post';
+import { storage } from '../services';
+import { platforms, type Platform } from '../types';
 
 export interface Preferences {
   name: string;

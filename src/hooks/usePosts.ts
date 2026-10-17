@@ -1,5 +1,5 @@
 import { useEffect, useState, useSyncExternalStore } from 'react';
-import { createPostsStore } from '../services/posts';
+import { createPostsStore } from '../services';
 
 export function usePosts() {
   const [repository] = useState(createPostsStore);

@@ -1,10 +1,9 @@
-import { appH1Styles } from '../ui/elementStyles';
-import { storage } from '../services/storage';
-import { cn } from '../ui/cn';
 import { useState } from 'react';
-import { SocialAccountCard } from '../components/SocialAccountCard';
-import type { Platform, Post } from '../types/post';
-import { demoAccounts, connectionKey, initialConnections } from '../lib/socialAccounts';
+import { SocialAccountCard } from '../components';
+import { connectionKey, demoAccounts, initialConnections } from '../lib';
+import { storage } from '../services';
+import type { Platform, Post } from '../types';
+import { appH1Styles, cn } from '../ui';
 export function SocialAccountsPage({ posts }: { posts: Post[] }) {
   const [connections, setConnections] = useState(initialConnections);
   const connectedCount = Object.values(connections).filter(Boolean).length;

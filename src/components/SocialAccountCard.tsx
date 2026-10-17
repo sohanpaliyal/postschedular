@@ -1,9 +1,9 @@
-import { cn } from '../ui/cn';
 import { useId, useState } from 'react';
 import { ArrowUpRight, Check, ChevronDown, Link2, Unplug } from 'lucide-react';
 import { Button } from './Button';
 import { PlatformIcon } from './PlatformIcon';
-import type { Platform } from '../types/post';
+import type { Platform } from '../types';
+import { cn } from '../ui';
 export interface SocialAccount {
   platform: Platform;
   name: string;
