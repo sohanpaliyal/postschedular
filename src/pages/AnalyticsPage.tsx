@@ -17,6 +17,7 @@ import {
   type TableColumn,
 } from '@/components';
 import {
+  scopedQuery,
   compactNumber,
   metricSeries,
   mockMetrics,
@@ -98,7 +99,8 @@ export function AnalyticsPage({
     const params = new URLSearchParams(location.search);
     params.set('tab', tab);
     params.set('period', String(period));
-    history.replaceState(null, '', `${location.pathname}?${params}`);
+    const query = scopedQuery(location.pathname, params.toString());
+    history.replaceState(null, '', `${location.pathname}${query.size ? '?' + query : ''}`);
   }, [tab, period]);
   const rows = posts
     .filter((post) => withinPeriod(post, period))

@@ -2,7 +2,7 @@
 
 A responsive, frontend-only social media scheduling application built with **React 19 + TypeScript + Vite**. Users can compose posts, select platforms, schedule them for the future, and manage everything from a single dashboard.
 
-**Live demo:** _[Add your Vercel/Netlify URL here]_
+**Live demo:** [postschedular-gnlc.vercel.app](https://postschedular-gnlc.vercel.app/)
 
 ---
 

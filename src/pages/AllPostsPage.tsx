@@ -11,7 +11,7 @@ import {
   type PostFiltersProps,
   type PostListProps,
 } from '@/components';
-import { dateKey, movePeriod, parseCalendarDate, type CalendarView } from '@/lib';
+import { scopedQuery, dateKey, movePeriod, parseCalendarDate, type CalendarView } from '@/lib';
 import {
   allPostsFilterRowStyles,
   allPostsHeadingStyles,
@@ -62,7 +62,8 @@ export function AllPostsPage({
     const params = new URLSearchParams(location.search);
     params.set('view', view);
     params.set('date', dateKey(date));
-    history.replaceState(null, '', `${location.pathname}?${params}`);
+    const query = scopedQuery(location.pathname, params.toString());
+    history.replaceState(null, '', `${location.pathname}${query.size ? '?' + query : ''}`);
   }, [view, date]);
   const dayPosts = day
     ? posts.filter((post) => dateKey(new Date(post.scheduledAt)) === dateKey(day))
